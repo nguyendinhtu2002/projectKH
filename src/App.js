@@ -12,7 +12,8 @@ import 'owl.carousel';
 import PageHome from './Screen/pageHome';
 import Login from './Screen/loginScreen';
 import RegisterScreen from './Screen/RegisterScreen';
-import ServicesScreen from './Screen/ServicesScreen';
+import ServicesSreen from './Screen/ServicesSreen';
+import SupportScreen from './Screen/SupportScreen';
 function App() {
   return (
     <BrowserRouter>
@@ -20,7 +21,9 @@ function App() {
         <Route path='/' element={<PageHome />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<RegisterScreen />} />
-        <Route path='/services' element={<ServicesScreen/>} />
+        <Route path='/services' element={<ServicesSreen/>} />
+        <Route path='/tickets' element={<SupportScreen/>} />
+
       </Routes>
     </BrowserRouter>
   );

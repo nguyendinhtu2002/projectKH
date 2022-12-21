@@ -123,6 +123,9 @@
     .left-section--carousel {
         max-width: 320px;
     }
+    .fs-2x {
+        font-size: 2rem!important;
+    }
 
 }
 

@@ -117,13 +117,58 @@ body a:active, body a:focus, body a:hover {
     padding: 2rem 2.25rem;
     color: var(--kt-card-color);
 }
-
+.card .card-header .card-title, .card .card-header .card-title .card-label {
+    font-weight: 500;
+    font-size: 1.275rem;
+    color: #181C32;
+}
+.card .card-header .card-title {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+    margin-left: 0;
+}
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: 70px;
+    padding: 0 2.25rem;
+    color: var(--kt-card-cap-color);
+    background-color: transparent;
+    border-bottom: 1px solid #eff2f5;
+}
+.card-title {
+    margin-bottom: 0.85rem;
+}
+.card-header:first-child {
+    border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px) 0 0;
+}
+.card-header {
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+    margin-bottom: 0;
+    color: var(--bs-card-cap-color);
+    background-color: var(--bs-card-cap-bg);
+    border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
+}
 .card-body {
     flex: 1 1 auto;
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
 }
-
+.symbol.symbol-circle, .symbol.symbol-circle .symbol-label, .symbol.symbol-circle>img {
+    border-radius: 50%;
+}
+.fs-2x {
+    font-size: calc(1.325rem + .9vw)!important;
+}
+.symbol {
+    display: inline-block;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 0.65rem;
+}
 .fst-italic {
     font-style: italic !important;
 }
@@ -453,7 +498,17 @@ td:not(.wrap) {
 .text-muted {
     color: #A1A5B7;
 }
-
+.text-danger {
+    color: #f1416c!important;
+}
+ul li::marker {
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0px !important;
+    text-align: start !important;
+    text-align-last: start !important;
+}
 .text-muted {
     --bs-text-opacity: 1;
     color: #a1a5b7 !important;
