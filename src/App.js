@@ -14,6 +14,9 @@ import Login from './Screen/loginScreen';
 import RegisterScreen from './Screen/RegisterScreen';
 import ServicesSreen from './Screen/ServicesSreen';
 import SupportScreen from './Screen/SupportScreen';
+import ApiScreen from './Screen/ApiScreen';
+import Code from './Screen/Code';
+import NewOrder from './Screen/NewOrder';
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +26,9 @@ function App() {
         <Route path='/register' element={<RegisterScreen />} />
         <Route path='/services' element={<ServicesSreen/>} />
         <Route path='/tickets' element={<SupportScreen/>} />
+        <Route path='/api' element={<ApiScreen/>} />
+        <Route path='/code.txt' element={<Code/>} />
+        <Route path='/new' element={<NewOrder/>} />
 
       </Routes>
     </BrowserRouter>

@@ -78,7 +78,7 @@ function Section() {
                             <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62d5690f32024baee024e4a4_AdCreativetext.svg" loading="lazy" alt="AdCreative text that redirects to the home." class="adc-text"></img>
                         </a>
                         <div className='hero-content__nav-items'>
-                            <a href="/" aria-current="page" class="nav-item__link w-inline-block w--current">
+                            <a href="#home" aria-current="page" class="nav-item__link w-inline-block w--current">
                                 <div class="nav-item-logo-wrapper">
                                     <div class="embed-icon w-embed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 22.216 21.629">
@@ -92,7 +92,7 @@ function Section() {
                                 </div>
                                 <div class="nav-link-text">Homepage</div>
                             </a>
-                            <a href="/" aria-current="page" class="nav-item__link w-inline-block ">
+                            <a href="#howit" aria-current="page" class="nav-item__link w-inline-block ">
                                 <div class="nav-item-logo-wrapper">
                                     <div class="embed-icon w-embed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.002 22.998">
@@ -102,7 +102,7 @@ function Section() {
                                 </div>
                                 <div class="nav-link-text">How it Works</div>
                             </a>
-                            <a href="/" aria-current="page" class="nav-item__link w-inline-block ">
+                            <a href="#achi" aria-current="page" class="nav-item__link w-inline-block ">
                                 <div class="nav-item-logo-wrapper">
                                     <div class="embed-icon w-embed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 27.255 20.752">
@@ -112,7 +112,7 @@ function Section() {
                                 </div>
                                 <div class="nav-link-text">Achievements</div>
                             </a>
-                            <a href="/" aria-current="page" class="nav-item__link w-inline-block ">
+                            <a href="#pri" aria-current="page" class="nav-item__link w-inline-block ">
                                 <div class="nav-item-logo-wrapper">
                                     <div class="embed-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 22.641 22.633">
                                         <g id="label" transform="translate(0 -0.064)">
@@ -125,7 +125,7 @@ function Section() {
                                 </div>
                                 <div class="nav-link-text">Pricing</div>
                             </a>
-                            <a href="/" aria-current="page" class="nav-item__link w-inline-block ">
+                            <a href="/services" aria-current="page" class="nav-item__link w-inline-block ">
                                 <div class="nav-item-logo-wrapper">
                                     <div class="embed-icon w-embed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 15.841 16.161">

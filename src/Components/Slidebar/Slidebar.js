@@ -1,3 +1,5 @@
+import Api from "../Api/Api"
+import Neworder from "../NewOrder/Neworder"
 import Services from "../Services/Services"
 import Support from "../Support/Support"
 export const SidebarData = [
@@ -11,5 +13,15 @@ export const SidebarData = [
         path: "/tickets",
         file:<Support/>,
         tilte:"Support"
+    },
+    {
+        path: "/api",
+        file:<Api/>,
+        tilte:"API Documentation"
+    },
+    {
+        path: "/new",
+        file:<Neworder/>,
+        tilte:"New order"
     },
 ]

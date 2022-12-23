@@ -7,6 +7,22 @@
     outline: none;
 }
 
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #181C32;
+    outline: 0;
+}
+
 table {
     caption-side: bottom;
     border-collapse: collapse;
@@ -27,21 +43,27 @@ h2 {
 }
 
 .flex-column-fluid {
-    flex: 1 0 auto;
+    flex: 1 auto;
+    min-width: 0;
 }
 
 .text-dark {
     color: #181C32;
 }
+
 .text-hover-primary:hover {
     transition: color .2s ease;
-    color: #009ef7!important;
+    color: #009ef7 !important;
 }
+
 .text-hover-primary {
     transition: color .2s ease;
 }
-body a:active, body a:focus, body a:hover {
-    text-decoration: none!important;
+
+body a:active,
+body a:focus,
+body a:hover {
+    text-decoration: none !important;
 }
 
 .container,
@@ -113,21 +135,35 @@ body a:active, body a:focus, body a:hover {
     box-shadow: var(--bs-card-box-shadow);
 }
 
+.bg-light {
+    --kt-bg-rgb-color: 245, 248, 250;
+    background-color: #f5f8fa !important;
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(245, 248, 250, var(--bs-bg-opacity)) !important;
+}
+
 .card .card-body {
     padding: 2rem 2.25rem;
     color: var(--kt-card-color);
 }
-.card .card-header .card-title, .card .card-header .card-title .card-label {
+
+.card .card-header .card-title,
+.card .card-header .card-title .card-label {
     font-weight: 500;
     font-size: 1.275rem;
     color: #181C32;
 }
+
 .card .card-header .card-title {
     display: flex;
     align-items: center;
     margin: 0.5rem;
     margin-left: 0;
 }
+
 .card .card-header {
     display: flex;
     justify-content: space-between;
@@ -139,12 +175,15 @@ body a:active, body a:focus, body a:hover {
     background-color: transparent;
     border-bottom: 1px solid #eff2f5;
 }
+
 .card-title {
     margin-bottom: 0.85rem;
 }
+
 .card-header:first-child {
     border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px) 0 0;
 }
+
 .card-header {
     padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
     margin-bottom: 0;
@@ -152,23 +191,30 @@ body a:active, body a:focus, body a:hover {
     background-color: var(--bs-card-cap-bg);
     border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
+
 .card-body {
     flex: 1 1 auto;
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
 }
-.symbol.symbol-circle, .symbol.symbol-circle .symbol-label, .symbol.symbol-circle>img {
+
+.symbol.symbol-circle,
+.symbol.symbol-circle .symbol-label,
+.symbol.symbol-circle>img {
     border-radius: 50%;
 }
+
 .fs-2x {
-    font-size: calc(1.325rem + .9vw)!important;
+    font-size: calc(1.325rem + .9vw) !important;
 }
+
 .symbol {
     display: inline-block;
     flex-shrink: 0;
     position: relative;
     border-radius: 0.65rem;
 }
+
 .fst-italic {
     font-style: italic !important;
 }
@@ -247,16 +293,15 @@ body a:active, body a:focus, body a:hover {
 
 
 
-.table.gs-5 td:last-child,
-.table.gs-5 th:last-child {
-    padding-right: 1.25rem;
+
+.page-title {
+    display: block;
 }
-.page-title{
+
+.header-title {
     display: none;
 }
-.header-title{
-    display: none;
-}
+
 .table.gs-5 td:first-child,
 .table.gs-5 th:first-child {
     padding-left: 1.25rem;
@@ -318,7 +363,7 @@ td:not(.wrap) {
 }
 
 .btn {
-    --bs-btn-color: var(--kt-body-color);
+    --bs-btn-color: #181C32;
     --bs-btn-bg: transparent;
     --bs-btn-border-color: transparent;
     outline: 0 !important;
@@ -347,7 +392,8 @@ td:not(.wrap) {
 
 .drawer.drawer-on {
     transform: none;
-    box-shadow: var(--kt-drawer-box-shadow);
+    box-shadow: 0px 1px 9px -3px rgba(0, 0, 0, 0.05);
+    ;
     transition: transform .3s ease-in-out !important;
 }
 
@@ -362,6 +408,32 @@ td:not(.wrap) {
     flex-shrink: 0;
     line-height: 0;
     margin-right: 0.5rem;
+}
+
+.table.table-rounded {
+    border-radius: 0.65rem;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+.table>tbody {
+    vertical-align: inherit;
+}
+
+.table.gy-2 td,
+.table.gy-2 th {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.table.table-row-bordered tr {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #eff2f5;
+}
+
+.border-tb {
+    border: 1px solid #eff2f5 !important;
 }
 
 .svg-icon {
@@ -400,6 +472,16 @@ td:not(.wrap) {
     background-color: var(--bs-btn-bg);
     box-shadow: var(--bs-btn-box-shadow);
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.bg {
+    background-color: #f9fafb;
+    background-size: cover;
+
+}
+
+.flex-test {
+    display: flex !important;
 }
 
 .align-text {
@@ -498,9 +580,11 @@ td:not(.wrap) {
 .text-muted {
     color: #A1A5B7;
 }
+
 .text-danger {
-    color: #f1416c!important;
+    color: #f1416c !important;
 }
+
 ul li::marker {
     unicode-bidi: isolate;
     font-variant-numeric: tabular-nums;
@@ -509,6 +593,7 @@ ul li::marker {
     text-align: start !important;
     text-align-last: start !important;
 }
+
 .text-muted {
     --bs-text-opacity: 1;
     color: #a1a5b7 !important;
@@ -814,6 +899,39 @@ h6 {
     z-index: 1;
     top: 0;
     margin: 0 !important;
+}
+
+.alert {
+    --bs-alert-bg: transparent;
+    --bs-alert-padding-x: 1rem;
+    --bs-alert-padding-y: 1rem;
+    --bs-alert-margin-bottom: 1rem;
+    --bs-alert-color: inherit;
+    --bs-alert-border-color: transparent;
+    --bs-alert-border: 1px solid var(--bs-alert-border-color);
+    --bs-alert-border-radius: 0.65rem;
+    position: relative;
+    padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+    margin-bottom: var(--bs-alert-margin-bottom);
+    color: var(--bs-alert-color);
+    background-color: var(--bs-alert-bg);
+    border: var(--bs-alert-border);
+    border-radius: var(--bs-alert-border-radius);
+}
+
+.font-1 {
+    color: rgb(230, 0, 0);
+}
+
+.font-2 {}
+
+.alert-primary {
+    --bs-alert-color: #005f94;
+    --bs-alert-bg: #ccecfd;
+    --bs-alert-border-color: #b3e2fd;
+    color: #009ef7;
+    border-color: #009ef7;
+    background-color: #f1faff;
 }
 
 .input-control .toggle-password {

@@ -123,8 +123,9 @@
     .left-section--carousel {
         max-width: 320px;
     }
+
     .fs-2x {
-        font-size: 2rem!important;
+        font-size: 2rem !important;
     }
 
 }
@@ -186,10 +187,7 @@
 }
 
 @media (max-width: 992px) {
-    .hover-scroll-overlay-y {
-        overflow-y: hidden;
-    }
-
+    
 
 
     .header {
@@ -218,20 +216,31 @@
     }
 }
 
+@media (max-width: 767.98px) {
+    .card>.card-header:not(.flex-nowrap) {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+}
+
 @media (min-width: 992px) {
     .wrapper {
         padding-top: 50px;
         padding-left: 350px;
     }
+
     .d-lg-none {
-        display: none!important;
+        display: none !important;
     }
-    .header-title{
+
+    .header-title {
         display: block;
     }
-    /* .page-title{
+
+    .page-title {
         display: none;
-    } */
+    }
+
     .bg {
         position: relative;
         display: -webkit-box;
@@ -240,12 +249,13 @@
         display: flex;
         height: full;
         min-height: 100vh;
-        padding: 4.375em;
+        /* padding: 4.375em; */
         background-image: url("../../assets/images/62d530867556588cd0f37242_hero-bg.webp");
         background-position: 0 50%;
         background-size: cover;
         background-repeat: no-repeat;
     }
+
     .pb-lg-0 {
         padding-bottom: 0 !important;
     }
@@ -277,6 +287,9 @@
 @media (max-width: 991.98px) {
     .content {
         padding: 20px 0 0;
+    }
+    .hover-scroll-overlay-y {
+        overflow-y: auto;
     }
     .container,
     .container-fluid,
