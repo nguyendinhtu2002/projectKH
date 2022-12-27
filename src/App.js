@@ -19,6 +19,7 @@ import Code from './Screen/Code';
 import NewOrder from './Screen/NewOrder';
 import MassOrderScreen from './Screen/MassOrderScreen';
 import MyOrderSreen from './Screen/MyOrderSreen';
+import AddFundScreen from './Screen/AddFundScreen';
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
         <Route path='/new' element={<NewOrder/>} />
         <Route path='/mass' element={<MassOrderScreen/>} />
         <Route path='/orders' element={<MyOrderSreen/>} />
+        <Route path='/addfunds' element={<AddFundScreen/>} />
 
       </Routes>
     </BrowserRouter>

@@ -1,3 +1,4 @@
+import AddFund from "../AddFund/AddFund"
 import Api from "../Api/Api"
 import MassOrder from "../MassOrder/MassOrder"
 import MyOrders from "../MyOrders/MyOrders"
@@ -35,5 +36,10 @@ export const SidebarData = [
         path: "/orders",
         file:<MyOrders/>,
         tilte:"My Orders"
+    },
+    {
+        path: "/addfunds",
+        file:<AddFund/>,
+        tilte:"Add funds"
     },
 ]

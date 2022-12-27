@@ -66,7 +66,7 @@ function Section
                                         </a>
                                     </div>
                                     <div className='menu-item'>
-                                        <a href='/services' className={userInfo ? 'menu-link' : "menu-link d-none"}>
+                                        <a href='/addfunds' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-credit-card fs-1"></i></span>
                                             <span class="menu-title" >Add funds</span>
                                         </a>
