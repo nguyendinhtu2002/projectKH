@@ -788,6 +788,20 @@ ul li::marker {
 .table.table-row-gray-300 tr {
     border-bottom-color: #E4E6EF;
 }
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-accent-bg: rgba(245, 248, 250, 0.75);
+    color: #181C32;
+}
+.text-pill{
+    font-size: .5rem!important;
+}
+.table.gs-2 td:first-child, .table.gs-2 th:first-child {
+    padding-left: 0.5rem;
+}
+.wrap{
+    word-break: break-word;
+    white-space: pre-wrap;
+}
 
 .menu-column {
     flex-direction: column;

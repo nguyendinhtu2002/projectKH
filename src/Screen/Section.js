@@ -40,7 +40,7 @@ function Section
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
                         <div className='aside-logo flex-none px-9 mb-9'>
                             <a href="/">
-                                <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-[25px] logo theme-light-show" />
+                                <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-6 logo theme-light-show" />
                                 <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-[25px] logo theme-dark-show hidden" />
                             </a>
                         </div>
