@@ -17,6 +17,8 @@ import SupportScreen from './Screen/SupportScreen';
 import ApiScreen from './Screen/ApiScreen';
 import Code from './Screen/Code';
 import NewOrder from './Screen/NewOrder';
+import MassOrderScreen from './Screen/MassOrderScreen';
+import MyOrderSreen from './Screen/MyOrderSreen';
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +31,8 @@ function App() {
         <Route path='/api' element={<ApiScreen/>} />
         <Route path='/code.txt' element={<Code/>} />
         <Route path='/new' element={<NewOrder/>} />
+        <Route path='/mass' element={<MassOrderScreen/>} />
+        <Route path='/orders' element={<MyOrderSreen/>} />
 
       </Routes>
     </BrowserRouter>

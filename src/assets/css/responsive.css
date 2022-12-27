@@ -169,6 +169,15 @@
         border-radius: 2rem;
     }
 
+    .col-lg-2 {
+        flex: 0 0 auto;
+        width: 16.66666667%;
+    }
+    .col-lg-8 {
+        flex: 0 0 auto;
+        width: 66.66666667%;
+    }
+
     .aside .aside-logo {
         display: flex;
         justify-content: space-between;
@@ -187,7 +196,7 @@
 }
 
 @media (max-width: 992px) {
-    
+
 
 
     .header {
@@ -282,9 +291,11 @@
         flex: 0 0 auto;
         width: 100%;
     }
+
     .hover-scroll-overlay-y:hover {
         overflow-y: overlay;
     }
+
     .hover-scroll-overlay-y {
         overflow-y: hidden;
     }
@@ -294,9 +305,11 @@
     .content {
         padding: 20px 0 0;
     }
+
     .hover-scroll-overlay-y {
         overflow-y: auto;
     }
+
     .container,
     .container-fluid,
     .container-lg,

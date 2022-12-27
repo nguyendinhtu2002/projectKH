@@ -28,9 +28,14 @@ function Section
             setClick(false)
         }
     }
+    const style = "--i:0;";
+    const style1 = "--i:1;";
+    const style2 = "--i:2;";
+    const style3 = "--i:3;";
+
     return (
         <>
-            <div className=' flex-test flex-col flex-1 page-wrapper is-home bg  ' ref={refOne}>
+            <div className=' flex-test flex-row flex-1 page-wrapper is-home bg  ' ref={refOne}>
                 <div className={click ? 'page flex flex-row flex-column-fluid' : 'page flex flex-row '}>
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
                         <div className='aside-logo flex-none px-9 mb-9'>
@@ -40,7 +45,7 @@ function Section
                             </a>
                         </div>
                         <div className='aside-menu flex-column-fluid pl-5 pr-3 mb-9 '>
-                            <div className='w-full hover-scroll-overlay-y flex pr-2'>
+                            <div className='w-full hover-scroll-overlay-y flex pr-2 h-[648px]'>
                                 <div className='menu menu-column menu-rounded menu-sub-indention menu-active-bg font-medium my-auto'>
                                     <div className='menu-item'>
                                         <a href='/new' className={userInfo ? 'menu-link' : "menu-link d-none"}>
@@ -49,13 +54,13 @@ function Section
                                         </a>
                                     </div>
                                     <div className='menu-item'>
-                                        <a href='/services' className={userInfo ? 'menu-link' : "menu-link d-none"}>
+                                        <a href='/mass' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-shopping-basket fs-1"></i></span>
                                             <span class="menu-title" >Mass order</span>
                                         </a>
                                     </div>
                                     <div className='menu-item'>
-                                        <a href='/services' className={userInfo ? 'menu-link' : "menu-link d-none"}>
+                                        <a href='/orders' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-th-list fs-1"></i></span>
                                             <span class="menu-title" >My Orders</span>
                                         </a>
@@ -175,24 +180,56 @@ function Section
                                         <img alt="Logo" src={logo} class="theme-dark-show hidden h-5" />
                                     </Link>
                                 </div>
+                                <div className='flex items-center flex-shrink-0'>
+                                    <div className='flex items-center'>
+                                        <div className='flex items-center'>
+                                            <div className='btn btn-icon w-[35px] h-[35px] md:w-[40px] md:h-[40px]'>
+                                                <span class="svg-icon svg-icon-1 text-primary">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <div className='flex items-center ml-1 lg:ml-3'>
+                                                <div className='btn btn-icon w-[30px] h-[30px] pulse pulse-primary'>
+                                                    <i class="fas fa-bell fs-1 text-primary"></i>
+                                                    <span style={{ style }}></span>
+                                                    <span style={{ style1 }}></span>
+                                                    <span style={{ style2 }}></span>
+                                                    <span style={{ style3 }}></span>
+
+                                                </div>
+                                            </div>
+                                            <div className='flex items-center ml-1 lg:ml-3 hidden'>
+                                                <div className='cursor-pointer text-[1.35rem] text-primary'>
+                                                    ₫0
+                                                </div>
+                                                <div className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color font-semibold py-4 text-[1.075rem] w-250px hidden'>
+                                                    <div class="menu-item px-5 mb-3" data-lang="menu::Choose your currency">Choose your currency</div>
+                                                    <div className='menu-item px-5 text-[0.85rem]'>
+
+                                                        <span className='w-full select2 select2-container select2-container-bootstrap5'>
+                                                            <span className='selection'>
+                                                                <span className='select2-selection select2-selection--single form-select form-select-sm sl-currency'>
+                                                                    <span class="select2-selection__rendered" id="select2-currency-iu-container" role="textbox" aria-readonly="true" title="0 VND">0 VND</span>
+                                                                    <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
+
+                                                                </span>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className='content flex flex-col flex-column-fluid'>
                             <div className='container-fluid'>
-                                {/* <div class="bg-[#f1faff] border border-solid border-[#009ef7] rounded-lg py-5 px-6 mb-3 text-base text-blue-700 flex items-center " role="alert">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-megaphone-fill fs-2x mr-5 text-primary" viewBox="0 0 16 16">
-                                        <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z" />
-                                    </svg>
-                                    <div className=' flex flex-col'>
-                                        <ul className='list-disc'>
-                                            <li>
-                                                <strong className='font-1 text-[13px]'>
-                                                    All services 4000h watch time dropped. Orders from December 6 will have views deducted. We will partial order all orders for you in 5 days. The reason is that all of today's views are deducted so we can refund the <br/> exact amount.
-                                                </strong>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> */}
+
 
                                 <div className='alert alert-primary flex items-center p-5 '>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi inline-block bi-megaphone-fill fs-2x mr-8 text-primary" viewBox="0 0 16 16">
@@ -206,7 +243,6 @@ function Section
                                                 </strong>
                                             </li>
                                             <li>Các bạn muốn mở website riêng dành cho đại lý liên hệ với mình qua FB <a href="https://www.facebook.com/motdanga" rel="noopener noreferrer" target="_blank">Nguyễn Mạnh Hùng</a></li>
-                                            {/* <li>You can get an SMM Panel like us (It is just a panel, and not services): <a href="https://1dgpanel.com/signup" rel="noopener noreferrer" target="_blank" style={{}}>1DG Panel</a></li> */}
                                         </ul>
                                     </div>
 
@@ -231,7 +267,7 @@ function Section
                                 </div>
                             </div>
                         </div>
-                        {/* <div className='footer py-4 flex lg:flex-col'>
+                        <div className='footer py-4 flex lg:flex-col'>
                             <div className='app-container container-fluid flex flex-col md:flex-row justify-center items-center md:justify-between md:items-center py-3'>
                                 <div className='text-dark order-2 md:order-1'>
                                     <span className="text-muted font-medium mr-1">2022© </span>
@@ -249,7 +285,7 @@ function Section
                                     </li>
                                 </ul>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
