@@ -6,13 +6,25 @@ import "../Components/homePage/Header.css"
 import "../assets/css/main.css"
 import "../assets/css/responsive.css"
 import { SidebarData } from '../Components/Slidebar/Slidebar';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { DatePicker } from 'antd';
+import { logout } from '../redux/Actions/userAction'
+import { CreateWallet } from '../redux/Actions/WalletAction'
+const { RangePicker } = DatePicker
 const usePathName = () => {
     const location = useLocation();
     return location.pathname;
 };
 function Section
     () {
+    const [chooseSelect, SetChooseSelect] = useState('MoMo')
+    const dispatch = useDispatch();
+    const logoutHandler = () => {
+        dispatch(logout());
+    };
+    useEffect( ()=>{
+        dispatch(CreateWallet())
+    },[dispatch])
     const location = usePathName();
     const [click, setClick] = useState(false)
     const toggleChecked = () => setClick(value => !value);
@@ -28,118 +40,122 @@ function Section
             setClick(false)
         }
     }
-    const style = "--i:0;";
-    const style1 = "--i:1;";
-    const style2 = "--i:2;";
-    const style3 = "--i:3;";
+
+
 
     return (
         <>
-            <div className=' flex-test flex-row flex-1 page-wrapper is-home bg  ' ref={refOne}>
+            <div className={location === "/new" ? ' flex-test flex-row flex-1 page-wrapper is-home bg  ' : ' flex-test flex-col flex-1 page-wrapper is-home bg  '} ref={refOne}>
                 <div className={click ? 'page flex flex-row flex-column-fluid' : 'page flex flex-row '}>
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
                         <div className='aside-logo flex-none px-9 mb-9'>
-                            <a href="/">
+                            <Link to="/">
                                 <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-6 logo theme-light-show" />
                                 <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-[25px] logo theme-dark-show hidden" />
-                            </a>
+                            </Link>
                         </div>
                         <div className='aside-menu flex-column-fluid pl-5 pr-3 mb-9 '>
-                            <div className='w-full hover-scroll-overlay-y flex pr-2 h-[648px]'>
+                            <div className={userInfo ? 'w-full hover-scroll-overlay-y flex pr-2 h-[648px]' : 'w-full hover-scroll-overlay-y flex pr-2 '}>
                                 <div className='menu menu-column menu-rounded menu-sub-indention menu-active-bg font-medium my-auto'>
                                     <div className='menu-item'>
-                                        <a href='/new' className={userInfo ? 'menu-link' : "menu-link d-none"}>
+                                        <Link to='/new' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-shopping-cart fs-1"></i></span>
                                             <span class="menu-title" >New order</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className='menu-item'>
-                                        <a href='/mass' className={userInfo ? 'menu-link' : "menu-link d-none"}>
+                                        <Link to='/mass' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-shopping-basket fs-1"></i></span>
                                             <span class="menu-title" >Mass order</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className='menu-item'>
-                                        <a href='/orders' className={userInfo ? 'menu-link' : "menu-link d-none"}>
+                                        <Link to='/orders' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-th-list fs-1"></i></span>
                                             <span class="menu-title" >My Orders</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className='menu-item'>
-                                        <a href='/addfunds' className={userInfo ? 'menu-link' : "menu-link d-none"}>
+                                        <Link to='/addfunds' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-credit-card fs-1"></i></span>
                                             <span class="menu-title" >Add funds</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div className='menu-item'>
-                                        <a href='/services' className='menu-link'>
+                                        <Link to='/services' className='menu-link'>
                                             <span class="menu-icon"><i class="fa-brands fa-servicestack fs-1"></i></span>
                                             <span class="menu-title" >Services</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="/tickets" class="menu-link ">
+                                        <Link to="/tickets" class="menu-link ">
                                             <span class="menu-icon"><i class="las la-phone fs-1"></i></span>
                                             <span class="menu-title" data-lang="menu::Support">Support</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div class={userInfo ? "menu-item" : "menu-item d-none"}>
                                         <div class="menu-item">
-                                            <a href="/settings" class="menu-link">
+                                            <Link to="/settings" class="menu-link">
                                                 <span class="menu-icon"><i class="las la-cog fs-1"></i></span>
                                                 <span class="menu-title" data-lang="menu::Settings">Settings</span>
-                                            </a>
+                                            </Link>
                                         </div>
-                                        <a href="/cashflow" class="menu-link">
+                                        <Link to="/cashflow" class="menu-link">
                                             <span class="menu-icon"><i class="las la-hand-holding-usd fs-1"></i></span>
                                             <span class="menu-title" data-lang="menu::Cash flow">Cash flow</span>
-                                        </a>
+                                        </Link>
                                     </div>
 
                                     <div class={userInfo ? "menu-item" : "menu-item d-none"}>
-                                        <a href="/affiliate" class="menu-link">
+                                        <Link to="/affiliate" class="menu-link">
                                             <span class="menu-icon"><i class="las la-podcast fs-1"></i></span>
                                             <span class="menu-title" data-lang="menu::Affiliate">Affiliate</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div class={userInfo ? "menu-item" : "menu-item d-none"}>
-                                        <a href="/childpanel" class="menu-link">
+                                        <Link to="/childpanel" class="menu-link">
                                             <span class="menu-icon"><i class="las la-child fs-1"></i></span>
                                             <span class="menu-title" data-lang="menu::Child Panel">Child Panel</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="/api" class="menu-link">
+                                        <Link to="/api" class="menu-link">
                                             <span class="menu-icon"><i class="las la-book fs-1"></i></span>
                                             <span class="menu-title">API</span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div class={userInfo ? "menu-item  d-none" : "menu-item"}>
-                                        <a href="/login" class="menu-link">
+                                        <Link to="/login" class="menu-link">
                                             <span class="menu-icon"><i class="las la-sign-in-alt fs-1"></i></span>
                                             <span class="menu-title" data-lang="menu::Sign in">Sign in</span>
-                                        </a>
+                                        </Link>
                                     </div>
-                                    <div class="menu-item">
-                                        <a href="/register" class="menu-link">
+                                    <div class={ "menu-item"}>
+                                        <Link to={userInfo?"/":"/register"} onClick={logoutHandler} class="menu-link">
                                             <span class="menu-icon"><i class="las la-sign-in-alt fs-1"></i></span>
-                                            <span class="menu-title" data-lang="menu::Sign up">Sign up</span>
-                                        </a>
+                                            <span class="menu-title" >{userInfo?'Sign out':'Sign up'}</span>
+                                        </Link>
                                     </div>
+                                    {/* <div class="menu-item">
+                                        <Link to="/register" onClick={logoutHandler} class="menu-link">
+                                            <span class="menu-icon"><i class="las la-sign-in-alt fs-1"></i></span>
+                                            <span class="menu-title" data-lang="menu::Sign up">Sign out</span>
+                                        </Link>
+                                    </div> */}
                                     <div class="menu-item">
                                         <div id="google_translate_element" class="mb-10"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className='aside-footer flex-column-auto px-9'>
+                        <div className={userInfo ? 'aside-footer flex-column-auto px-9' : 'hidden'}>
                             <div className='flex justify-between items-center'>
                                 <div className='flex items-center'>
                                     <div className='symbol symbol-circle symbol-40px'>
                                         <img src="https://cdn.my1dg.com/3/media/avatars/300-3.jpg" alt="photo" />
                                     </div>
                                     <div className='ml-2'>
-                                        <a href="#" class="text-gray-800 text-hover-primary text-[0.95rem] font-bold leading-none">nguyendinhtu1</a>
+                                        <Link to="#" class="text-gray-800 text-hover-primary text-[0.95rem] font-bold leading-none">nguyendinhtu1</Link>
                                         <span class="text-muted font-semibold block text-[0.75rem] lh-1">nguyentu@gmail.com</span>
                                     </div>
                                 </div>
@@ -194,10 +210,10 @@ function Section
                                             <div className='flex items-center ml-1 lg:ml-3'>
                                                 <div className='btn btn-icon w-[30px] h-[30px] pulse pulse-primary'>
                                                     <i class="fas fa-bell fs-1 text-primary"></i>
-                                                    <span style={{ style }}></span>
-                                                    <span style={{ style1 }}></span>
-                                                    <span style={{ style2 }}></span>
-                                                    <span style={{ style3 }}></span>
+                                                    <span ></span>
+                                                    <span ></span>
+                                                    <span ></span>
+                                                    <span ></span>
 
                                                 </div>
                                             </div>
@@ -229,9 +245,23 @@ function Section
                         </div>
                         <div className='content flex flex-col flex-column-fluid'>
                             <div className='container-fluid'>
+                                {location === "/affiliate" ? <div className='alert alert-primary  '>
+                                    🤑 Wanna get money? Use our Affiliate Programs to get more! Refer your friends and lets make money! 👍
 
+                                </div> : null}
+                                {location === "/childpanel" ? <div className='alert alert-primary  '>
+                                    <p class="m-0 text-[#009ef7] text-[13px]">Please change domain nameservers to:</p>
+                                    <p class="m-0 font-bold text-[#009ef7] text-[13px]">ns1.1dgdns.com</p>
+                                    <p class="m-0 font-bold text-[#009ef7] text-[13px]">ns2.1dgdns.com</p>
 
-                                <div className='alert alert-primary flex items-center p-5 '>
+                                </div> : null}
+                                {location === "/childpanel" ? <div className='alert alert-primary text-[13px] '>
+                                    Please use this account on this site as
+                                    <strong> ADMIN </strong>
+                                    account for log in to child panel.
+                                </div> : null}
+
+                                {location === "/new" ? <div className='alert alert-primary flex items-center p-5 '>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi inline-block bi-megaphone-fill fs-2x mr-8 text-primary" viewBox="0 0 16 16">
                                         <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z" />
                                     </svg>
@@ -242,11 +272,11 @@ function Section
                                                     All services 4000h watch time dropped. Orders from December 6 will have views deducted. We will partial order all orders for you in 5 days. The reason is that all of today's views are deducted so we can refund the  exact amount.
                                                 </strong>
                                             </li>
-                                            <li>Các bạn muốn mở website riêng dành cho đại lý liên hệ với mình qua FB <a href="https://www.facebook.com/motdanga" rel="noopener noreferrer" target="_blank">Nguyễn Mạnh Hùng</a></li>
+                                            <li>Các bạn muốn mở website riêng dành cho đại lý liên hệ với mình qua FB <Link to="https://www.facebook.com/motdanga" rel="noopener noreferrer" target="_blank">Nguyễn Mạnh Hùng</Link></li>
                                         </ul>
                                     </div>
 
-                                </div>
+                                </div> : null}
                                 <div className='page-title flex flex-col items-start justify-center flex-wrap lg:mr-2 pb-5 lg:pb-0'>
                                     <h1 className="flex flex-col text-dark font-semibold my-0 fs-1">
                                         {
@@ -255,36 +285,297 @@ function Section
                                         }
                                     </h1>
                                 </div>
-                                <div className='row'>
-                                    <div className='col-lg-12'>
-                                        <div className='card card-flush '>
-                                            {
-                                                SidebarData.map((item) => location === item.path ? item.file : null)
+                                {location !== "/settings" ? <div className='row'>
+                                    {location !== "/affiliate" ?
+                                        <div className='col-lg-12'>
+                                            <div className='card card-flush '>
+                                                {
+                                                    SidebarData.map((item) => location === item.path ? item.file : null)
 
-                                            }
-                                        </div>
+                                                }
+                                            </div>
+                                            {location === "/addfunds" ? <div className='card card-flush mt-10'>
+                                                <div className='card-body'>
+                                                    <div class="tab-content" id="tabs-tabContent3">
+                                                        <div class="tab-pane fade show active" id="tabs-home3" role="tabpanel" aria-labelledby="tabs-home-tab3">
+                                                            <div class="data-pm-method d-none"></div>
+                                                            <div className='mb-5'>
+                                                                <label className="required mb-2 text-base font-medium text-[#3f4254] inline-block">Choose method</label>
+                                                                <select id="countries" onChange={(e) => SetChooseSelect(e.target.value)} class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                    <option value="MoMo" defaultValue>AUTO - Momo | Nạp tối thiểu 10.000 VND</option>
+                                                                    <option value="USDT">USDT - TRC20 (5% Bonus on $1000+)</option>
+
+                                                                </select>
+                                                            </div>
+                                                            <div className={chooseSelect === "USDT" ? 'mb-5 text-sm ' : 'hidden'}>
+                                                                <p className='text-inherit text-sm mb-[1em]'>Địa chỉ <strong>USDT-TRC20</strong>: <strong>TRUY48qTEWE6sLzK2yxJCqqQZ1AeahWiQ2</strong></p>
+                                                                <p className='text-inherit text-sm mb-[1em]'>Binance Pay ID : 11713152</p>
+                                                                <p className='text-inherit text-sm mb-[1em]'>Sau khi chuyển tiền vui lòng liên hệ với tôi để được cập nhật tiền.</p>
+                                                            </div>
+                                                            <div class="div-options div-8 text-center " >
+                                                                <img src="https://momosv3.apimienphi.com/api/QRCode?phone=0917557227&amp;note=aznguyendinhtu1pq a stretch" class="w-250px  mb-5 inline-block" />
+                                                                <div class="mb-5">
+                                                                    <span class="" id="momo_phone">Số điện thoại: <span class="fw-boldest text-primary ">0917557227</span></span>
+                                                                    <span class="block" id="momo_content">Nội dung: <span class="fs-6 fw-bolder text-primary">aznguyendinhtu1pq a stretch</span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="tabs-profile3" role="tabpanel" aria-labelledby="tabs-profile-tab3">
+                                                            <div class="mb-1">
+                                                                <label class="form-label" data-lang="Filter">Filter</label>
+
+                                                            </div>
+                                                            <div className='mb-5'>
+                                                                <RangePicker className='w-full' />
+                                                            </div>
+                                                            <div className='table-responsive mb-5'>
+                                                                <table className='table align-middle table-row-bordered text-[.95rem] gy-3 gs-9 table-history-fund '>
+                                                                    <thead class="fs-6 font-semibold bg-lighten">
+                                                                        <tr>
+                                                                            <th data-lang="Method">Method</th>
+                                                                            <th data-lang="Amount">Amount</th>
+                                                                            <th data-lang="Details">Details</th>
+                                                                            <th data-lang="Created">Created</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div> : null}
+                                            {location === "/tickets" && userInfo ?
+                                                <div className='card card-flush mt-10'>
+                                                    <div className='card-body'>
+                                                        <div className='row'>
+                                                            <div className='col-lg-7'>
+                                                                <button type="button" class="btn btn-primary btn-sm mb-5">Create a ticket</button>
+                                                                <div className='table-responsive'>
+                                                                    <div className='table table-striped table-hover table-row-dashed table-row-gray-400 align-middle gs-2 gy-2'>
+                                                                        <tbody>
+                                                                            <tr className='bg-lighten'>
+                                                                                <td>
+                                                                                    <p class="m-0 fs-6 font-semibold text-[#181C32]">4395 - Order (6832021)</p>
+                                                                                    <p class="m-0 text-gray-700">2022-10-19 11:06:36</p>
+                                                                                </td>
+                                                                                <td class="fs-6 text-right"><span class="text-gray" data-lang="closed">closed</span><sup>🔖</sup></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div className='col-lg-5'>
+                                                                <h3 class="mt-4 mb-5 text-primary font-semibold" data-lang="FAQ">Frequently FAQ's</h3>
+                                                                <div class="accordion" id="accordionExample">
+                                                                    <div class="accordion-item bg-white border border-gray-200">
+                                                                        <h2 class="accordion-header mb-0" id="headingOne">
+                                                                            <button class="
+        accordion-button
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                                                                                aria-controls="collapseOne">
+                                                                                Why was my refill request rejected?
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                                                                            data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body py-4 px-5">
+                                                                                A refill can be rejected for a variety of reasons such as:
+                                                                                1. The order has dropped below the start count of the original order, in this case the number must be brought up organically or through a new quick service order so that the system can refill the original order.
+                                                                                2. The refill period outlined in the description of the order has now ended.
+                                                                                3. The service does not offer refill.
+                                                                                4.A new order has been made for the same link and there is overlap.
+                                                                                If none of these reasons apply to you, please open a ticket with the support team for further assistance or clarification.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="accordion-item bg-white border border-gray-200">
+                                                                        <h2 class="accordion-header mb-0" id="headingTwo">
+                                                                            <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                                                                aria-controls="collapseTwo">
+                                                                                Is it possible for the quantity ordered to decrease?
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                                                            data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body py-4 px-5">
+                                                                                A drop is normal, that is why most services offer a refill guarantee. A drop can depend on many factors such as an update made by the social media platform, or on the quality of service chosen. Always make sure to read the service descriptions carefully to ensure you are making the correct order for your needs.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="accordion-item bg-white border border-gray-200">
+                                                                        <h2 class="accordion-header mb-0" id="headingThree">
+                                                                            <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                                                                aria-controls="collapseThree">
+                                                                                Why was my order canceled?
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                                                            data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body py-4 px-5">
+                                                                                Your orders will be canceled for one of the following reasons: 1. Placing two or more orders for the same link at the same time without waiting for completion. 2. The link format is incorrect or does not follow the instructions provided in the service description. 3. The service is currently being updated or under service. 4. In some cases, the quantity was not in increments of 100's or 1000's.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="accordion-item bg-white border border-gray-200">
+                                                                        <h2 class="accordion-header mb-0" id="heading4">
+                                                                            <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
+                                                                                aria-controls="collapse4">
+                                                                                How many tickets can I open?
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+                                                                            data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body py-4 px-5">
+                                                                                You must open only one ticket for all your orders so we can help you better. After the request has been submitted or the issue has been solved, the ticket will be closed. Only then should you open a new ticket for new orders. The maximum limit for pending tickets is 3. A response must be made by the support team to be able to open a new ticket.                                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="accordion-item bg-white border border-gray-200">
+                                                                        <h2 class="accordion-header mb-0" id="heading5">
+                                                                            <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false"
+                                                                                aria-controls="collapse6">
+                                                                                How can I send a screenshot to you?                                                                        </button>
+                                                                        </h2>
+                                                                        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading5"
+                                                                            data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body py-4 px-5">
+                                                                                You can send us a screenshot using this website : https://imgur.com/upload                                                                    </div>
+                                                                        </div>
+                                                                        <div class="accordion-item bg-white border border-gray-200">
+                                                                            <h2 class="accordion-header mb-0" id="heading6">
+                                                                                <button class="
+        accordion-button
+        collapsed
+        relative
+        flex
+        items-center
+        w-full
+        py-4
+        px-5
+        text-base text-gray-800 text-left
+        bg-white
+        border-0
+        rounded-none
+        transition
+        focus:outline-none
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false"
+                                                                                    aria-controls="collapse5">
+                                                                                    Why is my order not completed yet?
+                                                                                </button>
+                                                                            </h2>
+                                                                            <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6"
+                                                                                data-bs-parent="#accordionExample">
+                                                                                <div class="accordion-body py-4 px-5">
+                                                                                    Check the status of your order from the orders tab in your user dashboard before opening a ticket.To know the speed of the orders please refer to the service description. In the rare event that the status of your order has become complete but the service was not delivered, please open a ticket and tell us so to check the order for you.                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> : null}
+
+                                        </div> : SidebarData.map((item) => location === item.path ? item.file : null)
+                                    }
+
+
+                                </div> : null}
+                                {location === "/settings" ? SidebarData.map((item) => location === item.path ? item.file : null) : null}
+                            </div>
+                            {/* <div className='footer py-4 flex lg:flex-col'>
+                                <div className='app-container container-fluid flex flex-col md:flex-row justify-center items-center md:justify-between md:items-center py-3'>
+                                    <div className='text-dark order-2 md:order-1'>
+                                        <span className="text-muted font-medium mr-1">2022© </span>
+                                        <Link to="/" target="_blank" className="text-gray-800 text-hover-primary">1DG SMM Panel - Social Services</Link>
                                     </div>
+                                    <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+                                        <li class="menu-item">
+                                            <Link to="/" target="_blank" class="menu-link px-2 active">Home</Link>
+                                        </li>
+                                        <li class="menu-item">
+                                            <Link to="/terms" target="_blank" class="menu-link px-2">Term</Link>
+                                        </li>
+                                        <li class="menu-item">
+                                            <Link to="/faqs" target="_blank" class="menu-link px-2">FAQs</Link>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div className='footer py-4 flex lg:flex-col'>
-                            <div className='app-container container-fluid flex flex-col md:flex-row justify-center items-center md:justify-between md:items-center py-3'>
-                                <div className='text-dark order-2 md:order-1'>
-                                    <span className="text-muted font-medium mr-1">2022© </span>
-                                    <Link to="/" target="_blank" className="text-gray-800 text-hover-primary">1DG SMM Panel - Social Services</Link>
-                                </div>
-                                <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-                                    <li class="menu-item">
-                                        <Link to="/" target="_blank" class="menu-link px-2 active">Home</Link>
-                                    </li>
-                                    <li class="menu-item">
-                                        <Link to="/terms" target="_blank" class="menu-link px-2">Term</Link>
-                                    </li>
-                                    <li class="menu-item">
-                                        <Link to="/faqs" target="_blank" class="menu-link px-2">FAQs</Link>
-                                    </li>
-                                </ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

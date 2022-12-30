@@ -1,15 +1,156 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
+import { listProduct } from '../../redux/Actions/productAction';
+import Loading from "../LoadingError/Loading";
+import Message from "../LoadingError/Error";
+import Toast from "./../LoadingError/Toast";
+import { toast } from "react-toastify";
+import { addToCart } from '../../redux/Actions/cartActions';
+import { createOrderAPIMe, listMyOrders } from '../../redux/Actions/ordersAction';
+import { updateWallet } from '../../redux/Actions/WalletAction';
+import { createCashFlow } from '../../redux/Actions/cashAction';
+const Social = [
+    { name: 'Youtube' }
+    // { name: 'Pending' },
+    // { name: 'Processing' },
+    // { name: 'In progress' },
+    // { name: 'Completed' },
+    // { name: 'Partial' },
+    // { name: 'Canceled' },
 
+]
 function Neworder() {
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const redirect = location.search ? Number(location.search.split("=")[1]) : "";
+
+    const [socialMedida, setSocialMedida] = useState("Youtube")
+    // const [id, setId] = useState('')
+    const [service, setService] = useState(redirect)
+    const [category, setCategory] = useState('Increase video views')
+    const [link, setLink] = useState("")
+    const [quanlity, setQuanlity] = useState(0)
+    const [keyword, setKeyWord] = useState("")
     const [startDate, setStartDate] = useState(new Date());
     const [check, setCheck] = useState(false)
     const [checkLoop, setCheckLoop] = useState(false)
+    const toastId = React.useRef(null);
+    const productList = useSelector((state) => state.productList)
+    const { loading, products } = productList;
+    const createWallet = useSelector((state) => state.createWallet);
+    const { wallet } = createWallet
+    const temp1 = []
+    const temp2 = [];
+    const temp3 = [];
 
+    const findBySercive = products.find((items) => items.service === redirect)
+
+    if (redirect !== "" && findBySercive != undefined) {
+
+        const getScial = findBySercive?.name.split("|")[0]
+        const getCategory = findBySercive?.category.split(`${getScial}|`)[1]
+
+        temp1.push(findBySercive?.platform)
+        temp2.push(getCategory)
+        temp3.push(findBySercive?.name.split(`${socialMedida} |${getCategory} |`)[1])
+    }
+    else {
+        products.map((items) => {
+            if (socialMedida === items.name.split(" | ")[0]) temp2.push(items.category.split(`${socialMedida} | `)[1])
+        })
+        products.map((items) => {
+            if ((items.category.split(`${socialMedida} | `)[1]) === category) temp3.push(items.name.split(`${socialMedida} | ${category} |`)[1])
+        })
+
+    }
+
+    const uniqueSet2 = new Set(temp2);
+    const Category = [...uniqueSet2];
+
+    const uniqueSet = new Set(temp3);
+    const Service = [...uniqueSet];
+    const Toastobjects = {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    };
+
+
+    const onSubmit = async () => {
+        if (link === "" || quanlity === "") {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.error("Cần điền đủ thông tin!!", Toastobjects);
+            }
+        }
+        else {
+
+            await dispatch(addToCart(service, Number(quanlity), link))
+            const items = (JSON.parse(localStorage.getItem('cartItems')))
+            if (wallet.balance > Number(quanlity) * (items[0].rate) / 1000) {
+                //khách order -> lưu vào databasse -> xử lý gửi cho đối tác -> check trạng thái vsoos view bên đối tác -> update lên database 
+
+
+                await dispatch(createOrderAPIMe({
+                    service,
+                    link,
+                    search: keyword.split('|').toString(),
+                    quanlity: Number(quanlity),
+                    name: redirect === "" ? (items[0].name.split(`${socialMedida} | ${category} |`)[1]) : Service[0],
+                    totalPrice: Number(quanlity) * (items[0].rate) / 1000,
+                }))
+                const order = (JSON.parse(localStorage.getItem('ordersInfo')))
+                if ((order[0].order !== undefined ? order[0].order : 0) !== 0) {
+                    await dispatch(updateWallet({ amount: -(Number(Number(quanlity) * (items[0].rate) / 1000)).toFixed(2) }))
+                    if (!toast.isActive(toastId.current)) {
+                        toastId.current = toast.success("Order thành công", Toastobjects);
+                    }
+                }
+                else {
+                    if (!toast.isActive(toastId.current)) {
+                        toastId.current = toast.error("Order không thành công", Toastobjects);
+                    }
+                }
+
+
+            }
+            else {
+                if (!toast.isActive(toastId.current)) {
+                    toastId.current = toast.error("Không đủ tiền", Toastobjects);
+                }
+            }
+            await dispatch(listMyOrders())
+            const order = (JSON.parse(localStorage.getItem('ordersInfo')))
+
+            await dispatch(createCashFlow({
+                order: order[0].order !== undefined ? order[0].order : 0,
+                type: "Add order",
+                spending: Number(quanlity) * (items[0].rate) / 1000,
+                remainingMoney: wallet.balance - Number(quanlity) * (items[0].rate) / 1000
+            })
+            )
+        }
+
+    }
+    useEffect(() => {
+        // if (userInfo) {
+        //     setId(userInfo._id)
+        // }
+
+        dispatch(listProduct());
+    }, [dispatch]);
     return (
         <>
+            <Toast />
+            {loading && <Loading />}
+
             <div className='card-body'>
                 <div className='row'>
                     <div className='grid lg:grid-cols-3 grid-cols-1 gap-2'>
@@ -17,25 +158,23 @@ function Neworder() {
                             <label className=' mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254] inline-block '>
                                 Social media
                             </label>
-                            {/* <select onChange={(e) => setSocialMedida(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 {
                                     redirect === "" ? <option></option> : ""
                                 }
                                 {
                                     Social.map((items, index) =>
-                                        <option key={index} value={items}>{items}</option>
+                                        <option key={index} value={items.name}>{items.name}</option>
                                     )
                                 }
-                            </select> */}
-                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option></option> : ""
                             </select>
+
                         </div>
                         <div className='mb-3 lg:col-span-2' >
                             <label className=' mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254] inline-block '>
                                 Category
                             </label>
-                            {/* <select onChange={(e) => setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select onChange={(e) => setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 {
                                     redirect === "" ? <option></option> : ""
                                 }
@@ -46,31 +185,31 @@ function Neworder() {
                                     )
                                 }
 
-                            </select> */}
-                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option></option> : ""
                             </select>
+                            {/* <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option></option> : ""
+                            </select> */}
 
                         </div>
                         <div className='mb-3 lg:col-span-3 ' >
                             <label className=' mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254] inline-block '>
                                 Service
                             </label>
-                            {/* <select onChange={(e) => setCategory(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select onChange={(e) => setService(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 {
                                     redirect === "" ? <option></option> : ""
                                 }
                                 {
-                                    Category.map((items, index) =>
+                                    Service.map((items, index) =>
                                         <option key={index} value={items}>{items}</option>
 
                                     )
                                 }
 
-                            </select> */}
-                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option></option> : ""
                             </select>
+                            {/* <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option></option> : ""
+                            </select> */}
 
                         </div>
                         <div className='mb-3 lg:col-span-3 ' >
@@ -78,7 +217,7 @@ function Neworder() {
                                 Link
                             </label>
                             <div className='input-group input-group-solid mb-2'>
-                                <input type="text" id="default-input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                <input onChange={(e) => setLink(e.target.value)} type="text" id="default-input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                             </div>
 
@@ -89,7 +228,7 @@ function Neworder() {
                                 Quantity
                             </label>
                             <div className='input-group input-group-solid mb-2'>
-                                <input type="text" id="default-input" placeholder="From 500 to 2000" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                <input onChange={(e) => setQuanlity(e.target.value)} type="text" id="default-input" placeholder="From 500 to 2000" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                             </div>
 
@@ -154,7 +293,7 @@ function Neworder() {
                         </div>
 
                         <div className='mb-2 lg:col-span-3' >
-                            <button type="button" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            <button onClick={onSubmit} type="button" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                 +
                                 Submit
                             </button>
@@ -172,7 +311,7 @@ function Neworder() {
                                 <p>📲 Device : Mobile phone</p>
                                 <p>👨‍👩‍👧‍👦 Real user</p>
                                 <p>🌎 Country :&nbsp;Global</p>
-                                <p><br/></p>
+                                <p><br /></p>
                                 <p>⚠️ Note :&nbsp;</p>
                                 <p>📌 When the service is busy, the starting speed of the process changes.</p>
                                 <p>📌 Do not place the second order on the same link before your order is completed in the system.</p>

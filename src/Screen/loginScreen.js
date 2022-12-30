@@ -8,6 +8,7 @@ import Loading from "../Components/LoadingError/Loading";
 import { useLocation, useNavigate } from 'react-router';
 import { toast } from "react-toastify";
 import Toast from "../Components/LoadingError/Toast";
+import { Link } from 'react-router-dom';
 function LoginScreen() {
     const location = useLocation();
     const history = useNavigate();
@@ -59,9 +60,9 @@ function LoginScreen() {
                 <div className='login-layout'>
 
                     <section className='left-section'>
-                        <a className='/'>
+                        <Link to='/'>
                             <img src="https://app.adcreative.ai/assets/svg/auth-logo.svg" class="left-section--logo" />
-                        </a>
+                        </Link>
                         <section className='left-section--texts'>
                             <h2 className='text-white'>Converting Ad Creatives by</h2>
                             <h1>Artifical Intelligence</h1>

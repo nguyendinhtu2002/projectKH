@@ -7,7 +7,7 @@ export const listStatus = (id) => async (dispatch) => {
 
         dispatch({ type: Status_CREATE_REQUEST });
 
-        const { data } = await axios.put(`https://up-views.herokuapp.com/api/orders/${id}/status`);
+        const { data } = await axios.put(`http://localhost:5000/api/orders/${id}/status`);
         dispatch({ type: Status_CREATE_SUCCESS, payload: data });
     } catch (error) {
         dispatch({

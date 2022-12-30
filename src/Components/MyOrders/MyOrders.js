@@ -6,12 +6,12 @@ function MyOrders() {
         <div className='card-body'>
             <Select />
             <div className='table-responsive'>
-                <div className='table table-striped table-hover table-row-bordered table-row-gray-300 align-middle gs-2 gy-2'>
+                <table className='table table-striped table-hover table-row-bordered table-row-gray-300 align-middle gs-2 gy-2'>
                     <tbody>
-                        <tr className='bg-lighten'>
-                            <td>
-                                <p class="m-0 font-bolder">ID: 7608722</p>
-                                <p class="m-0 font-bolder text-primary"><span data-lang="status::In progress">In progress</span> </p>
+                        <tr className='bg-lighten '>
+                            <td className='w-[13%]'>
+                                <p class="m-0 font-bold text-[#181C32]">ID: 7608722</p>
+                                <p class="m-0 font-bold text-primary"><span data-lang="status::In progress">In progress</span> </p>
                                 <p class="m-0 text-[0.75rem] text-gray-600">2022-12-20 19:03:13</p>
                                 <p class="m-0 text-[0.75rem] text-gray-600"> 2022-12-27 15:48:24</p>
                             </td>
@@ -24,11 +24,11 @@ function MyOrders() {
                                     <p class="m-0 wrap">https://www.tiktok.com/@daudau02042020?_t=8YKoLcfH7gn&amp;_r=1 </p>
                                 </div>
                                 <div class="float-right">
-                                    <a target="_blank" href="/new?service=1112" class="text-primary mr-2 font-bold" data-lang="Reorder">Reorder</a>
-                                    <a class="text-danger font-bold" data-lang="Report">Report</a>
+                                    <a target="_blank" href="/new?service=1112" class="text-primary mr-2 font-bold md:text-[16px] sm:text-[16px] text-[16px]" data-lang="Reorder">Reorder</a>
+                                    <a class="text-danger font-bold md:text-[16px] sm:text-[16px] text-[16px]" data-lang="Report">Report</a>
                                 </div>
                             </td>
-                            <td>
+                            <td className='w-[13%]'>
                                 <p className='m-0 font-bold'>
                                     <span class="text-gray-600" data-lang="Charge">Charge</span>
                                     :
@@ -49,7 +49,7 @@ function MyOrders() {
                             </td>
                         </tr>
                     </tbody>
-                </div>
+                </table>
             </div>
         </div>
     )

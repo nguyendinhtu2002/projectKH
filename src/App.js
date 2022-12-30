@@ -20,6 +20,10 @@ import NewOrder from './Screen/NewOrder';
 import MassOrderScreen from './Screen/MassOrderScreen';
 import MyOrderSreen from './Screen/MyOrderSreen';
 import AddFundScreen from './Screen/AddFundScreen';
+import CashFlowScreen from './Screen/CashFlowScreen';
+import AffiliateScreen from './Screen/AffiliateScreen';
+import ChildPanelScreen from './Screen/ChildPanelScreen';
+import SettingScreen from './Screen/SettingScreen';
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +39,10 @@ function App() {
         <Route path='/mass' element={<MassOrderScreen/>} />
         <Route path='/orders' element={<MyOrderSreen/>} />
         <Route path='/addfunds' element={<AddFundScreen/>} />
+        <Route path='/cashflow' element={<CashFlowScreen/>} />
+        <Route path='/affiliate' element={<AffiliateScreen/>} />
+        <Route path='/childpanel' element={<ChildPanelScreen/>} />
+        <Route path='/settings' element={<SettingScreen/>} />
 
       </Routes>
     </BrowserRouter>

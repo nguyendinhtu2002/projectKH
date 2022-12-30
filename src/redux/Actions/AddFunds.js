@@ -17,7 +17,7 @@ export const createAddFunds = (funds) => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.post(`https://up-views.herokuapp.com/api/addFunds`, funds, config);
+        const { data } = await axios.post(`http://localhost:5000/api/addFunds`, funds, config);
         dispatch({ type: ADDFUNDS_CREATE_SUCCESS, payload: data });
         // localStorage.setItem("listMyOrders", JSON.stringify(data));
 
@@ -74,7 +74,7 @@ export const listMyAdsFunds = () => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get(`https://up-views.herokuapp.com/api/addFunds/getByUser`, config);
+        const { data } = await axios.get(`http://localhost:5000/api/addFunds/getByUser`, config);
         dispatch({ type: ADDFUNDS_GETLIST_MY_SUCCESS, payload: data });
 
     } catch (error) {

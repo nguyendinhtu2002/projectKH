@@ -10,14 +10,14 @@ export const listProduct = () => async (dispatch, getState) => {
         const {
             userLogin: { userInfo },
         } = getState();
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`,
+        // const config = {
+        //     headers: {
+        //         Authorization: `Bearer ${userInfo.token}`,
 
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-        const { data } = await axios.get("https://up-views.herokuapp.com/api/products", config);
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //     }
+        // }
+        const { data } = await axios.get("http://localhost:5000/api/products");
         // const { data } = await axios.post("https://upview.us/api/v2",params,config);
 
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });

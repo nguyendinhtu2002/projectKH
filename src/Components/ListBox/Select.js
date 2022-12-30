@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
-const people = [
+const Status = [
     { name: 'ALL' },
     { name: 'Pending' },
     { name: 'Processing' },
@@ -13,8 +13,17 @@ const people = [
 
 ]
 
+const type = [
+    { name: 'Search type' },
+    { name: 'Order ID' },
+    { name: 'Link' },
+    { name: 'Service' },
+   
+
+]
 export default function Select() {
-    const [selected, setSelected] = useState(people[0])
+    const [selected, setSelected] = useState(Status[0])
+    const [selected1, setSelected1] = useState(type[0])
 
     return (
         <div className='row'>
@@ -37,8 +46,8 @@ export default function Select() {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {people.map((person, personIdx) => (
+                            <Listbox.Options className="relative lg:absolute mt-1 max-h-60 lg:w-[15%] w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                {Status.map((person, personIdx) => (
                                     <Listbox.Option
                                         key={personIdx}
                                         className={({ active }) =>
@@ -70,10 +79,10 @@ export default function Select() {
                 </Listbox>
             </div>
             <div className=" top-16 col-lg-2">
-                <Listbox value={selected} onChange={setSelected} className="mb-5">
+                <Listbox value={selected1} onChange={setSelected1} className="mb-5">
                     <div className="relative mt-1">
                         <Listbox.Button className="relative w-full cursor-default rounded-lg bg-[#eef3f7] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                            <span className="block truncate">{selected.name}</span>
+                            <span className="block truncate">{selected1.name}</span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                 <ChevronUpDownIcon
                                     className="h-5 w-5 text-gray-400"
@@ -87,8 +96,8 @@ export default function Select() {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {people.map((person, personIdx) => (
+                            <Listbox.Options className="relative lg:absolute mt-1 max-h-60 lg:w-[15%] w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                {type.map((person, personIdx) => (
                                     <Listbox.Option
                                         key={personIdx}
                                         className={({ active }) =>
@@ -123,7 +132,7 @@ export default function Select() {
                 <div className='mb-5'>
                     <div className='input-group'>
                         <input type="text" class="form-control form-control-solid ipt-keyword h-[38px] relative flex-auto min-w-0" placeholder="Search" value="" />
-                        <button className='btn btn-primary btn-icon px-4 h-[38px]'><i class="las la-search fs-2"></i></button>
+                        <button className='btn btn-primary btn-icon px-4' style={{height:38}}><i class="las la-search fs-2"></i></button>
                     </div>
                 </div>
 
