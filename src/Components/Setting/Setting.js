@@ -27,15 +27,16 @@ function Setting() {
     const dispatch = useDispatch();
     const getUser = useSelector((state) => state.getUser);
     const { getUserId } = getUser;
-    const [email, setEmail] = useState(getUserId?.email)
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+    const [email, setEmail] = useState(userInfo?.email)
     const changeEmailUser = useSelector((state) => state.changeEmailUser)
     const getApiKey = useSelector((state) => state.getApiKey)
     const { ApiKey } = getApiKey
     const [api, setApi] = useState(ApiKey?.apiKey)
     const changeApiKey = useSelector((state) => state.changeApi)
     const [isLoading, setIsLoading] = useState(false);
-    const userLogin = useSelector((state) => state.userLogin)
-    const { userInfo } = userLogin
+   
 
     const toastId = React.useRef(null);
 

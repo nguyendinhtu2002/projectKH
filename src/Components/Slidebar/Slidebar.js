@@ -70,6 +70,5 @@ export const SidebarData = [
     {
         path: "/tickets/:id",
         file:<ViewTicket/>,
-        tilte:"Support"
     },
 ]

@@ -28,8 +28,6 @@ function Section
     const [choose, SetChoose] = useState('Order')
     const history = useNavigate();
 
-
-
     const dispatch = useDispatch();
     const toastId = React.useRef(null);
 
@@ -69,10 +67,12 @@ function Section
         }
     }
     useEffect(() => {
+        window.scrollTo(0, 0)
         dispatch(CreateWallet())
     }, [dispatch])
     const location = usePathName();
-    const Location  = useLocation();
+    const id = location.split("/")[2]
+    const Location = useLocation();
     const [click, setClick] = useState(false)
     const toggleChecked = () => setClick(value => !value);
     const userLogin = useSelector((state) => state.userLogin);
@@ -81,7 +81,6 @@ function Section
     const { messager } = messageList
     const format1 = "YYYY-MM-DD HH:mm:ss"
     const redirect = Location.pathname ? Number(Location.pathname.split("/")[2]) : "";
-    console.log(redirect)
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true)
     })
@@ -205,8 +204,8 @@ function Section
                                         <img src="https://cdn.my1dg.com/3/media/avatars/300-3.jpg" alt="photo" />
                                     </div>
                                     <div className='ml-2'>
-                                        <Link to="#" class="text-gray-800 text-hover-primary text-[0.95rem] font-bold leading-none">nguyendinhtu1</Link>
-                                        <span class="text-muted font-semibold block text-[0.75rem] lh-1">nguyentu@gmail.com</span>
+                                        <Link to="#" class="text-gray-800 text-hover-primary text-[0.95rem] font-bold leading-none">{userInfo?.name}</Link>
+                                        <span class="text-muted font-semibold block text-[0.75rem] lh-1">{userInfo?.email}</span>
                                     </div>
                                 </div>
 
@@ -228,9 +227,14 @@ function Section
                             <div className='container-fluid flex justify-between items-center flex-wrap gap-2'>
                                 <div className=' flex flex-col items-start header-title justify-center flex-wrap me-lg-2 pb-5 pb-lg-0'>
                                     <h1 class="flex flex-col text-dark fw-bold my-0 fs-1">{
-                                        SidebarData.map((item) => location === item.path || location === `/ticket/${redirect}` ? (console.log(item.tilte)) : null)
+                                        SidebarData.map((item) => location === item.path ? item.tilte : null)
 
-                                    }</h1>
+                                    }
+                                        {
+                                            SidebarData.map((item) => location.split(`/8`)[0] === item.path.split(`/:id`)[0] ? item.tilte : null)
+
+                                        }
+                                    </h1>
                                 </div>
                                 <div className='flex d-lg-none items-center -ml-2 mr-2 '>
                                     <div className='btn btn-icon btn-active-icon-primary'>
@@ -333,6 +337,7 @@ function Section
                                             SidebarData.map((item) => location === item.path ? item.tilte : null)
 
                                         }
+
                                     </h1>
                                 </div>
                                 {location !== "/settings" ? <div className='row'>
@@ -341,6 +346,10 @@ function Section
                                             <div className='card card-flush '>
                                                 {
                                                     SidebarData.map((item) => location === item.path ? item.file : null)
+
+                                                }
+                                                {
+                                                    SidebarData.map((item) => item.path === "/tickets/:id" && location === `/tickets/${id}` ? item.file : null)
 
                                                 }
                                             </div>

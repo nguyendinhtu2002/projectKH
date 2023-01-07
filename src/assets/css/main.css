@@ -1484,7 +1484,7 @@ aside .aside-menu .menu .menu-item .menu-link.active .menu-icon,
     align-items: center;
     padding: 0;
     flex: 0 0 100%;
-    padding: 0.65rem 1rem;
+    padding: 0.3rem 0.8rem;
     transition: none;
     outline: 0 !important;
 }

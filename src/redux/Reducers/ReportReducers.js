@@ -38,11 +38,11 @@ export const messageListDetailMyReducer = (state = {}, action) => {
       case MESSAGE_DETAILS_LIST_MY_REQUEST:
         return { loading: true };
       case MESSAGE_DETAILS_LIST_MY_SUCCESS:
-        return { loading: false, messager: action.payload };
+        return { loading: false, messagerDetail: action.payload };
       case MESSAGE_DETAILS_LIST_MY_FAIL:
         return { loading: false, error: action.payload };
       case MESSAGE_DETAILS_LIST_MY_RESET:
-        return { messager: [] };
+        return { messagerDetail: [] };
       default:
         return state;
     }
