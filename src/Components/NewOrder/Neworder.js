@@ -84,6 +84,12 @@ function Neworder() {
     };
 
 
+    const getId1 = products.find((items) => items.name.split(`${socialMedida} | ${category} |`)[1] === service)
+
+    if (redirect === "" && getId1 !== undefined) {
+        console.log(getId1.service)
+        setService(getId1.service)
+    }
     const onSubmit = async () => {
         if (link === "" || quanlity === "") {
             if (!toast.isActive(toastId.current)) {

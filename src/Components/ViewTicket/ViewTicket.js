@@ -1,42 +1,11 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { listMyMessage } from '../../redux/Actions/reportActions'
-import Toast from "./../LoadingError/Toast";
-import { toast } from "react-toastify";
-function Support() {
+import React from 'react'
 
-    const dispatch = useDispatch();
-
-    
-    const handlerSendReport = () => {
-        // const temp = document.getElementById('order').value
-        // if (temp === "" && message === "") {
-        //     if (!toast.isActive(toastId.current)) {
-        //         toastId.current = toast.error("Order or Message not null", Toastobjects);
-        //     }
-        // }
-        // else {
-        //     dispatch(report({
-        //         reportOrder: {
-        //             order: Number(temp),
-        //             message,
-        //             Request: request
-        //         }
-        //     }))
-        //     if (!toast.isActive(toastId.current)) {
-        //         toastId.current = toast.success("Report thành công", Toastobjects);
-        //     }
-
-        // }
-    }
-    useEffect(() => {
-        dispatch(listMyMessage())
-    }, [dispatch])
+function ViewTicket() {
     return (
         <>
-            
+
             <div className='card-header'>
-                <h3 class="card-title" data-lang="Direct message">Direct message</h3>
+                <h3 class="card-title" data-lang="Direct message">Order (6832021)</h3>
             </div>
             <div className='card-body py-5'>
                 <div className='grid lg:grid-cols-3 grid-cols-1 gap-2'>
@@ -96,4 +65,4 @@ function Support() {
     )
 }
 
-export default Support
+export default ViewTicket

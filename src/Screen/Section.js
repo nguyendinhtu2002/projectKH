@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import logo from "../assets/images/logo.png"
 import "../Components/homePage/Header.css"
 import "../assets/css/main.css"
@@ -10,27 +10,78 @@ import { useDispatch, useSelector } from 'react-redux'
 import { DatePicker } from 'antd';
 import { logout } from '../redux/Actions/userAction'
 import { CreateWallet } from '../redux/Actions/WalletAction'
+import moment from "moment"
+import Toast from "../Components/LoadingError/Toast";
+import { toast } from "react-toastify";
+import { report } from '../redux/Actions/reportActions'
 const { RangePicker } = DatePicker
 const usePathName = () => {
     const location = useLocation();
     return location.pathname;
 };
+
 function Section
     () {
     const [chooseSelect, SetChooseSelect] = useState('MoMo')
+    const [request, setRequest] = useState('Order')
+    const [message, setMessage] = useState('')
+    const [choose, SetChoose] = useState('Order')
+    const history = useNavigate();
+
+
+
     const dispatch = useDispatch();
+    const toastId = React.useRef(null);
+
     const logoutHandler = () => {
         dispatch(logout());
     };
-    useEffect( ()=>{
+    const Toastobjects = {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    };
+
+    const handlerSendReport = () => {
+        const temp = document.getElementById('order').value
+        if (temp === "" && message === "") {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.error("Order or Message not null", Toastobjects);
+            }
+        }
+        else {
+            dispatch(report({
+                reportOrder: {
+                    order: Number(temp),
+                    message,
+                    subject: choose,
+                    Request: request
+                }
+            }))
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.success("Report thành công", Toastobjects);
+            }
+
+        }
+    }
+    useEffect(() => {
         dispatch(CreateWallet())
-    },[dispatch])
+    }, [dispatch])
     const location = usePathName();
+    const Location  = useLocation();
     const [click, setClick] = useState(false)
     const toggleChecked = () => setClick(value => !value);
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
-
+    const messageList = useSelector((state) => state.messageList)
+    const { messager } = messageList
+    const format1 = "YYYY-MM-DD HH:mm:ss"
+    const redirect = Location.pathname ? Number(Location.pathname.split("/")[2]) : "";
+    console.log(redirect)
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true)
     })
@@ -45,6 +96,7 @@ function Section
 
     return (
         <>
+            <Toast />
             <div className={location === "/new" ? ' flex-test flex-row flex-1 page-wrapper is-home bg  ' : ' flex-test flex-col flex-1 page-wrapper is-home bg  '} ref={refOne}>
                 <div className={click ? 'page flex flex-row flex-column-fluid' : 'page flex flex-row '}>
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
@@ -94,12 +146,10 @@ function Section
                                         </Link>
                                     </div>
                                     <div class={userInfo ? "menu-item" : "menu-item d-none"}>
-                                        <div class="menu-item">
-                                            <Link to="/settings" class="menu-link">
-                                                <span class="menu-icon"><i class="las la-cog fs-1"></i></span>
-                                                <span class="menu-title" data-lang="menu::Settings">Settings</span>
-                                            </Link>
-                                        </div>
+                                        <Link to="/settings" class="menu-link">
+                                            <span class="menu-icon"><i class="las la-cog fs-1"></i></span>
+                                            <span class="menu-title" data-lang="menu::Settings">Settings</span>
+                                        </Link>
                                         <Link to="/cashflow" class="menu-link">
                                             <span class="menu-icon"><i class="las la-hand-holding-usd fs-1"></i></span>
                                             <span class="menu-title" data-lang="menu::Cash flow">Cash flow</span>
@@ -130,10 +180,10 @@ function Section
                                             <span class="menu-title" data-lang="menu::Sign in">Sign in</span>
                                         </Link>
                                     </div>
-                                    <div class={ "menu-item"}>
-                                        <Link to={userInfo?"/":"/register"} onClick={logoutHandler} class="menu-link">
+                                    <div class={"menu-item"}>
+                                        <Link to={userInfo ? "/" : "/register"} onClick={logoutHandler} class="menu-link">
                                             <span class="menu-icon"><i class="las la-sign-in-alt fs-1"></i></span>
-                                            <span class="menu-title" >{userInfo?'Sign out':'Sign up'}</span>
+                                            <span class="menu-title" >{userInfo ? 'Sign out' : 'Sign up'}</span>
                                         </Link>
                                     </div>
                                     {/* <div class="menu-item">
@@ -178,7 +228,7 @@ function Section
                             <div className='container-fluid flex justify-between items-center flex-wrap gap-2'>
                                 <div className=' flex flex-col items-start header-title justify-center flex-wrap me-lg-2 pb-5 pb-lg-0'>
                                     <h1 class="flex flex-col text-dark fw-bold my-0 fs-1">{
-                                        SidebarData.map((item) => location === item.path ? item.tilte : null)
+                                        SidebarData.map((item) => location === item.path || location === `/ticket/${redirect}` ? (console.log(item.tilte)) : null)
 
                                     }</h1>
                                 </div>
@@ -351,19 +401,19 @@ function Section
                                                     <div className='card-body'>
                                                         <div className='row'>
                                                             <div className='col-lg-7'>
-                                                                <button type="button" class="btn btn-primary btn-sm mb-5">Create a ticket</button>
+                                                                <button type="button" class="btn btn-primary btn-sm mb-5" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">Create a ticket</button>
                                                                 <div className='table-responsive'>
-                                                                    <div className='table table-striped table-hover table-row-dashed table-row-gray-400 align-middle gs-2 gy-2'>
-                                                                        <tbody>
-                                                                            <tr className='bg-lighten'>
+                                                                    <table className='table table-striped table-hover table-row-dashed table-row-gray-400 align-middle gs-2 gy-2' id="table-tickets">
+                                                                        {messager?.map((items, index) => <tbody>
+                                                                            <tr className='bg-lighten' onClick={() => history(`${items._id}`)}>
                                                                                 <td>
-                                                                                    <p class="m-0 fs-6 font-semibold text-[#181C32]">4395 - Order (6832021)</p>
-                                                                                    <p class="m-0 text-gray-700">2022-10-19 11:06:36</p>
+                                                                                    <p class="m-0 fs-6 font-semibold text-[#181C32]">{items._id} - {items.reportOrder[0].subject} ({items.reportOrder[0].order})</p>
+                                                                                    <p class="m-0 text-gray-700">{moment(items.createAt).format(format1)}</p>
                                                                                 </td>
-                                                                                <td class="fs-6 text-right"><span class="text-gray" data-lang="closed">closed</span><sup>🔖</sup></td>
+                                                                                <td class="fs-6 text-right"><span class="text-gray" >{items.reportOrder[0].status}</span></td>
                                                                             </tr>
-                                                                        </tbody>
-                                                                    </div>
+                                                                        </tbody>)}
+                                                                    </table>
 
                                                                 </div>
                                                             </div>
@@ -548,7 +598,72 @@ function Section
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> : null}
+                                                </div>
+                                                : null}
+                                            {location === "/tickets" && userInfo ?
+                                                <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollable" aria-modal="true" role="dialog">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+                                                        <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                                                            <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                                                                <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalCenteredScrollableLabel">
+                                                                    Create a ticket
+                                                                </h5>
+                                                                <button type="button"
+                                                                    class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body relative px-4 py-2 ">
+                                                                <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Subject</label>
+                                                                <select id="countries" onChange={(e) => { SetChoose(e.target.value) }} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                    <option value="Order" defaultValue>Order</option>
+                                                                    <option value="Payment">Payment</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                            <div className={choose === "Order" ? "modal-body relative px-4 py-2 " : "modal-body relative px-4 py-2 hidden"}>
+                                                                <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Order ID</label>
+                                                                <input type="text" id="order" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+
+                                                            </div>
+                                                            <div className={choose === "Order" ? "modal-body relative px-4 py-2 " : "modal-body relative px-4 py-2 hidden "}>
+                                                                <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Request</label>
+                                                                <select id="countries" onChange={(e) => { setRequest(e.target.value) }} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                    <option value="Cancel" defaultValue>Cancel</option>
+                                                                    <option value="Refill">Refill</option>
+                                                                    <option value="Speed up">Speed up</option>
+                                                                    <option value="DE">Other</option>
+                                                                </select>
+                                                            </div>
+                                                            <div className="modal-body relative px-4 py-2">
+                                                                <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Request</label>
+                                                                <textarea id="message" rows="4" onChange={(e) => { setMessage(e.target.value) }} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+
+                                                            </div>
+                                                            <div
+                                                                className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4  border-gray-200 rounded-b-md">
+
+                                                                <button type="button"
+                                                                    onClick={handlerSendReport}
+                                                                    className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
+                                                                    Send
+                                                                </button>
+                                                            </div>
+                                                            {/* <div
+                                                                class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                                                                <button type="button"
+                                                                    class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                                    data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
+                                                                    Save changes
+                                                                </button>
+                                                            </div> */}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                : null}
 
                                         </div> : SidebarData.map((item) => location === item.path ? item.file : null)
                                     }

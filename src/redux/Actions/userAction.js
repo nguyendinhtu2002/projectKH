@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USER_APIKEY_FAIL, USER_APIKEY_REQUEST, USER_APIKEY_SUCCESS, USER_CHANGEAPIKEY_FAIL, USER_CHANGEAPIKEY_REQUEST, USER_CHANGEAPIKEY_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from '../Constants/UserContants';
+import { USER_APIKEY_FAIL, USER_APIKEY_REQUEST, USER_APIKEY_SUCCESS, USER_CHANGEAPIKEY_FAIL, USER_CHANGEAPIKEY_REQUEST, USER_CHANGEAPIKEY_SUCCESS, USER_CHANGEEMAIL_FAIL, USER_CHANGEEMAIL_REQUEST, USER_CHANGEEMAIL_SUCCESS, USER_GETUSERBYID_FAIL, USER_GETUSERBYID_REQUEST, USER_GETUSERBYID_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from '../Constants/UserContants';
 
 export const register = (name, email, password, apiKey) => async (dispatch) => {
   try {
@@ -188,7 +188,6 @@ export const updateApiKey = (apiKey) => async (dispatch, getState) => {
       },
     };
 
-    console.log(apiKey)
     const { data } = await axios.put(`http://localhost:5000/api/users/${userInfo._id}/apiKey`, apiKey, config);
     dispatch({ type: USER_CHANGEAPIKEY_SUCCESS, payload: data });
     dispatch({ type: USER_APIKEY_SUCCESS, payload: data });
@@ -203,6 +202,69 @@ export const updateApiKey = (apiKey) => async (dispatch, getState) => {
     }
     dispatch({
       type: USER_CHANGEAPIKEY_FAIL,
+      payload: message,
+    });
+  }
+}
+
+export const changeEmail = (email) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_CHANGEEMAIL_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`http://localhost:5000/api/users/${userInfo._id}/updateEmail`, {email}, config);
+    dispatch({ type: USER_CHANGEEMAIL_SUCCESS, payload: data });
+
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: USER_CHANGEEMAIL_FAIL,
+      payload: message,
+    });
+  }
+}
+
+export const getUserById = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_GETUSERBYID_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(`http://localhost:5000/api/users/${userInfo._id}`, config);
+    dispatch({ type: USER_GETUSERBYID_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: USER_GETUSERBYID_FAIL,
       payload: message,
     });
   }

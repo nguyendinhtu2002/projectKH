@@ -644,6 +644,9 @@ td:not(.wrap) {
 .fa-youtube {
     color: #ff0000 !important;
 }
+#table-tickets tr {
+    cursor: pointer;
+}
 
 .bg {
     background-color: #f9fafb;
@@ -1025,7 +1028,9 @@ h6 {
     border-radius: 40px;
     position: relative;
 }
-
+.table.table-row-gray-400 tr {
+    border-bottom-color: #B5B5C3;
+}
 .login-layout .left-section .left-section--logo {
     width: 194px;
 }

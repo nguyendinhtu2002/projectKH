@@ -9,6 +9,7 @@ import Neworder from "../NewOrder/Neworder"
 import Services from "../Services/Services"
 import Setting from "../Setting/Setting"
 import Support from "../Support/Support"
+import ViewTicket from "../ViewTicket/ViewTicket"
 export const SidebarData = [
     
     {
@@ -65,5 +66,10 @@ export const SidebarData = [
         path: "/settings",
         file:<Setting/>,
         tilte:"Setting"
+    },
+    {
+        path: "/tickets/:id",
+        file:<ViewTicket/>,
+        tilte:"Support"
     },
 ]

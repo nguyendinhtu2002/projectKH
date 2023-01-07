@@ -24,6 +24,7 @@ import CashFlowScreen from './Screen/CashFlowScreen';
 import AffiliateScreen from './Screen/AffiliateScreen';
 import ChildPanelScreen from './Screen/ChildPanelScreen';
 import SettingScreen from './Screen/SettingScreen';
+import ViewTicketScreen from './Screen/ViewTicketScreen';
 function App() {
   return (
     <BrowserRouter>
@@ -43,6 +44,7 @@ function App() {
         <Route path='/affiliate' element={<AffiliateScreen/>} />
         <Route path='/childpanel' element={<ChildPanelScreen/>} />
         <Route path='/settings' element={<SettingScreen/>} />
+        <Route path='/tickets/:id' element={<ViewTicketScreen/>} />
 
       </Routes>
     </BrowserRouter>

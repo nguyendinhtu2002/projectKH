@@ -1,4 +1,4 @@
-import { USER_APIKEY_FAIL, USER_APIKEY_REQUEST, USER_APIKEY_SUCCESS, USER_CHANGEAPIKEY_FAIL, USER_CHANGEAPIKEY_REQUEST, USER_CHANGEAPIKEY_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../Constants/UserContants";
+import { USER_APIKEY_FAIL, USER_APIKEY_REQUEST, USER_APIKEY_SUCCESS, USER_CHANGEAPIKEY_FAIL, USER_CHANGEAPIKEY_REQUEST, USER_CHANGEAPIKEY_SUCCESS, USER_CHANGEEMAIL_FAIL, USER_CHANGEEMAIL_REQUEST, USER_CHANGEEMAIL_SUCCESS, USER_GETUSERBYID_FAIL, USER_GETUSERBYID_REQUEST, USER_GETUSERBYID_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../Constants/UserContants";
 
 // LOGIN
 export const userLoginReducer = (state = {}, action) => {
@@ -69,4 +69,33 @@ export const changeKeyReducer = (state = {}, action) => {
       return state;
   }
 }
+
+
+export const changeEmailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_CHANGEEMAIL_REQUEST:
+      return { loading: true };
+    case USER_CHANGEEMAIL_SUCCESS:
+      return { loading: false, success: true, ApiKey: action.payload };
+    case USER_CHANGEEMAIL_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+}
+
+
+export const getUserById = (state = {}, action) => {
+  switch (action.type) {
+    case USER_GETUSERBYID_REQUEST:
+      return { loading: true };
+    case USER_GETUSERBYID_SUCCESS:
+      return { loading: false, success: true, getUserId: action.payload };
+    case USER_GETUSERBYID_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+}
+
 

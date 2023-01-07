@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserById, changeEmail, apiKey, updateApiKey } from '../../redux/Actions/userAction'
+import { toast } from "react-toastify";
+import Toast from "../LoadingError/Toast";
+import axios from 'axios'
 const Status = [
     { name: 'ALL' },
     { name: 'Pending' },
@@ -15,6 +19,113 @@ const Status = [
 ]
 function Setting() {
     const [selected, setSelected] = useState(Status[0])
+    const [passwordOld, setPasswordOld] = useState("");
+    const [id, setId] = useState("");
+
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const dispatch = useDispatch();
+    const getUser = useSelector((state) => state.getUser);
+    const { getUserId } = getUser;
+    const [email, setEmail] = useState(getUserId?.email)
+    const changeEmailUser = useSelector((state) => state.changeEmailUser)
+    const getApiKey = useSelector((state) => state.getApiKey)
+    const { ApiKey } = getApiKey
+    const [api, setApi] = useState(ApiKey?.apiKey)
+    const changeApiKey = useSelector((state) => state.changeApi)
+    const [isLoading, setIsLoading] = useState(false);
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin
+
+    const toastId = React.useRef(null);
+
+    const Toastobjects = {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    };
+    function handleChangeEmail() {
+        dispatch(changeEmail(email));
+        if (changeEmailUser.error !== undefined) {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.error(changeEmailUser.error, Toastobjects);
+            }
+        }
+        else {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.success("Update Success!", Toastobjects);
+            }
+        }
+    }
+    function generate_string(n = 30) {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (var i = 0; i < n; i++) {
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+        return text;
+    }
+    function handleChangeApiKey() {
+        const key = generate_string()
+
+        dispatch(updateApiKey({ apiKey: key }));
+        if (changeApiKey.error !== undefined) {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.error(changeApiKey.error, Toastobjects);
+            }
+
+        }
+        else {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.success("Update Success!", Toastobjects);
+            }
+
+        }
+    }
+    function handleChangePassword(e) {
+        e.preventDefault();
+        setIsLoading(true)
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+        if (password != confirmPassword) {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.error("Password does not match", Toastobjects)
+            }
+        }if(password.length<6){
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.error("Password must not be less than 6 characters!", Toastobjects)
+            }
+        } 
+        else {
+            axios.put(`http://localhost:5000/api/users/${userInfo?._id}/updateProfile`, { id: id, paswordold: passwordOld, paswordNew: password }, config)
+                .then(() => {
+                    if (!toast.isActive(toastId.current)) {
+                        toastId.current = toast.success("Profile Updated", Toastobjects);
+                    }
+                })
+                .catch(error => {
+                    if (!toast.isActive(toastId.current)) {
+                        toastId.current = toast.error("Password Old Wrong", Toastobjects);
+                    }
+                })
+                .finally(() => setIsLoading(false));
+        }
+    }
+    useEffect(() => {
+        if (getUserId) {
+            setId(getUserId._id)
+        }
+        dispatch(apiKey())
+        dispatch(getUserById());
+    }, [dispatch]);
+
 
     return (
         <>
@@ -27,14 +138,14 @@ function Setting() {
                         <div className='col-lg-12'>
                             <div class="mb-5">
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-solid ipt-email " style={{ fontSize: 13 }} value="nguyentu@gmail.com" />
-                                    <button type="button" class="btn btn-primary" style={{ fontSize: 13 }} >Change email</button>
+                                    <input type="text" class="form-control form-control-solid ipt-email " style={{ fontSize: 13 }} onChange={(e) => setEmail(e.target.value)} value={email} />
+                                    <button type="button" class="btn btn-primary" style={{ fontSize: 13 }} onClick={handleChangeEmail} >Change email</button>
                                 </div>
                             </div>
                             <div class="mb-5">
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-solid ipt-api-key" style={{ fontSize: 13 }} value="6cb00**********" disabled="" />
-                                    <button type="button" class="btn btn-primary" style={{ fontSize: 13 }}>
+                                    <input type="text" class="form-control form-control-solid ipt-api-key" readOnly={true} style={{ fontSize: 13 }} value={`${ApiKey?.apiKey}`} disabled="" />
+                                    <button type="button" class="btn btn-primary" onClick={handleChangeApiKey} style={{ fontSize: 13 }}>
                                         <i class="fa fa-refresh" aria-hidden="true">
                                         </i>
                                         API Key
@@ -48,25 +159,25 @@ function Setting() {
                         <div className='col-lg-3'>
                             <div class="mb-lg-0 mb-md-5 mb-sm-5">
                                 <label class="form-label" style={{ fontSize: 13 }}>Current password</label>
-                                <input type="password" style={{ fontSize: 13 }} class="form-control form-control-solid ipt-current-pass" />
+                                <input type="password" style={{ fontSize: 13 }} class="form-control form-control-solid ipt-current-pass" onChange={(e) => setPasswordOld(e.target.value)} />
                             </div>
                         </div>
                         <div className='col-lg-3'>
                             <div class="mb-lg-0 mb-md-5 mb-sm-5">
                                 <label class="form-label" style={{ fontSize: 13 }}>New password</label>
-                                <input type="password" style={{ fontSize: 13 }} class="form-control form-control-solid ipt-current-pass" />
+                                <input type="password" style={{ fontSize: 13 }} class="form-control form-control-solid ipt-current-pass" onChange={(e) => setPassword(e.target.value)} />
                             </div>
                         </div>
                         <div className='col-lg-3'>
                             <div class="mb-lg-0 mb-md-5 mb-sm-5">
                                 <label class="form-label" style={{ fontSize: 13 }}>Confirm password</label>
-                                <input type="password" style={{ fontSize: 13 }} class="form-control form-control-solid ipt-current-pass" />
+                                <input type="password" style={{ fontSize: 13 }} class="form-control form-control-solid ipt-current-pass" onChange={(e) => { setConfirmPassword(e.target.value) }} />
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <label class="form-label">&nbsp;</label>
                             <div>
-                                <button type="button" class="btn btn-primary" style={{ fontSize: 13 }} >Change password</button>
+                                <button type="button" class="btn btn-primary" style={{ fontSize: 13 }} onClick={handleChangePassword}>Change password</button>
                             </div>
                         </div>
                     </div>
