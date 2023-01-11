@@ -63,7 +63,7 @@ export const createOrderAPIMe = (cash) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`http://localhost:5000/api/orders`, cash, config);
+    const { data } = await axios.post(`http://139.180.146.136/api/orders`, cash, config);
 
     dispatch({ type: ORDER_CREATE_SUCCESS_TO_ME, payload: data });
     dispatch({ type: CART_CLEAR_ITEMS, payload: data });
@@ -102,7 +102,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     };
 
 
-    const { data } = await axios.get(`http://localhost:5000/api/orders/${userInfo._id}/getByUser`, config);
+    const { data } = await axios.get(`http://139.180.146.136/api/orders/${userInfo._id}/getByUser`, config);
     dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });
     localStorage.setItem("listMyOrders", JSON.stringify(data));
 
@@ -138,7 +138,7 @@ export const findByStatus = (Status, IDorder, link, service) => async (dispatch,
     };
     const id = userInfo._id
 
-    const { data } = await axios.post(`http://localhost:5000/api/orders/findByStatus`, { Status, id, IDorder, link, service }, config);
+    const { data } = await axios.post(`http://139.180.146.136/api/orders/findByStatus`, { Status, id, IDorder, link, service }, config);
     dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });
     // localStorage.removeItem("listMyOrders")
     localStorage.setItem("listMyOrders", JSON.stringify(data));

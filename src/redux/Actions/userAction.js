@@ -11,7 +11,7 @@ export const register = (name, email, password, apiKey) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      'http://localhost:5000/api/users/signup',
+      'http://139.180.146.136/api/users/signup',
       { name, email, password, apiKey },
       config)
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data })
@@ -41,7 +41,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      'http://localhost:5000/api/users/login',
+      'http://139.180.146.136/api/users/login',
       { email, password },
       config)
 
@@ -87,7 +87,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://localhost:5000/api/users/updateProfile`, user, config);
+    const { data } = await axios.put(`http://139.180.146.136/api/users/updateProfile`, user, config);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -119,7 +119,7 @@ export const updateMoney = (money) => async (dispatch, getState) => {
 
 
 
-    const { data } = await axios.put(`http://localhost:5000/api/Waller/${userInfo._id}`, money);
+    const { data } = await axios.put(`http://139.180.146.136/api/Waller/${userInfo._id}`, money);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     // dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -155,7 +155,7 @@ export const apiKey = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`http://localhost:5000/api/users/${userInfo._id}/apiKey`, config);
+    const { data } = await axios.get(`http://139.180.146.136/api/users/${userInfo._id}/apiKey`, config);
     dispatch({ type: USER_APIKEY_SUCCESS, payload: data });
 
   } catch (error) {
@@ -188,7 +188,7 @@ export const updateApiKey = (apiKey) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://localhost:5000/api/users/${userInfo._id}/apiKey`, apiKey, config);
+    const { data } = await axios.put(`http://139.180.146.136/api/users/${userInfo._id}/apiKey`, apiKey, config);
     dispatch({ type: USER_CHANGEAPIKEY_SUCCESS, payload: data });
     dispatch({ type: USER_APIKEY_SUCCESS, payload: data });
 
@@ -222,7 +222,7 @@ export const changeEmail = (email) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://localhost:5000/api/users/${userInfo._id}/updateEmail`, {email}, config);
+    const { data } = await axios.put(`http://139.180.146.136/api/users/${userInfo._id}/updateEmail`, {email}, config);
     dispatch({ type: USER_CHANGEEMAIL_SUCCESS, payload: data });
 
   } catch (error) {
@@ -253,7 +253,7 @@ export const getUserById = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`http://localhost:5000/api/users/${userInfo._id}`, config);
+    const { data } = await axios.get(`http://139.180.146.136/api/users/${userInfo._id}`, config);
     dispatch({ type: USER_GETUSERBYID_SUCCESS, payload: data });
   } catch (error) {
     const message =

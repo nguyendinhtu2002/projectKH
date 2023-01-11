@@ -16,7 +16,7 @@ export const report = (reportOrder) => async (dispatch, getState) => {
             },
         };
         const { data } = await axios.post(
-            'http://localhost:5000/api/report',
+            'http://139.180.146.136/api/report',
             reportOrder,
             config)
         dispatch({ type: REPORT_CREATE_SUCCESS, payload: data })
@@ -48,7 +48,7 @@ export const listMyMessage = () => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get(`http://localhost:5000/api/report/getByUser`, config);
+        const { data } = await axios.get(`http://139.180.146.136/api/report/getByUser`, config);
         dispatch({ type: MESSAGE_LIST_MY_SUCCESS, payload: data });
 
     } catch (error) {
@@ -80,7 +80,7 @@ export const messagelistDetailMessage = (id) => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get(`http://localhost:5000/api/report/${id}`, config);
+        const { data } = await axios.get(`http://139.180.146.136/api/report/${id}`, config);
         dispatch({ type: MESSAGE_DETAILS_LIST_MY_SUCCESS, payload: data });
 
     } catch (error) {

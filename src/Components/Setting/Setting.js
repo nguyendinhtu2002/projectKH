@@ -105,7 +105,7 @@ function Setting() {
             }
         } 
         else {
-            axios.put(`http://localhost:5000/api/users/${userInfo?._id}/updateProfile`, { id: id, paswordold: passwordOld, paswordNew: password }, config)
+            axios.put(`http://139.180.146.136/api/users/${userInfo?._id}/updateProfile`, { id: id, paswordold: passwordOld, paswordNew: password }, config)
                 .then(() => {
                     if (!toast.isActive(toastId.current)) {
                         toastId.current = toast.success("Profile Updated", Toastobjects);

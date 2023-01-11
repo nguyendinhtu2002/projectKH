@@ -16,7 +16,7 @@ export const CreateWallet = () => async (dispatch, getState) => {
           'Content-Type': 'application/x-www-form-urlencoded'
       }
   }
-    const { data } = await axios.post(`http://localhost:5000/api/Waller/${userInfo._id}`,config);
+    const { data } = await axios.post(`http://139.180.146.136/api/Waller/${userInfo._id}`,config);
     dispatch({ type: WALLET_CREATE_SUCCESS, payload: data });
 
   } catch (error) {
@@ -51,7 +51,7 @@ export const updateWallet = (money) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://localhost:5000/api/Waller/${userInfo._id}`, money,config);
+    const { data } = await axios.put(`http://139.180.146.136/api/Waller/${userInfo._id}`, money,config);
     dispatch({ type: WALLET_UPDATE_SUCCESS, payload: data });
 
     // localStorage.setItem("userInfo", JSON.stringify(data));
