@@ -124,10 +124,9 @@ export const listMyOrders = () => async (dispatch, getState) => {
 };
 
 
-export const findByStatus = (Status) => async (dispatch, getState) => {
+export const findByStatus = (Status, IDorder, link, service) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_LIST_MY_REQUEST });
-
     const {
       userLogin: { userInfo },
     } = getState();
@@ -137,9 +136,9 @@ export const findByStatus = (Status) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+    const id = userInfo._id
 
-
-    const { data } = await axios.post(`http://localhost:5000/api/orders/findByStatus`,{Status},config);
+    const { data } = await axios.post(`http://localhost:5000/api/orders/findByStatus`, { Status, id, IDorder, link, service }, config);
     dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });
     // localStorage.removeItem("listMyOrders")
     localStorage.setItem("listMyOrders", JSON.stringify(data));

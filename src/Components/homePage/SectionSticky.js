@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import CountUp from 'react-countup';
+import ScrollTrigger from 'react-scroll-trigger';
 
 function SectionSticky() {
+    const [counterOn, setCounterOn] = useState(false);
+
     return (
-        <div id="achi" className='section sticky'>
+
+        <ScrollTrigger id="achi" className='section sticky' onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
             <div className='Container'>
                 <div className='content-narrow'>
                     <div className='sticky-content-wrapper'>
@@ -18,7 +24,11 @@ function SectionSticky() {
                             </p>
                             <div class="button-and-text-wrapper left-aligned">
                                 <a data-ps="target" href="https://app.adcreative.ai/Identity/Account/Register" target="_blank" class="main-button is-general w-inline-block">
-                                    <div class="text-block">Generate Account AZ</div>
+                                    <div class="text-block">
+                                        <Link to="/register">
+                                            Generate Account AZ
+                                        </Link>
+                                    </div>
                                     <div class="purple-logo-small w-embed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.229 23.228">
                                             <g id="layers" transform="translate(0 -0.009)">
@@ -59,10 +69,41 @@ function SectionSticky() {
 
                                 </div>
                                 <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac237cbb1206a086e0b19_arrow-right.svg" loading="lazy" alt="arrow right" class="arrow-right"></img>
-                                <h3>Trained A.I.</h3>
-                                <p class="paragraph">Our machine learning model is learning every day and provides up-to-date creatives with a sole purpose: conversion.</p>
+                                <h3>Orders.</h3>
+                                <p class="paragraph text-2xl">{counterOn && <CountUp start={0} end={33359240} className=" min-w-[70px] " formattingFn={num => num.toLocaleString()} />}+
+                                </p>
+                                <p class="paragraph">Every month</p>
+
                             </div>
                             <div className='sticky-content__feature' >
+                                <div className='sticky-content__feature-icon-wrapper'>
+                                    <div className='logo-white-wrapperr is-red with-shadow'>
+                                        <div class="login-text hidden-mobile hidden">Login</div>
+                                        <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac12910bbd13ee4ef4ece_feature-1.svg" loading="lazy" alt="" class="image-3" />
+                                    </div>
+
+                                </div>
+                                <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac237cbb1206a086e0b19_arrow-right.svg" loading="lazy" alt="arrow right" class="arrow-right"></img>
+                                <h3>Price Starting From</h3>
+
+                                <p class="paragraph text-2xl">$ 0.0001</p>
+                                <p class="paragraph">Our machine learning model is learning every day and provides up-to-date creatives with a sole purpose: conversion.</p>
+
+
+                            </div>
+                            <div className='sticky-content__feature' >
+                                <div className='sticky-content__feature-icon-wrapper'>
+                                    <div className='logo-white-wrapperr is-red with-shadow'>
+                                        <div class="login-text hidden-mobile hidden">Login</div>
+                                        <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac12910bbd13ee4ef4ece_feature-1.svg" loading="lazy" alt="" class="image-3" />
+                                    </div>
+
+                                </div>
+                                <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac237cbb1206a086e0b19_arrow-right.svg" loading="lazy" alt="arrow right" class="arrow-right"></img>
+                                <h3>An Order Is Made Every</h3>
+                                <p class="paragraph text-2xl">0.1 sec</p>
+                            </div>
+                            {/* <div className='sticky-content__feature' >
                                 <div className='sticky-content__feature-icon-wrapper'>
                                     <div className='logo-white-wrapperr is-red with-shadow'>
                                         <div class="login-text hidden-mobile hidden">Login</div>
@@ -133,37 +174,13 @@ function SectionSticky() {
                                 <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac237cbb1206a086e0b19_arrow-right.svg" loading="lazy" alt="arrow right" class="arrow-right"></img>
                                 <h3>Trained A.I.</h3>
                                 <p class="paragraph">Our machine learning model is learning every day and provides up-to-date creatives with a sole purpose: conversion.</p>
-                            </div>
-                            <div className='sticky-content__feature' >
-                                <div className='sticky-content__feature-icon-wrapper'>
-                                    <div className='logo-white-wrapperr is-red with-shadow'>
-                                        <div class="login-text hidden-mobile hidden">Login</div>
-                                        <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac12910bbd13ee4ef4ece_feature-1.svg" loading="lazy" alt="" class="image-3" />
-                                    </div>
-
-                                </div>
-                                <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac237cbb1206a086e0b19_arrow-right.svg" loading="lazy" alt="arrow right" class="arrow-right"></img>
-                                <h3>Trained A.I.</h3>
-                                <p class="paragraph">Our machine learning model is learning every day and provides up-to-date creatives with a sole purpose: conversion.</p>
-                            </div>
-                            <div className='sticky-content__feature' >
-                                <div className='sticky-content__feature-icon-wrapper'>
-                                    <div className='logo-white-wrapperr is-red with-shadow'>
-                                        <div class="login-text hidden-mobile hidden">Login</div>
-                                        <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac12910bbd13ee4ef4ece_feature-1.svg" loading="lazy" alt="" class="image-3" />
-                                    </div>
-
-                                </div>
-                                <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62dac237cbb1206a086e0b19_arrow-right.svg" loading="lazy" alt="arrow right" class="arrow-right"></img>
-                                <h3>Trained A.I.</h3>
-                                <p class="paragraph">Our machine learning model is learning every day and provides up-to-date creatives with a sole purpose: conversion.</p>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </ScrollTrigger>
     )
 }
 

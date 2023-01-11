@@ -8,12 +8,15 @@ import "../assets/css/responsive.css"
 import { SidebarData } from '../Components/Slidebar/Slidebar';
 import { useDispatch, useSelector } from 'react-redux'
 import { DatePicker } from 'antd';
-import { logout } from '../redux/Actions/userAction'
-import { CreateWallet } from '../redux/Actions/WalletAction'
+import { logout, updateMoney } from '../redux/Actions/userAction'
+import { CreateWallet, updateWallet } from '../redux/Actions/WalletAction'
 import moment from "moment"
 import Toast from "../Components/LoadingError/Toast";
 import { toast } from "react-toastify";
 import { report } from '../redux/Actions/reportActions'
+import { createCashFlow } from '../redux/Actions/cashAction'
+import { createAddFunds } from '../redux/Actions/AddFunds'
+import axios from 'axios'
 const { RangePicker } = DatePicker
 const usePathName = () => {
     const location = useLocation();
@@ -43,7 +46,56 @@ function Section
         draggable: true,
         progress: undefined,
     };
+    const handleSubbmit = () => {
+        const access_token = "MvDqOYEh6uK7KSKnsY1ilEFUWNfFHXC16I0odgyKn25wuC6X9i"
+        const phone = "0985822626"
+        const amount = 0
+        // axios.post('https://momosv3.apimienphi.com/api/checkTranContent', JSON.stringify({ access_token, phone, content }))
+        //     // .then(res => res.json())
+        //     .then(res => {
+        //         if (res.data.error !== 1) {
+        //             dispatch(createAddFunds({
+        //                 data: {
+        //                     tranId: res.data.data.tranId,
+        //                     amount: res.data.data.amount,
+        //                     comment: res.data.data.comment,
+        //                     // decs: res.data.data.decs,
+        //                     create_time: res.data.data.create_time,
+        //                     run_time: res.data.data.run_time,
+        //                     user: res.data.data.user,
+        //                     partnerId: res.data.data.partnerId,
+        //                     partnerName: res.data.data.partnerName,
+        //                 },
+        //                 type: "VND",
+        //             }))
+        //             dispatch(updateMoney(
+        //                 {
+        //                     amount: ((amount) / 23000).toFixed(2)
+        //                 }
+        //             ))
+        //             dispatch(createCashFlow({
+        //                 type: "Add order",
+        //                 spending: res.data.data.amount,
+        //                 remainingMoney: (wallet.balance + res.data.data.amount).toFixed(2)
+        //             })
+        //             )
+        //             // ))
+        //         }
 
+        //     })
+        dispatch(createCashFlow({
+            type: "DEPOSIT",
+            spending: 123,
+            remainingMoney: 123
+        })
+        )
+        // dispatch(updateWallet(
+        //     {
+        //         amount: ((6000) / 23000).toFixed(2)
+        //     }
+        // ))
+
+    }
     const handlerSendReport = () => {
         const temp = document.getElementById('order').value
         if (temp === "" && message === "") {
@@ -79,24 +131,26 @@ function Section
     const { userInfo } = userLogin;
     const messageList = useSelector((state) => state.messageList)
     const { messager } = messageList
+    const createWallet = useSelector((state) => state.createWallet)
+    const { wallet } = createWallet
     const format1 = "YYYY-MM-DD HH:mm:ss"
     const redirect = Location.pathname ? Number(Location.pathname.split("/")[2]) : "";
-    useEffect(() => {
-        document.addEventListener("click", handleClickOutside, true)
-    })
+    // useEffect(() => {
+    //     document.addEventListener("click", handleClickOutside, true)
+    // })
     const refOne = useRef(null)
-    const handleClickOutside = (e) => {
-        if (!refOne.current.contains(e.target)) {
-            setClick(false)
-        }
-    }
+    // const handleClickOutside = (e) => {
+    //     if (!refOne.current.contains(e.target)) {
+    //         setClick(false)
+    //     }
+    // }
 
 
 
     return (
         <>
             <Toast />
-            <div className={location === "/new" ? ' flex-test flex-row flex-1 page-wrapper is-home bg  ' : ' flex-test flex-col flex-1 page-wrapper is-home bg  '} ref={refOne}>
+            <div className={location === "/new" ? ' flex-test flex-col flex-1 page-wrapper is-home bg  ' : ' flex-test flex-col flex-1 page-wrapper is-home bg  '} ref={refOne}>
                 <div className={click ? 'page flex flex-row flex-column-fluid' : 'page flex flex-row '}>
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
                         <div className='aside-logo flex-none px-9 mb-9'>
@@ -106,12 +160,13 @@ function Section
                             </Link>
                         </div>
                         <div className='aside-menu flex-column-fluid pl-5 pr-3 mb-9 '>
-                            <div className={userInfo ? 'w-full hover-scroll-overlay-y flex pr-2 h-[648px]' : 'w-full hover-scroll-overlay-y flex pr-2 '}>
+                            <div className={userInfo ? 'w-full hover-scroll-overlay-y flex pr-2 h-[648px]' : 'w-full hover-scroll-overlay-y flex pr-2 '} data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_example_js_header, #kt_example_js_footer, #kt_header"
+                            >
                                 <div className='menu menu-column menu-rounded menu-sub-indention menu-active-bg font-medium my-auto'>
                                     <div className='menu-item'>
                                         <Link to='/new' className={userInfo ? 'menu-link' : "menu-link d-none"}>
                                             <span class="menu-icon"><i class="las la-shopping-cart fs-1"></i></span>
-                                            <span class="menu-title" >New order</span>
+                                            <span class="menu-title lg:text-[14.3px]" >New order</span>
                                         </Link>
                                     </div>
                                     <div className='menu-item'>
@@ -226,14 +281,14 @@ function Section
                         <div className="header">
                             <div className='container-fluid flex justify-between items-center flex-wrap gap-2'>
                                 <div className=' flex flex-col items-start header-title justify-center flex-wrap me-lg-2 pb-5 pb-lg-0'>
-                                    <h1 class="flex flex-col text-dark fw-bold my-0 fs-1">{
+                                    <h1 class="flex flex-col text-dark font-semibold my-0 fs-1">{
                                         SidebarData.map((item) => location === item.path ? item.tilte : null)
 
                                     }
-                                        {
+                                        {/* {
                                             SidebarData.map((item) => location.split(`/8`)[0] === item.path.split(`/:id`)[0] ? item.tilte : null)
 
-                                        }
+                                        } */}
                                     </h1>
                                 </div>
                                 <div className='flex d-lg-none items-center -ml-2 mr-2 '>
@@ -263,19 +318,25 @@ function Section
                                             </div>
                                             <div className='flex items-center ml-1 lg:ml-3'>
                                                 <div className='btn btn-icon w-[30px] h-[30px] pulse pulse-primary'>
-                                                    <i class="fas fa-bell fs-1 text-primary"></i>
-                                                    <span ></span>
-                                                    <span ></span>
-                                                    <span ></span>
-                                                    <span ></span>
+                                                    <button data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+
+                                                        <i class="fas fa-bell fs-1 text-primary"></i>
+                                                    </button>
+                                                    {/* <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg  focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mr-1.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button> */}
+
+                                                    <span type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ></span>
+                                                    <span type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ></span>
+                                                    <span type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></span>
+                                                    <span type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ></span>
 
                                                 </div>
+
                                             </div>
-                                            <div className='flex items-center ml-1 lg:ml-3 hidden'>
+                                            <div className='flex items-center ml-1 lg:ml-3 '>
                                                 <div className='cursor-pointer text-[1.35rem] text-primary'>
-                                                    ₫0
+                                                    ₫{(wallet?.balance)?.toFixed(2)}
                                                 </div>
-                                                <div className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color font-semibold py-4 text-[1.075rem] w-250px hidden'>
+                                                {/* <div className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color font-semibold py-4 text-[1.075rem] w-250px hidden'>
                                                     <div class="menu-item px-5 mb-3" data-lang="menu::Choose your currency">Choose your currency</div>
                                                     <div className='menu-item px-5 text-[0.85rem]'>
 
@@ -289,7 +350,7 @@ function Section
                                                             </span>
                                                         </span>
                                                     </div>
-                                                </div>
+                                                </div> */}
 
                                             </div>
                                         </div>
@@ -321,7 +382,7 @@ function Section
                                     </svg>
                                     <div className='flex flex-col'>
                                         <ul className='list-disc'>
-                                            <li>
+                                            <li className='hidden'>
                                                 <strong className='font-1 text-[12px]'>
                                                     All services 4000h watch time dropped. Orders from December 6 will have views deducted. We will partial order all orders for you in 5 days. The reason is that all of today's views are deducted so we can refund the  exact amount.
                                                 </strong>
@@ -371,12 +432,14 @@ function Section
                                                                 <p className='text-inherit text-sm mb-[1em]'>Binance Pay ID : 11713152</p>
                                                                 <p className='text-inherit text-sm mb-[1em]'>Sau khi chuyển tiền vui lòng liên hệ với tôi để được cập nhật tiền.</p>
                                                             </div>
-                                                            <div class="div-options div-8 text-center " >
+                                                            <div className={chooseSelect != "USDT" ? "div-options div-8 text-center " : "hidden"} >
                                                                 <img src="https://momosv3.apimienphi.com/api/QRCode?phone=0917557227&amp;note=aznguyendinhtu1pq a stretch" class="w-250px  mb-5 inline-block" />
                                                                 <div class="mb-5">
                                                                     <span class="" id="momo_phone">Số điện thoại: <span class="fw-boldest text-primary ">0917557227</span></span>
-                                                                    <span class="block" id="momo_content">Nội dung: <span class="fs-6 fw-bolder text-primary">aznguyendinhtu1pq a stretch</span></span>
+                                                                    <span class="block" id="momo_content">Nội dung: <span class="fs-6 font-bold text-primary">aznguyendinhtu1pq a stretch</span></span>
                                                                 </div>
+                                                                <button type="button" onClick={handleSubbmit} class={chooseSelect === "MoMo" ? "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" : "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 hidden"}>Xác nhận thành công</button>
+
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane fade" id="tabs-profile3" role="tabpanel" aria-labelledby="tabs-profile-tab3">
@@ -565,11 +628,11 @@ function Section
         rounded-none
         transition
         focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false"
-                                                                                aria-controls="collapse6">
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false"
+                                                                                aria-controls="collapse5">
                                                                                 How can I send a screenshot to you?                                                                        </button>
                                                                         </h2>
-                                                                        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading5"
+                                                                        <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5"
                                                                             data-bs-parent="#accordionExample">
                                                                             <div class="accordion-body py-4 px-5">
                                                                                 You can send us a screenshot using this website : https://imgur.com/upload                                                                    </div>
@@ -591,7 +654,7 @@ function Section
         rounded-none
         transition
         focus:outline-none
-      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false"
+      " type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false"
                                                                                     aria-controls="collapse5">
                                                                                     Why is my order not completed yet?
                                                                                 </button>
@@ -704,7 +767,97 @@ function Section
                     </div>
                 </div>
             </div>
+
+            {/* <div class="text-center">
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+                    Show right drawer
+                </button>
+            </div> */}
+
+            <div class="offcanvas offcanvas-end fixed bottom-0 flex flex-col max-w-full bg-white invisible bg-clip-padding shadow-sm outline-none transition duration-300 ease-in-out text-gray-700 top-0 right-0 border-none lg:w-[600px] w-[300px]" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div className="offcanvas-header flex items-center justify-between p-4 border-b-[1px] border-solid boder-[#dadaeb]">
+                    <h5 className="offcanvas-title mb-0 leading-normal font-semibold" id="offcanvasRightLabel">Updates</h5>
+                    <button type="button" className="btn-close box-content w-4 h-4 p-2 -my-5 -mr-2 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div className="offcanvas-body flex-grow px-[29.25px] py-[26px] overflow-y-auto ">
+                    <div>
+                        <div className='relative p-0 m-0 flex items-start'>
+                            <div className=' w-full overflow-automt-[-0.45rem] mb-[1rem] mt-4'>
+                                <div className="pr-3 mb-5 text-[#50cd89]">
+                                    <div className="text-[14.95px] font-medium mb-2">[New Service] 1037 | Tiktok Likes | Max 500K | Speed: 150K/Day | $0.21</div>
+                                    <div className="flex items-center mt-1 text-[1.075rem]">
+                                        <div className="text-[#a1a5b7] mr-2 text-[.95rem]">2022-10-06 00:22:15</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='relative p-0 m-0 flex items-start'>
+                            <div className=' w-full overflow-auto mt-[-0.45rem] mb-[1rem]'>
+                                <div className="pr-3 mb-5 text-[#50cd89]">
+                                    <div className="text-[14.95px] font-medium mb-2">[New Service] 1037 | Tiktok Likes | Max 500K | Speed: 150K/Day | $0.21</div>
+                                    <div className="flex items-center mt-1 text-[1.075rem]">
+                                        <div className="text-[#a1a5b7] mr-2 text-[.95rem]">2022-10-06 00:22:15</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className='relative p-0 m-0 flex items-start'>
+                            <div className=' w-full overflow-automt-[-0.45rem] mb-[1rem]'>
+                                <div className="pr-3 mb-5 text-[#f1416c]">
+                                    <div className="text-[14.95px] font-medium mb-2">[Disable Service] 1001 | FB Profile Followers | VIET NAM | Max 100k | Speed 3k/day</div>
+                                    <div className="flex items-center mt-1 text-[1.075rem]">
+                                        <div className="text-[#a1a5b7] mr-2 text-[.95rem]">2022-10-04 13:47:09</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='relative p-0 m-0 flex items-start'>
+                            <div className=' w-full overflow-automt-[-0.45rem] mb-[1rem]'>
+                                <div className="pr-3 mb-5 text-[#50cd89]">
+                                    <div className="text-[14.95px] font-medium mb-2">[New Service] 1035 | Facebook Custom Comments | Bình luận Facebook Việt | Speed 50-200/Day | $3.5</div>
+                                    <div className="flex items-center mt-1 text-[1.075rem]">
+                                        <div className="text-[#a1a5b7] mr-2 text-[.95rem]">2022-10-04 12:41:25</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='relative p-0 m-0 flex items-start'>
+                            <div className=' w-full overflow-automt-[-0.45rem] mb-[1rem]'>
+                                <div className="pr-3 mb-5 text-[#50cd89]">
+                                    <div className="text-[14.95px] font-medium mb-2">[New Service] 1034 | Facebook | 𝗣𝗼𝘀𝘁/𝗣𝗵𝗼𝘁𝗼 𝗟𝗶𝗸𝗲𝘀 | Max 10k | Speed 3k-5k/day | $0.182</div>
+                                    <div className="flex items-center mt-1 text-[1.075rem]">
+                                        <div className="text-[#a1a5b7] mr-2 text-[.95rem]">2022-10-03 23:52:40</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='relative p-0 m-0 flex items-start'>
+                            <div className=' w-full overflow-automt-[-0.45rem] mb-[1rem]'>
+                                <div className="pr-3 mb-5 text-[#50cd89]">
+                                    <div className="text-[14.95px] font-medium mb-2">[New Service] 1033 | Youtube Likes | Speed 30k/Hours | $1.26</div>
+                                    <div className="flex items-center mt-1 text-[1.075rem]">
+                                        <div className="text-[#a1a5b7] mr-2 text-[.95rem]">2022-10-03 22:56:17</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class={click ? "drawer-overlay tempt " : "drawer-overlay tempt hidden"}></div>
+
         </>
     )
 }

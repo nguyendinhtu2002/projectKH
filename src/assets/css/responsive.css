@@ -158,7 +158,9 @@
     .fs-1 {
         font-size: 1.5rem !important;
     }
-    .h3, h3 {
+
+    .h3,
+    h3 {
         font-size: 1.35rem;
     }
 }
@@ -200,18 +202,22 @@
         flex: 0 0 auto;
         width: 58.33333333%;
     }
+
     .col-lg-5 {
         flex: 0 0 auto;
         width: 41.66666667%;
     }
+
     .col-lg-3 {
         flex: 0 0 auto;
         width: 25%;
     }
+
     .col-lg-4 {
         flex: 0 0 auto;
         width: 33.33333333%;
     }
+
     .symbol.symbol-lg-160px.symbol-fixed>img {
         width: 160px;
         height: 160px;
@@ -369,5 +375,12 @@
     .container-xxl {
         max-width: none;
         padding: 0 20px !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .menu-item .menu-link {
+        padding: 0.65rem 1rem;
+
     }
 }

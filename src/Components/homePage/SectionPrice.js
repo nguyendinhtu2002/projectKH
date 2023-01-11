@@ -73,7 +73,11 @@ function SectionPrice() {
                     </div>
                     <div className='button-and-text-absolute-bottom'>
                         <a data-ps="target" href="https://app.adcreative.ai/Identity/Account/Register" target="_blank" class="main-button white-purple-h w-inline-block">
-                            <div class="text-block">Generate Account AZ</div>
+                            <div class="text-block">
+                                <Link to="/register">
+                                    Generate Account AZ
+                                </Link>
+                            </div>
                             <div class="purple-logo-small w-embed">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.229 23.228">
                                     <g id="layers" transform="translate(0 -0.009)">

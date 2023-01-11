@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function SectionDark() {
     return (
-        <div  className='section dark-purple decoration-bottom'>
+        <div className='section dark-purple decoration-bottom'>
             <div className='Container'>
                 <div className='content-centered bottom'>
                     <div class="mobile-prizes">
@@ -20,7 +21,7 @@ function SectionDark() {
                         </div>
                     </div>
                     <div className='_30-text is-white margin-top-120'>
-                            Increase view increase like increase sub quickly
+                        Increase view increase like increase sub quickly
                     </div>
                     <h2 className="text-gradient-purple-yellow">Using 100% Real Interactions.﻿</h2>
                     <p class="is-soft-purple">In 2022, every single thing in Digital Marketing is optimized by Artificial Intelligence, except Creatives. ﻿Azview.az is here to change that, to make data-backed, result-bringing ad creatives accessible.</p>
@@ -72,7 +73,11 @@ function SectionDark() {
                     </div>
                     <div class="button-and-text-wrapper">
                         <a data-ps="target" href="https://app.adcreative.ai/Identity/Account/Register" target="_blank" class="main-button is-general w-inline-block">
-                            <div class="text-block">Generate Account AZ</div>
+                            <div class="text-block">
+                                <Link to="/register">
+                                    Generate Account AZ
+                                </Link>
+                            </div>
                             <div class="purple-logo-small w-embed">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.229 23.228">
                                     <g id="layers" transform="translate(0 -0.009)">
@@ -117,7 +122,9 @@ function SectionDark() {
                     </a>
                     <div class="button-and-text-wrapper">
                         <a data-ps="target" href="https://app.adcreative.ai/Identity/Account/Register" target="_blank" class="main-button is-general w-inline-block">
-                            <div class="text-block">Generate Account AZ</div>
+                            <div class="text-block">  <Link to="/register">
+                                Generate Account AZ
+                            </Link></div>
                             <div class="purple-logo-small w-embed">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.229 23.228">
                                     <g id="layers" transform="translate(0 -0.009)">

@@ -1,6 +1,8 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { useDispatch } from 'react-redux'
+import { findByStatus } from '../../redux/Actions/ordersAction'
 
 const Status = [
     { name: 'ALL' },
@@ -18,13 +20,33 @@ const type = [
     { name: 'Order ID' },
     { name: 'Link' },
     { name: 'Service' },
-   
+
 
 ]
 export default function Select() {
     const [selected, setSelected] = useState(Status[0])
     const [selected1, setSelected1] = useState(type[0])
+    const [Link, setLink] = useState('')
+    const [IDorder, setLink1] = useState('')
+    const [link, setLink2] = useState('')
+    const [service, setLink3] = useState('')
+    if (selected1 === "Order ID") setLink1(Link)
+    if (selected1 === "Link") setLink2(Link)
+    if (selected1 === "Service") setLink3(Link)
 
+    const dispatch = useDispatch()
+    // useEffect(() => {
+    //     dispatch(findByStatus(selected))
+    // }, [dispatch])
+    function handleClickFindByStatus() {
+        dispatch(findByStatus(selected.name, IDorder, link, service))
+
+    }
+    useEffect(() => {
+        if (selected1.name === "Order ID") setLink1(Link)
+        if (selected1.name === "Link") setLink2(Link)
+        if (selected1.name === "Service") setLink3(Link)
+    })
     return (
         <div className='row'>
 
@@ -128,11 +150,11 @@ export default function Select() {
                     </div>
                 </Listbox>
             </div>
-            <div className='   col-lg-8'>
+            <div className='col-lg-8'>
                 <div className='mb-5'>
                     <div className='input-group'>
-                        <input type="text" class="form-control form-control-solid ipt-keyword h-[38px] relative flex-auto min-w-0" placeholder="Search" value="" />
-                        <button className='btn btn-primary btn-icon px-4' style={{height:38}}><i class="las la-search fs-2"></i></button>
+                        <input type="text" class="form-control form-control-solid ipt-keyword h-[38px] relative flex-auto min-w-0" placeholder="Search" onChange={(e) => setLink(e.target.value)} />
+                        <button onClick={handleClickFindByStatus} className='btn btn-primary btn-icon px-4' style={{ height: 38 }}><i class="las la-search fs-2"></i></button>
                     </div>
                 </div>
 

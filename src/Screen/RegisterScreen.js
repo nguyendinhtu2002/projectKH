@@ -8,6 +8,7 @@ import Loading from "../Components/LoadingError/Loading";
 import { useLocation, useNavigate } from 'react-router';
 import { toast } from "react-toastify";
 import Toast from "../Components/LoadingError/Toast";
+import { Link } from 'react-router-dom';
 export default function RegisterScreen() {
     const location = useLocation();
     const history = useNavigate();
@@ -48,7 +49,7 @@ export default function RegisterScreen() {
 
     const redirect = location.search ? location.search.split("=")[1] : "/";
     const userLogin = useSelector((state) => state.userLogin);
-    const {  userInfo } = userLogin;
+    const { userInfo } = userLogin;
     const userRegister = useSelector((state) => state.userRegister);
     const { loading, error } = userRegister
     useEffect(() => {
@@ -77,9 +78,9 @@ export default function RegisterScreen() {
                 <div className='login-layout'>
 
                     <section className='left-section'>
-                        <a className='/'>
+                        <Link to='/'>
                             <img src="https://app.adcreative.ai/assets/svg/auth-logo.svg" class="left-section--logo" />
-                        </a>
+                        </Link>
                         <section className='left-section--texts'>
                             <h2 className='text-white'>Converting Ad Creatives by</h2>
                             <h1>Artifical Intelligence</h1>
@@ -189,7 +190,7 @@ export default function RegisterScreen() {
                                             </div>
                                         </div>
                                         <div className='input-control'>
-                                            <input placeholder="Confirm Password" id="password" autocomplete="current-password"type={click1 ? "text" : 'password'} data-val="true" data-val-maxlength="The field Password must be a string or array type with a maximum length of '30'." data-val-maxlength-max="30" data-val-required="The Password field is required."
+                                            <input placeholder="Confirm Password" id="password" autocomplete="current-password" type={click1 ? "text" : 'password'} data-val="true" data-val-maxlength="The field Password must be a string or array type with a maximum length of '30'." data-val-maxlength-max="30" data-val-required="The Password field is required."
                                                 maxlength="30" name="Input.Password"
                                                 onChange={(e) => setConfirmPassword(e.target.value)}
 

@@ -103,25 +103,39 @@ function Neworder() {
             if (wallet.balance > Number(quanlity) * (items[0].rate) / 1000) {
                 //khách order -> lưu vào databasse -> xử lý gửi cho đối tác -> check trạng thái vsoos view bên đối tác -> update lên database 
 
+                if (quanlity >= 200 && quanlity <= 20000) {
+                    await dispatch(createOrderAPIMe({
+                        service,
+                        link,
+                        search: keyword.split('|').toString(),
+                        quanlity: Number(quanlity),
+                        name: redirect === "" ? (items[0].name.split(`${socialMedida} | ${category} |`)[1]) : Service[0],
+                        totalPrice: Number(quanlity) * (items[0].rate) / 1000,
+                    }))
+                    const order = (JSON.parse(localStorage.getItem('ordersInfo')))
+                    if (order[0].order !== undefined) {
+                        await dispatch(updateWallet({ amount: -(Number(Number(quanlity) * (items[0].rate) / 1000)).toFixed(2) }))
+                        if (!toast.isActive(toastId.current)) {
+                            toastId.current = toast.success("Order thành công", Toastobjects);
+                        }
 
-                await dispatch(createOrderAPIMe({
-                    service,
-                    link,
-                    search: keyword.split('|').toString(),
-                    quanlity: Number(quanlity),
-                    name: redirect === "" ? (items[0].name.split(`${socialMedida} | ${category} |`)[1]) : Service[0],
-                    totalPrice: Number(quanlity) * (items[0].rate) / 1000,
-                }))
-                const order = (JSON.parse(localStorage.getItem('ordersInfo')))
-                if ((order[0].order !== undefined ? order[0].order : 0) !== 0) {
-                    await dispatch(updateWallet({ amount: -(Number(Number(quanlity) * (items[0].rate) / 1000)).toFixed(2) }))
-                    if (!toast.isActive(toastId.current)) {
-                        toastId.current = toast.success("Order thành công", Toastobjects);
+                        await dispatch(createCashFlow({
+                            order: order[0].order !== undefined ? order[0].order : 0,
+                            type: "Add order",
+                            spending: Number(quanlity) * (items[0].rate) / 1000,
+                            remainingMoney: wallet.balance - Number(quanlity) * (items[0].rate) / 1000
+                        })
+                        )
+                    }
+                    else {
+                        if (!toast.isActive(toastId.current)) {
+                            toastId.current = toast.error("Order không thành công", Toastobjects);
+                        }
                     }
                 }
                 else {
                     if (!toast.isActive(toastId.current)) {
-                        toastId.current = toast.error("Order không thành công", Toastobjects);
+                        toastId.current = toast.error("Số lượng vượt hoặc ít hơn số lượng cho phép", Toastobjects);
                     }
                 }
 
@@ -133,15 +147,7 @@ function Neworder() {
                 }
             }
             await dispatch(listMyOrders())
-            const order = (JSON.parse(localStorage.getItem('ordersInfo')))
 
-            await dispatch(createCashFlow({
-                order: order[0].order !== undefined ? order[0].order : 0,
-                type: "Add order",
-                spending: Number(quanlity) * (items[0].rate) / 1000,
-                remainingMoney: wallet.balance - Number(quanlity) * (items[0].rate) / 1000
-            })
-            )
         }
 
     }
@@ -243,7 +249,7 @@ function Neworder() {
                         <div className='mb-3 lg:col-span-3 '>
                             <label class="inline-flex relative items-center cursor-pointer ">
                                 <input type="checkbox" value="" class="sr-only peer" onChange={(e) => { setCheck(e.target.checked) }} />
-                                <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute lg:after:top-[0.15rem] after:top-2 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                                 <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Schedule. Your timezone: +07:00</span>
                             </label>
                         </div>
@@ -261,7 +267,9 @@ function Neworder() {
                             <label class="inline-flex relative items-center cursor-pointer ">
                                 <input type="checkbox" value="" class="sr-only peer" onChange={(e) => { setCheckLoop(e.target.checked) }} />
                                 <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Loop. Auto Re-order when this order has been COMPLETED. Carefully when to use this function. Always make sure balance is enough.</span>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300 lg:hidden">Loop. Auto Re-order.</span>
+                                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300 hidden lg:block">Loop. Auto Re-order when this order has been COMPLETED. Carefully when to use this function. Always make sure balance is enough.</span>
+
                             </label>
                         </div>
                         <div className={checkLoop ? 'mb-3 lg:col-span-3' : 'hidden'}>

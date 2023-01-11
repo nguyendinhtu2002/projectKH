@@ -20,8 +20,8 @@ function PageHome() {
                 <SectionSticky />
                 <SectionPrice />
                 <SectionHidden />
-                <SectionTest/>
-                <SectionFooter/>
+                <SectionTest />
+                <SectionFooter />
             </div>
         </div>
     )

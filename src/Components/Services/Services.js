@@ -13,15 +13,15 @@ function Services() {
     const productList = useSelector((state) => state.productList)
     const { loading, error, products } = productList;
 
-    useEffect(() => {
-        document.addEventListener("click", handleClickOutside, true)
-    })
+    // useEffect(() => {
+    //     document.addEventListener("click", handleClickOutside, true)
+    // })
     const refOne = useRef(null)
-    const handleClickOutside = (e) => {
-        if (!refOne.current.contains(e.target)) {
-            setClick(false)
-        }
-    }
+    // const handleClickOutside = (e) => {
+    //     if (!refOne.current.contains(e.target)) {
+    //         setClick(false)
+    //     }
+    // }
     
     useEffect(() => {
         dispatch(listProduct());

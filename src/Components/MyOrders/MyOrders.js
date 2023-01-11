@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { report } from '../../redux/Actions/reportActions';
 import { findByStatus, listMyOrders } from '../../redux/Actions/ordersAction';
 import moment from 'moment'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function MyOrders() {
     const dispatch = useDispatch()
@@ -16,13 +16,18 @@ function MyOrders() {
     const { status } = statusOrders
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
+    const reportOrder = useSelector((state) => state.reportOrder)
+    const { error } = reportOrder
     const [data, setData] = useState([]); // no data yet
     const [isLoading, setIsLoading] = useState(false);
     const [Error, setError] = useState('')
     const [order, setOrders] = useState(0)
     const [request, setRequest] = useState('Cancel')
     const [message, setMessage] = useState('')
+    const [choose, SetChoose] = useState('Order')
+
     const [Status, setStatus] = useState('')
+
     const toastId = React.useRef(null);
     const format1 = "YYYY-MM-DD HH:mm:ss"
     const Toastobjects = {
@@ -61,9 +66,17 @@ function MyOrders() {
                     Request: request
                 }
             }))
-            if (!toast.isActive(toastId.current)) {
-                toastId.current = toast.success("Report thành công", Toastobjects);
-                setMessage('')
+            if (error === undefined) {
+                if (!toast.isActive(toastId.current)) {
+                    toastId.current = toast.success("Report thành công", Toastobjects);
+                    setMessage('')
+                }
+            }
+            else {
+                if (!toast.isActive(toastId.current)) {
+                    toastId.current = toast.error("Report thất bại", Toastobjects);
+                    setMessage('')
+                }
             }
         }
 
@@ -109,8 +122,73 @@ function MyOrders() {
                                     <p class="m-0 wrap">{item.orderItems[0].link} </p>
                                 </div>
                                 <div class="float-right">
-                                    <Link  href="/new?service=1112" class="text-primary mr-2 font-bold md:text-[16px] sm:text-[16px] text-[16px]" data-lang="Reorder">Reorder</Link>
-                                    <Link class="text-danger font-bold md:text-[16px] sm:text-[16px] text-[16px]" data-lang="Report">Report</Link>
+                                    <Link to={`/new?service=${item.orderItems[0].service}`} class="text-primary mr-2 font-bold md:text-[16px] sm:text-[16px] text-[16px]" data-lang="Reorder">Reorder</Link>
+                                    <button type='button' data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable" >
+
+                                        <Link class="text-danger font-bold md:text-[16px] sm:text-[16px] text-[16px]" data-lang="Report" >Report</Link>
+                                    </button>
+                                    <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollable" aria-modal="true" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+                                            <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                                                <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                                                    <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalCenteredScrollableLabel">
+                                                        Create a ticket
+                                                    </h5>
+                                                    <button type="button"
+                                                        class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                {/* <div className="modal-body relative px-4 py-2 ">
+                            <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Subject</label>
+                            <select id="countries" onChange={(e) => { SetChoose(e.target.value) }} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="Order" defaultValue>Order</option>
+                                <option value="Payment">Payment</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div> */}
+                                                <div className={choose === "Order" ? "modal-body relative px-4 py-2 " : "modal-body relative px-4 py-2 hidden"}>
+                                                    <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Order ID</label>
+                                                    <input type="text" id="order" value={item.orderItems[0].order} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+
+                                                </div>
+                                                <div className={choose === "Order" ? "modal-body relative px-4 py-2 " : "modal-body relative px-4 py-2 hidden "}>
+                                                    <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Request</label>
+                                                    <select id="countries" onChange={(e) => { setRequest(e.target.value) }} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        <option value="Cancel" defaultValue>Cancel</option>
+                                                        <option value="Refill">Refill</option>
+                                                        <option value="Speed up">Speed up</option>
+                                                        <option value="DE">Other</option>
+                                                    </select>
+                                                </div>
+                                                <div className="modal-body relative px-4 py-2">
+                                                    <label className="required mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254]">Request</label>
+                                                    <textarea id="message" rows="4" onChange={(e) => { setMessage(e.target.value) }} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+
+                                                </div>
+                                                <div
+                                                    className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4  border-gray-200 rounded-b-md">
+
+                                                    <button type="button"
+                                                        onClick={handlerSendReport}
+                                                        className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                                {/* <div
+                                                                class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                                                                <button type="button"
+                                                                    class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                                                                    data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                                <button type="button"
+                                                                    class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
+                                                                    Save changes
+                                                                </button>
+                                                            </div> */}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                             <td className='w-[13%]'>
@@ -137,6 +215,7 @@ function MyOrders() {
                     </tbody>
                 </table>
             </div>
+
         </div>
     )
 }

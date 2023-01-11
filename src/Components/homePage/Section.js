@@ -162,7 +162,11 @@ function Section() {
                                 </p>
                             </div>
                             <a className='main-button is-hero w-inline-block w-[12em] mr-auto mb-[3em] ml-auto mt-[33px]'>
-                                <div className="text-block ">Generate Account AZ</div>
+                                <div className="text-block ">
+                                    <Link to="/register">
+                                        Generate Account AZ
+                                    </Link>
+                                </div>
                                 <div className="purple-logo-small w-embed">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.229 23.228">
                                         <g id="layers" transform="translate(0 -0.009)">

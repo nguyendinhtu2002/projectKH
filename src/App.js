@@ -25,6 +25,9 @@ import AffiliateScreen from './Screen/AffiliateScreen';
 import ChildPanelScreen from './Screen/ChildPanelScreen';
 import SettingScreen from './Screen/SettingScreen';
 import ViewTicketScreen from './Screen/ViewTicketScreen';
+import PrivateRoutes from './ProtectRouter';
+import Error404 from './Screen/404';
+import ForgotPassword from './Screen/ForgotPassword';
 function App() {
   return (
     <BrowserRouter>
@@ -32,19 +35,25 @@ function App() {
         <Route path='/' element={<PageHome />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<RegisterScreen />} />
-        <Route path='/services' element={<ServicesSreen/>} />
-        <Route path='/tickets' element={<SupportScreen/>} />
-        <Route path='/api' element={<ApiScreen/>} />
-        <Route path='/code.txt' element={<Code/>} />
-        <Route path='/new' element={<NewOrder/>} />
-        <Route path='/mass' element={<MassOrderScreen/>} />
-        <Route path='/orders' element={<MyOrderSreen/>} />
-        <Route path='/addfunds' element={<AddFundScreen/>} />
-        <Route path='/cashflow' element={<CashFlowScreen/>} />
-        <Route path='/affiliate' element={<AffiliateScreen/>} />
-        <Route path='/childpanel' element={<ChildPanelScreen/>} />
-        <Route path='/settings' element={<SettingScreen/>} />
-        <Route path='/tickets/:id' element={<ViewTicketScreen/>} />
+        <Route path='/services' element={<ServicesSreen />} />
+        <Route path='/api' element={<ApiScreen />} />
+        <Route path='/tickets' element={<SupportScreen />} />
+        <Route path='/ForgotPassword' element={<ForgotPassword />} />
+        <Route element={<PrivateRoutes />}>
+
+          <Route path='/code.txt' element={<Code />} />
+          <Route path='/new' element={<NewOrder />} />
+          <Route path='/mass' element={<MassOrderScreen />} />
+          <Route path='/orders' element={<MyOrderSreen />} />
+          <Route path='/addfunds' element={<AddFundScreen />} />
+          <Route path='/cashflow' element={<CashFlowScreen />} />
+          <Route path='/affiliate' element={<AffiliateScreen />} />
+          <Route path='/childpanel' element={<ChildPanelScreen />} />
+          <Route path='/settings' element={<SettingScreen />} />
+          <Route path='/tickets/:id' element={<ViewTicketScreen />} />
+
+        </Route>
+        <Route path="*" element={<Error404 />} />
 
       </Routes>
     </BrowserRouter>

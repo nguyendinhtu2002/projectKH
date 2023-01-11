@@ -1477,7 +1477,10 @@ aside .aside-menu .menu .menu-item .menu-link.active .menu-icon,
 .menu-rounded .menu-link {
     border-radius: 0.65rem;
 }
-
+#btn-back-to-top {
+    position: fixed;
+    display: none;
+  }
 .menu-item .menu-link {
     cursor: pointer;
     display: flex;

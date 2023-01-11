@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import '../assets/css/main.css'
-import '../assets/css/responsive.css'
-import { login } from '../redux/Actions/userAction';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Message from "../Components/LoadingError/Error";
 import Loading from "../Components/LoadingError/Loading";
-import { useLocation, useNavigate } from 'react-router';
 import { toast } from "react-toastify";
 import Toast from "../Components/LoadingError/Toast";
-import { Link } from 'react-router-dom';
-function LoginScreen() {
-    const location = useLocation();
-    const history = useNavigate();
-    const dispatch = useDispatch()
-    const toastId = React.useRef(null);
-
+import axios from 'axios';
+function ForgotPassword() {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [key, setKey] = useState("");
+    const [loading, SetLoading] = useState(false)
+    const [error, SetError] = useState('')
+    const [data, setData] = useState('')
+    const toastId = React.useRef(null);
     const Toastobjects = {
         position: "top-right",
         autoClose: 5000,
@@ -27,36 +20,33 @@ function LoginScreen() {
         draggable: true,
         progress: undefined,
     };
-    function onChange(value) {
-        setKey(value);
-    }
-    const redirect = location.search ? location.search.split("=")[1] : "/";
-    const userLogin = useSelector((state) => state.userLogin);
-    const { error, loading, userInfo } = userLogin;
-    useEffect(() => {
-        if (userInfo) {
-            history(redirect);
-
-        }
-    }, [userInfo, history, redirect]);
-    const submitHandler = async (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
-        await dispatch(login(email, password));
-        // if (key === "") {
-        //     if (!toast.isActive(toastId.current)) {
-        //         toastId.current = toast.error("Please solve Captcha correctly!", Toastobjects);
-        //     }
-        // }
-        // else {
-        //     await dispatch(login(email, password));
-        // }
+        if (email === "") {
+            if (!toast.isActive(toastId.current)) {
+                toastId.current = toast.error("Email not can't empty", Toastobjects);
+            }
+        }
+        else {
+            SetLoading(true)
+            axios.post('http://localhost:5000/api/users/forgotPassword', { email })
+
+                .then(res => {
+                    SetLoading(false)
+                    if (!toast.isActive(toastId.current)) {
+                        toastId.current = toast.success(res.data.message, Toastobjects);
+                    }
+                })
+                .catch(err => {
+                    SetLoading(false)
+                    SetError(err.response.data.message)
+                })
+        }
     };
-
-
     return (
         <div>
             <Toast />
-            <section className='pl-0 pr-0 max-w-[2100px]'>
+            <section className='pl-0 pr-0 max-w-[2100px] '>
                 <div className='login-layout'>
 
                     <section className='left-section'>
@@ -135,50 +125,23 @@ function LoginScreen() {
                             <section className='component-content'>
                                 {error && <Message variant="bg-red-500 text-white font-bold rounded-t px-4 py-2 ">{error}</Message>}
                                 {loading && <Loading />}
-                                <h1 id="title">Log In</h1>
+                                <h1 id="title">Forgot Password</h1>
                                 <p>
-                                    <span id="subtitle">Don’t have an account? </span>
+                                    <span id="subtitle">Do you have an account?  </span>
                                     <span id="subtitleLink">
-                                        <a class="auth-link" href="/register">Sign Up</a>
+                                        <Link class="auth-link" to="/login">Login</Link>
                                     </span>
                                 </p>
                                 <div className='content'>
                                     <form onSubmit={submitHandler}>
+
                                         <div className='input-control'>
-                                            <input placeholder="Email Address" id="email" autocomplete="email" type="email" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." name="Input.Email"
+                                            <input placeholder="Email Address" id="email" autocomplete="email" type="text" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." name="Input.Email"
                                                 onChange={(e) => setEmail(e.target.value)}
                                             />
-                                            <span class="field-validation-valid" data-valmsg-for="Input.Email" data-valmsg-replace="true"></span>
                                         </div>
-                                        <div className='input-control'>
-                                            <input placeholder="Password" id="password" autocomplete="current-password" type="password" data-val="true" data-val-maxlength="The field Password must be a string or array type with a maximum length of '30'." data-val-maxlength-max="30" data-val-required="The Password field is required."
-                                                maxlength="30" name="Input.Password"
-                                                onChange={(e) => setPassword(e.target.value)}
 
-                                            />
-                                            <div className='toggle-password'>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-
-                                                </svg>
-                                                <span class="field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
-                                            </div>
-                                        </div>
-                                        <section className='credentials-util'>
-                                            <div>
-                                                <label class="ad-checkbox" for="rememberMe">
-                                                    <input id="rememberMe" type="checkbox" data-val="true" data-val-required="The Remember me? field is required." name="Input.RememberMe" value="true" />
-                                                    <span class="ad-checkbox--inner"></span>
-                                                    <p>Remember me</p>
-                                                </label>
-                                            </div>
-
-                                            <Link to="/ForgotPassword" class="forgot-password cursor-pointer auth-link">
-                                                Forgot password?
-                                            </Link>
-                                        </section>
-                                        <button type="submit">Log In</button>
+                                        <button type="submit">RESET MY PASSWORD</button>
                                     </form>
                                 </div>
                             </section>
@@ -191,4 +154,4 @@ function LoginScreen() {
     )
 }
 
-export default LoginScreen
+export default ForgotPassword

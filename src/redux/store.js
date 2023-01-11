@@ -32,7 +32,7 @@ const reducer = combineReducers({
   addFunds: addFundsReducer,
   statusOrders: statusCreateReducer,
   userUpdate: userUpdateProfileReducer,
-  report: reportReducer,
+  reportOrder: reportReducer,
   cart: cartReducer,
   getUser:getUserById,
   changeEmailUser: changeEmailReducer,
