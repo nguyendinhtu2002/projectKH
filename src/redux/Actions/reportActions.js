@@ -1,6 +1,7 @@
 import { MESSAGE_DETAILS_LIST_MY_FAIL, MESSAGE_DETAILS_LIST_MY_REQUEST, MESSAGE_DETAILS_LIST_MY_SUCCESS, MESSAGE_LIST_MY_FAIL, MESSAGE_LIST_MY_REQUEST, MESSAGE_LIST_MY_SUCCESS, REPORT_CREATE_FAIL, REPORT_CREATE_REQUEST, REPORT_CREATE_SUCCESS } from "../Constants/ReportContans";
 import axios from "axios";
 import {logout} from "./userAction"
+import { URL } from "../Url";
 
 export const report = (reportOrder) => async (dispatch, getState) => {
     try {
@@ -16,7 +17,7 @@ export const report = (reportOrder) => async (dispatch, getState) => {
             },
         };
         const { data } = await axios.post(
-            'http://api.azview.us/api/report',
+            '${URL}/api/report',
             reportOrder,
             config)
         dispatch({ type: REPORT_CREATE_SUCCESS, payload: data })
@@ -48,7 +49,7 @@ export const listMyMessage = () => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get(`http://api.azview.us/api/report/getByUser`, config);
+        const { data } = await axios.get(`${URL}/api/report/getByUser`, config);
         dispatch({ type: MESSAGE_LIST_MY_SUCCESS, payload: data });
 
     } catch (error) {
@@ -80,7 +81,7 @@ export const messagelistDetailMessage = (id) => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get(`http://api.azview.us/api/report/${id}`, config);
+        const { data } = await axios.get(`${URL}/api/report/${id}`, config);
         dispatch({ type: MESSAGE_DETAILS_LIST_MY_SUCCESS, payload: data });
 
     } catch (error) {

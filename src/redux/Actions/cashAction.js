@@ -1,6 +1,8 @@
 import { CASHFLOW_CREATE_FAIL, CASHFLOW_CREATE_REQUEST, CASHFLOW_CREATE_SUCCESS, CASHFLOW_LIST_MY_FAIL, CASHFLOW_LIST_MY_REQUEST, CASHFLOW_LIST_MY_SUCCESS, CASHFLOW_MONEY_FAIL, CASHFLOW_MONEY_REQUEST, CASHFLOW_MONEY_SUCCESS } from "../Constants/CashFlowContants";
 import { logout } from "./userAction"
 import axios from "axios";
+import { URL } from "../Url";
+
 export const createCashFlow = (order) => async (dispatch, getState) => {
   try {
 
@@ -17,7 +19,7 @@ export const createCashFlow = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`http://api.azview.us/api/cashFlow`, order, config);
+    const { data } = await axios.post(`${URL}/api/cashFlow`, order, config);
 
     dispatch({ type: CASHFLOW_CREATE_SUCCESS, payload: data });
 
@@ -51,7 +53,7 @@ export const listCashFlow = () => async (dispatch, getState) => {
     };
 
 
-    const { data } = await axios.get(`http://api.azview.us/api/cashFlow`, config);
+    const { data } = await axios.get(`${URL}/api/cashFlow`, config);
     dispatch({ type: CASHFLOW_LIST_MY_SUCCESS, payload: data });
 
   } catch (error) {
@@ -82,7 +84,7 @@ export const getMoney = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`http://api.azview.us/api/cashFlow/getByUserDeposit`, config);
+    const { data } = await axios.get(`${URL}/api/cashFlow/getByUserDeposit`, config);
     dispatch({ type: CASHFLOW_MONEY_SUCCESS, payload: data });
 
   } catch (error) {

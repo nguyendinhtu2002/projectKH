@@ -35,7 +35,7 @@ function Section() {
     return (
         <>
             <div data-w-id="55590f16-e3c5-8ad3-ebbb-8862f752f654" className={clickClaim ? 'claim-pop-up opacity-100 close' : 'claim-pop-up opacity-100'} >
-                <div className="claim-cros-icon w-embed">
+                {/* <div className="claim-cros-icon w-embed">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 12.602 12.602" onClick={() => { setClickClaim(true) }}>
                         <g id="Group_18984" data-name="Group 18984" transform="translate(-230.086 -70.086)">
                             <line id="Line_196" data-name="Line 196" x2="9.773" y2="9.773" transform="translate(231.5 71.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"></line>
@@ -45,7 +45,20 @@ function Section() {
                 </div>
                 <div class="claim-line-seperator"></div>
                 <div class="claim-text">25% DISCOUNT ON ANY PACKAGE, FOREVER! USE: <span class="yellow-span">BLACKFRIDAY25</span> TODAY!</div>
-                <a href="https://app.adcreative.ai/Identity/Account/Register" class="claim-button w-button "  >CLAIM</a>
+                <a href="https://app.adcreative.ai/Identity/Account/Register" class="claim-button w-button "  >CLAIM</a> */}
+                <div className='claim-pop-up-inside'>
+                    <div className="claim-cros-icon w-embed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 12.602 12.602" onClick={() => { setClickClaim(true) }}>
+                            <g id="Group_18984" data-name="Group 18984" transform="translate(-230.086 -70.086)">
+                                <line id="Line_196" data-name="Line 196" x2="9.773" y2="9.773" transform="translate(231.5 71.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"></line>
+                                <line id="Line_197" data-name="Line 197" x1="9.773" y2="9.773" transform="translate(231.5 71.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"></line>
+                            </g>
+                        </svg>
+                    </div>
+                    {/* <div class="claim-line-seperator"></div> */}
+                    <div class="claim-text">25% DISCOUNT ON ANY PACKAGE! USE: <span class="yellow-span">FESTIVE25</span> TODAY!</div>
+                    <a href="https://app.adcreative.ai/Identity/Account/Register" class="claim-button w-button "  >CLAIM</a>
+                </div>
             </div>
             <div id="home" className=' section is-hero'>
                 <div className='hero-content'>

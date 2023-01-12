@@ -1,6 +1,8 @@
 import { WALLET_CREATE_FAIL, WALLET_CREATE_REQUEST, WALLET_CREATE_SUCCESS, WALLET_UPDATE_FAIL, WALLET_UPDATE_REQUEST, WALLET_UPDATE_SUCCESS } from "../Constants/WalletContants";
 import axios from "axios";
 import { logout } from "./userAction";
+import { URL } from "../Url";
+
 export const CreateWallet = () => async (dispatch, getState) => {
   try {
 
@@ -16,7 +18,7 @@ export const CreateWallet = () => async (dispatch, getState) => {
           'Content-Type': 'application/x-www-form-urlencoded'
       }
   }
-    const { data } = await axios.post(`http://api.azview.us/api/Waller/${userInfo._id}`,config);
+    const { data } = await axios.post(`${URL}/api/Waller/${userInfo._id}`,config);
     dispatch({ type: WALLET_CREATE_SUCCESS, payload: data });
 
   } catch (error) {
@@ -51,7 +53,7 @@ export const updateWallet = (money) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://api.azview.us/api/Waller/${userInfo._id}`, money,config);
+    const { data } = await axios.put(`${URL}/api/Waller/${userInfo._id}`, money,config);
     dispatch({ type: WALLET_UPDATE_SUCCESS, payload: data });
 
     // localStorage.setItem("userInfo", JSON.stringify(data));

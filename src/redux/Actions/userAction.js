@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { USER_APIKEY_FAIL, USER_APIKEY_REQUEST, USER_APIKEY_SUCCESS, USER_CHANGEAPIKEY_FAIL, USER_CHANGEAPIKEY_REQUEST, USER_CHANGEAPIKEY_SUCCESS, USER_CHANGEEMAIL_FAIL, USER_CHANGEEMAIL_REQUEST, USER_CHANGEEMAIL_SUCCESS, USER_GETUSERBYID_FAIL, USER_GETUSERBYID_REQUEST, USER_GETUSERBYID_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from '../Constants/UserContants';
+import { URL } from "../Url";
 
 export const register = (name, email, password, apiKey) => async (dispatch) => {
   try {
@@ -11,7 +12,7 @@ export const register = (name, email, password, apiKey) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      'http://api.azview.us/api/users/signup',
+      `${URL}/api/users/signup`,
       { name, email, password, apiKey },
       config)
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data })
@@ -41,7 +42,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      'http://api.azview.us/api/users/login',
+      `${URL}/api/users/login`,
       { email, password },
       config)
 
@@ -87,7 +88,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://api.azview.us/api/users/updateProfile`, user, config);
+    const { data } = await axios.put(`${URL}/api/users/updateProfile`, user, config);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -119,7 +120,7 @@ export const updateMoney = (money) => async (dispatch, getState) => {
 
 
 
-    const { data } = await axios.put(`http://api.azview.us/api/Waller/${userInfo._id}`, money);
+    const { data } = await axios.put(`${URL}/api/Waller/${userInfo._id}`, money);
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     // dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -155,7 +156,7 @@ export const apiKey = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`http://api.azview.us/api/users/${userInfo._id}/apiKey`, config);
+    const { data } = await axios.get(`${URL}/api/users/${userInfo._id}/apiKey`, config);
     dispatch({ type: USER_APIKEY_SUCCESS, payload: data });
 
   } catch (error) {
@@ -188,7 +189,7 @@ export const updateApiKey = (apiKey) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://api.azview.us/api/users/${userInfo._id}/apiKey`, apiKey, config);
+    const { data } = await axios.put(`${URL}/api/users/${userInfo._id}/apiKey`, apiKey, config);
     dispatch({ type: USER_CHANGEAPIKEY_SUCCESS, payload: data });
     dispatch({ type: USER_APIKEY_SUCCESS, payload: data });
 
@@ -222,7 +223,7 @@ export const changeEmail = (email) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`http://api.azview.us/api/users/${userInfo._id}/updateEmail`, {email}, config);
+    const { data } = await axios.put(`${URL}/api/users/${userInfo._id}/updateEmail`, {email}, config);
     dispatch({ type: USER_CHANGEEMAIL_SUCCESS, payload: data });
 
   } catch (error) {
@@ -253,7 +254,7 @@ export const getUserById = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`http://api.azview.us/api/users/${userInfo._id}`, config);
+    const { data } = await axios.get(`${URL}/api/users/${userInfo._id}`, config);
     dispatch({ type: USER_GETUSERBYID_SUCCESS, payload: data });
   } catch (error) {
     const message =

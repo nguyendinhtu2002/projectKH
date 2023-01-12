@@ -2,6 +2,8 @@ import { ORDER_CREATE_FAIL, ORDER_CREATE_FAIL_TO_ME, ORDER_CREATE_REQUEST, ORDER
 import axios from "axios";
 import { CART_CLEAR_ITEMS } from "../Constants/CartContants";
 import { logout } from "./userAction"
+import { URL } from "../Url";
+
 // CREATE ORDER TO API 1DG
 export const createOrder = (service, link, quantity) => async (dispatch) => {
   try {
@@ -63,7 +65,7 @@ export const createOrderAPIMe = (cash) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`http://api.azview.us/api/orders`, cash, config);
+    const { data } = await axios.post(`${URL}/api/orders`, cash, config);
 
     dispatch({ type: ORDER_CREATE_SUCCESS_TO_ME, payload: data });
     dispatch({ type: CART_CLEAR_ITEMS, payload: data });
@@ -102,7 +104,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     };
 
 
-    const { data } = await axios.get(`http://api.azview.us/api/orders/${userInfo._id}/getByUser`, config);
+    const { data } = await axios.get(`${URL}/api/orders/${userInfo._id}/getByUser`, config);
     dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });
     localStorage.setItem("listMyOrders", JSON.stringify(data));
 
@@ -138,7 +140,7 @@ export const findByStatus = (Status, IDorder, link, service) => async (dispatch,
     };
     const id = userInfo._id
 
-    const { data } = await axios.post(`http://api.azview.us/api/orders/findByStatus`, { Status, id, IDorder, link, service }, config);
+    const { data } = await axios.post(`${URL}/api/orders/findByStatus`, { Status, id, IDorder, link, service }, config);
     dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });
     // localStorage.removeItem("listMyOrders")
     localStorage.setItem("listMyOrders", JSON.stringify(data));

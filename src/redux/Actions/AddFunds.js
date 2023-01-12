@@ -1,6 +1,8 @@
 import { ADDFUNDS_CREATE_FAIL, ADDFUNDS_CREATE_REQUEST, ADDFUNDS_CREATE_SUCCESS, ADDFUNDS_GETLIST_MY_FAIL, ADDFUNDS_GETLIST_MY_REQUEST, ADDFUNDS_GETLIST_MY_SUCCESS, ADDFUNDS_LIST_MY_FAIL, ADDFUNDS_LIST_MY_REQUEST, ADDFUNDS_LIST_MY_SUCCESS } from "../Constants/AddFunds";
 import axios from "axios";
 import { logout } from "./userAction";
+import { URL } from "../Url";
+
 export const createAddFunds = (funds) => async (dispatch, getState) => {
     try {
         dispatch({ type: ADDFUNDS_CREATE_REQUEST });
@@ -17,7 +19,7 @@ export const createAddFunds = (funds) => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.post(`http://api.azview.us/api/addFunds`, funds, config);
+        const { data } = await axios.post(`${URL}/api/addFunds`, funds, config);
         dispatch({ type: ADDFUNDS_CREATE_SUCCESS, payload: data });
         // localStorage.setItem("listMyOrders", JSON.stringify(data));
 
@@ -74,7 +76,7 @@ export const listMyAdsFunds = () => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get(`http://api.azview.us/api/addFunds/getByUser`, config);
+        const { data } = await axios.get(`${URL}/api/addFunds/getByUser`, config);
         dispatch({ type: ADDFUNDS_GETLIST_MY_SUCCESS, payload: data });
 
     } catch (error) {
