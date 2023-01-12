@@ -17,7 +17,7 @@ export const listProduct = () => async (dispatch, getState) => {
         //         'Content-Type': 'application/x-www-form-urlencoded'
         //     }
         // }
-        const { data } = await axios.get("http://api.azview.us/api/products");
+        const { data } = await axios.get("https://api.azview.us/api/products");
         // const { data } = await axios.post("https://upview.us/api/v2",params,config);
 
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
