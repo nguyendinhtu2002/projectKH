@@ -17,7 +17,7 @@ export const createAddFunds = (funds) => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.post(`http://139.180.146.136/api/addFunds`, funds, config);
+        const { data } = await axios.post(`http://api.azview.us/api/addFunds`, funds, config);
         dispatch({ type: ADDFUNDS_CREATE_SUCCESS, payload: data });
         // localStorage.setItem("listMyOrders", JSON.stringify(data));
 
@@ -74,7 +74,7 @@ export const listMyAdsFunds = () => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get(`http://139.180.146.136/api/addFunds/getByUser`, config);
+        const { data } = await axios.get(`http://api.azview.us/api/addFunds/getByUser`, config);
         dispatch({ type: ADDFUNDS_GETLIST_MY_SUCCESS, payload: data });
 
     } catch (error) {

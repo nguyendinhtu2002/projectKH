@@ -17,7 +17,7 @@ export const createCashFlow = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`http://139.180.146.136/api/cashFlow`, order, config);
+    const { data } = await axios.post(`http://api.azview.us/api/cashFlow`, order, config);
 
     dispatch({ type: CASHFLOW_CREATE_SUCCESS, payload: data });
 
@@ -51,7 +51,7 @@ export const listCashFlow = () => async (dispatch, getState) => {
     };
 
 
-    const { data } = await axios.get(`http://139.180.146.136/api/cashFlow`, config);
+    const { data } = await axios.get(`http://api.azview.us/api/cashFlow`, config);
     dispatch({ type: CASHFLOW_LIST_MY_SUCCESS, payload: data });
 
   } catch (error) {
@@ -82,7 +82,7 @@ export const getMoney = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`http://139.180.146.136/api/cashFlow/getByUserDeposit`, config);
+    const { data } = await axios.get(`http://api.azview.us/api/cashFlow/getByUserDeposit`, config);
     dispatch({ type: CASHFLOW_MONEY_SUCCESS, payload: data });
 
   } catch (error) {
