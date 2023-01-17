@@ -61,7 +61,7 @@ function LoginScreen() {
 
                     <section className='left-section'>
                         <Link to='/'>
-                            <img src="https://app.adcreative.ai/assets/svg/auth-logo.svg" class="left-section--logo" />
+                            <img src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" class="left-section--logo" />
                         </Link>
                         <section className='left-section--texts'>
                             <h2 className='text-white'>Converting Ad Creatives by</h2>

@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import CountUp from 'react-countup';
 import ScrollTrigger from 'react-scroll-trigger';
+import { useSelector } from 'react-redux';
 
 function SectionSticky() {
     const [counterOn, setCounterOn] = useState(false);
-
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
     return (
 
         <ScrollTrigger id="achi" className='section sticky' onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
@@ -24,10 +26,14 @@ function SectionSticky() {
                             </p>
                             <div class="button-and-text-wrapper left-aligned">
                                 <a data-ps="target" href="https://app.adcreative.ai/Identity/Account/Register" target="_blank" class="main-button is-general w-inline-block">
-                                    <div class="text-block">
-                                        <Link to="/register">
+                                    <div className="text-block ml-auto mr-auto">
+                                        {!userInfo ? <Link to="/register">
                                             Generate Account AZ
-                                        </Link>
+                                        </Link> :
+                                            <Link to="/services" className=''>
+                                                Order Service Now!
+                                            </Link>
+                                        }
                                     </div>
                                     <div class="purple-logo-small w-embed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.229 23.228">
@@ -51,12 +57,12 @@ function SectionSticky() {
                                         </svg>
                                     </div>
                                 </a>
-                                <p class="top-margin-30">
+                                {/* <p class="top-margin-30">
                                     Try 50% free for 3 days.
                                     <span class="gradient-span">
                                         <strong>Cancel Anytime</strong>
                                     </span>
-                                </p>
+                                </p> */}
                             </div>
                         </div>
                         <div className='sticky-content_informations'>

@@ -15,8 +15,11 @@ import Toast from "../Components/LoadingError/Toast";
 import { toast } from "react-toastify";
 import { report } from '../redux/Actions/reportActions'
 import { createCashFlow } from '../redux/Actions/cashAction'
-import { createAddFunds } from '../redux/Actions/AddFunds'
+import { createAddFunds, listMyAdsFunds } from '../redux/Actions/AddFunds'
 import axios from 'axios'
+import { updateVoucher } from '../redux/Actions/Voucher'
+import { URL } from "../redux/Url";
+
 const { RangePicker } = DatePicker
 const usePathName = () => {
     const location = useLocation();
@@ -29,11 +32,15 @@ function Section
     const [request, setRequest] = useState('Order')
     const [message, setMessage] = useState('')
     const [choose, SetChoose] = useState('Order')
+    const [code, setCode] = useState('')
     const history = useNavigate();
-
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+   
     const dispatch = useDispatch();
     const toastId = React.useRef(null);
-
+    const voucher = useSelector((state) => state.voucher);
+    const { success } = voucher
     const logoutHandler = () => {
         dispatch(logout());
     };
@@ -46,10 +53,49 @@ function Section
         draggable: true,
         progress: undefined,
     };
+    const randomText = (text, length = 2) => {
+        var string = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries but also the leap into electronic typesetting remaining essentially unchanged It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form by injected humour or randomised words which dont look even slightly believable If you are going to use a passage of Lorem Ipsum you need to be sure there isnt anything embarrassing hidden in the middle of text All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary making this the first true generator on the Internet It uses a dictionary of over 200 Latin words combined with a handful of model sentence structures to generate Lorem Ipsum which looks reasonable The generated Lorem Ipsum is therefore always free from repetition injected humour or non character words etc estimate paint upset allocate create distribute want supplement match disturb thrust earn clutch compose occur manipulate wave enhance plunge listen stretch permit opt whisper imagine play promote render condemn light peer enforce murder combine wait impress resemble land protect need walk approve characterise record remark dismiss ride show criticize like own compile dress process transport dissolve brainstorm accuse drain bloom complete campaign reverse matter dominate forget induce stress inform ban prevent collect explain have tuck destroy encourage put hurry stick whisper attract stretch reply enforce enquire quote rub appoint spin concentrate time express review fund disturb inspect tie conceal suppress mount touch find learn close wish apply going pop incur leave shrug elect deem vary name slip swear prove give laugh move bring break rule boast smile shift bind react cite cook shout stare march aim lend dip cast ring order help sound value bend form train hunt own wrap'.toLowerCase();
+        string = string.split(' ');
+        var output = [], random_position = Math.floor(Math.random() * length);
+        for (var i = 0; i < length; i++) {
+            output.push(string[Math.floor(Math.random() * string.length)]);
+        }
+        output[random_position] = text;
+        return output.join('');
+    }
+
+    const content = (`az${userInfo._id}pq`)
+    // const QR = 
+    const phone = "0985822626"
     const handleSubbmit = () => {
         const access_token = "MvDqOYEh6uK7KSKnsY1ilEFUWNfFHXC16I0odgyKn25wuC6X9i"
-        const phone = "0985822626"
         const amount = 0
+        // dispatch(updateVoucher({ nameVoucher: code }))
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+        axios.post(`${URL}/api/voucher/edit`, { nameVoucher: code }, config)
+            .then(res => {
+                dispatch(createCashFlow({
+                    type: "DEPOSIT",
+                    spending: 123,
+                    remainingMoney: 123
+                })
+                )
+                dispatch(updateWallet(
+                    {
+                        amount: ((6000) / 23000).toFixed(2)
+                    }
+                ))
+            })
+            .catch(err => {
+                if (!toast.isActive(toastId.current)) {
+                    toastId.current = toast.error(err.response.data.message, Toastobjects);
+                }
+            })
         // axios.post('https://momosv3.apimienphi.com/api/checkTranContent', JSON.stringify({ access_token, phone, content }))
         //     // .then(res => res.json())
         //     .then(res => {
@@ -83,17 +129,9 @@ function Section
         //         }
 
         //     })
-        dispatch(createCashFlow({
-            type: "DEPOSIT",
-            spending: 123,
-            remainingMoney: 123
-        })
-        )
-        // dispatch(updateWallet(
-        //     {
-        //         amount: ((6000) / 23000).toFixed(2)
-        //     }
-        // ))
+
+
+
 
     }
     const handlerSendReport = () => {
@@ -121,29 +159,30 @@ function Section
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(CreateWallet())
+        dispatch(listMyAdsFunds())
+
     }, [dispatch])
     const location = usePathName();
     const id = location.split("/")[2]
     const Location = useLocation();
     const [click, setClick] = useState(false)
     const toggleChecked = () => setClick(value => !value);
-    const userLogin = useSelector((state) => state.userLogin);
-    const { userInfo } = userLogin;
+
     const messageList = useSelector((state) => state.messageList)
     const { messager } = messageList
     const createWallet = useSelector((state) => state.createWallet)
     const { wallet } = createWallet
     const format1 = "YYYY-MM-DD HH:mm:ss"
     const redirect = Location.pathname ? Number(Location.pathname.split("/")[2]) : "";
-    // useEffect(() => {
-    //     document.addEventListener("click", handleClickOutside, true)
-    // })
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside, true)
+    })
     const refOne = useRef(null)
-    // const handleClickOutside = (e) => {
-    //     if (!refOne.current.contains(e.target)) {
-    //         setClick(false)
-    //     }
-    // }
+    const handleClickOutside = (e) => {
+        if (!refOne.current.contains(e.target)) {
+            setClick(false)
+        }
+    }
 
 
 
@@ -155,7 +194,7 @@ function Section
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
                         <div className='aside-logo flex-none px-9 mb-9'>
                             <Link to="/">
-                                <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-6 logo theme-light-show" />
+                                <img alt="Logo" src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" class="h-[3.5rem] logo theme-light-show" />
                                 <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-[25px] logo theme-dark-show hidden" />
                             </Link>
                         </div>
@@ -301,7 +340,7 @@ function Section
                                         </span>
                                     </div>
                                     <Link to="/" class="flex items-center">
-                                        <img alt="Logo" src={logo} class="theme-light-show h-5 " />
+                                        <img alt="Logo" src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" class="theme-light-show h-9 " />
                                         <img alt="Logo" src={logo} class="theme-dark-show hidden h-5" />
                                     </Link>
                                 </div>
@@ -433,10 +472,38 @@ function Section
                                                                 <p className='text-inherit text-sm mb-[1em]'>Sau khi chuyển tiền vui lòng liên hệ với tôi để được cập nhật tiền.</p>
                                                             </div>
                                                             <div className={chooseSelect != "USDT" ? "div-options div-8 text-center " : "hidden"} >
-                                                                <img src="https://momosv3.apimienphi.com/api/QRCode?phone=0917557227&amp;note=aznguyendinhtu1pq a stretch" class="w-250px  mb-5 inline-block" />
-                                                                <div class="mb-5">
-                                                                    <span class="" id="momo_phone">Số điện thoại: <span class="fw-boldest text-primary ">0917557227</span></span>
-                                                                    <span class="block" id="momo_content">Nội dung: <span class="fs-6 font-bold text-primary">aznguyendinhtu1pq a stretch</span></span>
+                                                                <img src={`https://momosv3.apimienphi.com/api/QRCode?phone=0985822626&amount=0&note=${content}`} class="w-250px  mb-5 inline-block" />
+                                                                {/* <div className="mb-5">
+                                                                    <span className="" id="momo_phone">Số điện thoại: <span className="fw-boldest text-primary ">{phone}</span></span>
+                                                                    <span className="block" id="momo_content">Nội dung: <span className="fs-6 font-bold text-primary">{content}</span></span>
+                                                                </div> */}
+                                                                <div className='mb-2'>
+                                                                    <input
+                                                                        type="text"
+
+                                                                        className="
+          w-[25%]
+          block
+          
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          ml-auto
+          mr-auto
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+        "
+                                                                        id="exampleFormControlInput3"
+                                                                        placeholder="Enter Code"
+                                                                        onChange={(e) => setCode(e.target.value)}
+                                                                    />
                                                                 </div>
                                                                 <button type="button" onClick={handleSubbmit} class={chooseSelect === "MoMo" ? "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" : "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 hidden"}>Xác nhận thành công</button>
 

@@ -21,7 +21,7 @@ function CashFlow() {
         return results;
     }
 
-    var result = chunkArray(cashFlow, 10)
+    var result = chunkArray(cashFlow, 20)
 
     console.log(result[0])
 

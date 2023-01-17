@@ -10,6 +10,7 @@ import { messageListDetailMyReducer, messageListMyReducer, reportReducer } from 
 import { cashCreateReducer, cashFlowListReducer, getMoneyReducer } from "./Reducers/CashFlowReducers";
 import { addFundsListMyReducer, addFundsReducer, getaddFundsListMyReducer } from "./Reducers/AddFundsReducers";
 import { walletCreateReducer, walletUpdateProfileReducer } from "./Reducers/WalletReducers";
+import { voucherUpdateReducer } from "./Reducers/VoucherReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -36,6 +37,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   getUser:getUserById,
   changeEmailUser: changeEmailReducer,
+  voucher:voucherUpdateReducer
 });
 
 

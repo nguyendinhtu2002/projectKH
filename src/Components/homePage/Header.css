@@ -1420,6 +1420,8 @@ html {
     margin-left: 0;
     padding: 0 0.2875em;
     cursor: pointer;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .claim-line-seperator {
@@ -1458,11 +1460,16 @@ html {
     transform: translate3d(0px, -2em, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     transform-style: preserve-3d;
 }
-
+.w50{
+    width: 50%;
+}
+.an{
+    display: none;
+}
 .claim-button {
     margin-right: 0;
     margin-left: auto;
-    padding: 1em 1.5625em 0.875em;
+    /* padding: 1em 1.5625em 0.875em; */
     border-radius: 2em;
     background-color: #fbc822;
     -webkit-transition: background-color .2s;

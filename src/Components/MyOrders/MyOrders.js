@@ -7,6 +7,9 @@ import { report } from '../../redux/Actions/reportActions';
 import { findByStatus, listMyOrders } from '../../redux/Actions/ordersAction';
 import moment from 'moment'
 import { Link } from "react-router-dom"
+import { listStatus } from '../../redux/Actions/statusActions';
+import axios from 'axios';
+import { URL } from "../../redux/Url";
 
 function MyOrders() {
     const dispatch = useDispatch()
@@ -86,19 +89,25 @@ function MyOrders() {
     }
     useEffect(() => {
         setIsLoading(true);
-
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
         dispatch(listMyOrders())
-        // axios.get(`https://up-views.herokuapp.com/api/orders/${userInfo._id}/getByUser`, config)
-        //     .then(data => {
-        //         setData(data.data); // update state with response
+        axios.get(`${URL}/api/orders/${userInfo._id}/getByUser`, config)
+            .then(data => {
+                setData(data.data); // update state with response
+                // console.log( data.data[0].orderStatus)
 
-        //         data.data.map((items) => items.orderStatus!=="Completed" && items.orderStatus==="Cancel" ? dispatch(listStatus(items._id)) : null)
+                data.data.map((items) => items.orderStatus !== "Completed" && items.orderStatus !== "Cancel" ? dispatch(listStatus(items._id)) : null)
 
-        //     })
-        //     .catch(error => {
-        //         setError(error);
-        //     })
-        //     .finally(() => setIsLoading(false)); // complete loading success/fail
+            })
+            .catch(error => {
+                setError(error);
+            })
+            .finally(() => setIsLoading(false)); // complete loading success/fail
     }, [])
     return (
         <div className='card-body'>
@@ -115,7 +124,11 @@ function MyOrders() {
                             </td>
                             <td>
                                 <div>
-                                    <p class="m-0 text-gray-600 wrap"><i class="fa-brands fa-tiktok"></i> <span class="text-gray-800 font-bold">{item.orderItems[0].service}</span> | Tiktok Followers | VietNam | Speed 500-1000/day</p>
+                                    <p class="m-0 text-gray-600 wrap">
+                                        <i class="fa-brands fa-youtube">
+
+                                        </i>
+                                        <span class="text-gray-800 font-bold"> {item.orderItems[0].service}</span> {item.orderItems[0].name}</p>
                                     <p className='m-0'>
                                         <span class="badge badge-success text-pill rounded-pill mr-1" data-lang="label::No refill">No refill</span>
                                     </p>

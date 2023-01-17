@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import $ from "jquery";
-
+import logo from "../../assets/images/logo.png"
 import './Header.css'
 import './test.css'
 import { useSelector } from 'react-redux';
@@ -56,8 +56,10 @@ function Section() {
                         </svg>
                     </div>
                     {/* <div class="claim-line-seperator"></div> */}
-                    <div class="claim-text">25% DISCOUNT ON ANY PACKAGE! USE: <span class="yellow-span">FESTIVE25</span> TODAY!</div>
-                    <a href="https://app.adcreative.ai/Identity/Account/Register" class="claim-button w-button "  >CLAIM</a>
+                    <div class="claim-text">Please enter the <span class="yellow-span">abcdsdsa </span>to get 1% of the deposit value!</div>
+                    <Link to="/register" class={userInfo? " claim-button w-button mt-[5px] an" :"claim-button w-button mt-[5px] "}>CLAIM</Link>
+                    <Link to="/addfunds" class={userInfo? "claim-button w-button mt-[5px]":"an"}>CLAIM</Link>
+
                 </div>
             </div>
             <div id="home" className=' section is-hero'>
@@ -88,7 +90,7 @@ function Section() {
                             <div className=' logo-white-wrapper'>
                                 <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62d5364443bd69032aca1a2b_adc-icon.svg" loading="lazy" alt="" class="hero-icon is-hidden" />
                             </div>
-                            <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62d5690f32024baee024e4a4_AdCreativetext.svg" loading="lazy" alt="AdCreative text that redirects to the home." class="adc-text"></img>
+                            <img src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" loading="lazy" alt="AdCreative text that redirects to the home." class="adc-text"></img>
                         </a>
                         <div className='hero-content__nav-items'>
                             <a href="#home" aria-current="page" class="nav-item__link w-inline-block w--current">
@@ -165,7 +167,7 @@ function Section() {
 
                     <div className='hero-content__right'>
                         <div class="content-wrapper-hero">
-                            <img src="https://assets.website-files.com/62d52b6d074c2e318f479724/62d534b643bd69a6d3ca1002_AdCreative-logo-hero.svg" loading="lazy" alt="ad-creative-logo" class="hero-logo" />
+                            <img src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" loading="lazy" alt="ad-creative-logo" class="hero-logo" />
                             <div class="before-heading-text">Cheapest SMM Panel Over 10 Years!</div>
                             <h1 class="heading-hero">with 1DG SMM Panel - Social Services</h1>
                             <div class="mb-[1.25rem]">
@@ -175,10 +177,14 @@ function Section() {
                                 </p>
                             </div>
                             <a className='main-button is-hero w-inline-block w-[12em] mr-auto mb-[3em] ml-auto mt-[33px]'>
-                                <div className="text-block ">
-                                    <Link to="/register">
+                                <div className="text-block ml-auto mr-auto">
+                                    {!userInfo ? <Link to="/register">
                                         Generate Account AZ
-                                    </Link>
+                                    </Link> :
+                                        <Link to="/services" className=''>
+                                            Order Service Now!
+                                        </Link>
+                                    }
                                 </div>
                                 <div className="purple-logo-small w-embed">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 23.229 23.228">

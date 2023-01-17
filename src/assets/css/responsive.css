@@ -189,8 +189,8 @@
 @media (min-width: 992px) {
     .aside {
         position: fixed;
-        top: 50px;
-        bottom: 50px;
+        top: 60px;
+        bottom: 10px;
         left: 50px;
         z-index: 100;
         overflow: hidden;
