@@ -26,7 +26,7 @@ function SectionPrice() {
                                 <span class="mb-2 text-primary">from $</span>
                                 <span class="fs-3x fw-bolder text-primary"> 0.01</span>
                             </div>
-                            <Link to="/service" className='join-wrapper link-block is-white w-inline-block'>
+                            <Link to="/services" className='join-wrapper link-block is-white w-inline-block'>
                                 <div className="_18-text">Service List</div>
                                 <div className="html-embed-7 w-embed">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 4.619 7.862">
@@ -45,7 +45,7 @@ function SectionPrice() {
                                 <span class="mb-2 text-primary">from $</span>
                                 <span class="fs-3x fw-bolder text-primary">  0.25</span>
                             </div>
-                            <Link to="/service" className='join-wrapper link-block is-white w-inline-block'>
+                            <Link to="/services" className='join-wrapper link-block is-white w-inline-block'>
                                 <div className="_18-text">Service List</div>
                                 <div className="html-embed-7 w-embed">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 4.619 7.862">
@@ -64,7 +64,7 @@ function SectionPrice() {
                                 <span class="mb-2 text-primary">from $</span>
                                 <span class="fs-3x fw-bolder text-primary">  0.25</span>
                             </div>
-                            <Link to="/service" className='join-wrapper link-block is-white w-inline-block'>
+                            <Link to="/services" className='join-wrapper link-block is-white w-inline-block'>
                                 <div className="_18-text">Service List</div>
                                 <div className="html-embed-7 w-embed">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 4.619 7.862">
@@ -80,7 +80,7 @@ function SectionPrice() {
                                 {!userInfo ? <Link to="/register">
                                     Generate Account AZ
                                 </Link> :
-                                    <Link to="/services" className=''>
+                                    <Link to="/servicess" className=''>
                                         Order Service Now!
                                     </Link>
                                 }

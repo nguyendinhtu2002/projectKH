@@ -6,7 +6,6 @@ import { URL } from "../Url";
 
 export const listStatus = (id) => async (dispatch) => {
     try {
-        console.log(id)
         
         dispatch({ type: Status_CREATE_REQUEST });
 

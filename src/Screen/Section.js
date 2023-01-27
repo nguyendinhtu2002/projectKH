@@ -64,7 +64,7 @@ function Section
         return output.join('');
     }
 
-    const content = (`az${userInfo._id}pq`)
+    const content = (`az${userInfo?._id}pq`)
     // const QR = 
     const phone = "0985822626"
     const handleSubbmit = () => {
@@ -195,7 +195,6 @@ function Section
                         <div className='aside-logo flex-none px-9 mb-9'>
                             <Link to="/">
                                 <img alt="Logo" src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" class="h-[3.5rem] logo theme-light-show" />
-                                <img alt="Logo" src="http://1dg.me/assets/media/logo.png?1668419028" class="h-[25px] logo theme-dark-show hidden" />
                             </Link>
                         </div>
                         <div className='aside-menu flex-column-fluid pl-5 pr-3 mb-9 '>

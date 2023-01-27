@@ -301,7 +301,9 @@ textarea.form-control {
     padding: 2rem 2.25rem;
     color: var(--kt-card-color);
 }
-
+.title{
+    font: gilroy-bold,sans-serif;
+}
 .card .card-header .card-title,
 .card .card-header .card-title .card-label {
     font-weight: 500;
@@ -1022,7 +1024,7 @@ h6 {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: linear-gradient(45deg, #3b2a82 0%, #a5119f 41.38%, #f82e6b 90.15%, #ff3067 100%);
+    background: linear-gradient(265deg,#e39419,#eff2f5 41.38%,#f82e6b 90.15%,#ff0000);
     padding: 130px 30px 30px;
     color: #fff;
     border-radius: 40px;
@@ -1205,13 +1207,13 @@ h6 {
 }
 
 .login-layout .right-section .component .component-content h1 {
-    font-family: gilroy-medium;
+    font-family:  gilroy-medium, sans-serif;;
     font-size: 40px;
     color: #ff0064;
 }
 
 .login-layout .right-section .component .component-content p {
-    font-family: gilroy-medium;
+    font-family:  gilroy-medium, sans-serif;;
     color: #3b2a82;
     font-size: 18px;
 }
@@ -1223,7 +1225,7 @@ h6 {
 .auth-link {
     color: #ff0064 !important;
     text-decoration: none !important;
-    font-family: gilroy-medium !important;
+    font-family: gilroy-medium, sans-serif !important;
 }
 
 .input-control {
@@ -1378,11 +1380,7 @@ h6 {
     color: #7a719b;
 }
 
-.login-layout .right-section .component .component-content p {
-    font-family: gilroy-medium;
-    color: #3b2a82;
-    font-size: 18px;
-}
+
 
 .ad-checkbox .ad-checkbox--inner+p {
     line-height: 1;

@@ -53,7 +53,6 @@ function Header() {
                 // console.log(ele)
                 if (ele) {
                     const { offsetBottom, offsetTop } = getDimensions(ele);
-                    console.log(offsetBottom)
                     return scrollPosition > offsetTop && scrollPosition < offsetBottom;
                 }
             });

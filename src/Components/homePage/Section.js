@@ -56,7 +56,7 @@ function Section() {
                         </svg>
                     </div>
                     {/* <div class="claim-line-seperator"></div> */}
-                    <div class="claim-text">Please enter the <span class="yellow-span">abcdsdsa </span>to get 1% of the deposit value!</div>
+                    <div class="claim-text">Please enter the <span class="yellow-span">tet2022 </span>to get 1% of the deposit value!</div>
                     <Link to="/register" class={userInfo? " claim-button w-button mt-[5px] an" :"claim-button w-button mt-[5px] "}>CLAIM</Link>
                     <Link to="/addfunds" class={userInfo? "claim-button w-button mt-[5px]":"an"}>CLAIM</Link>
 
@@ -140,7 +140,7 @@ function Section() {
                                 </div>
                                 <div class="nav-link-text">Pricing</div>
                             </a>
-                            <a href="/services" aria-current="page" class="nav-item__link w-inline-block ">
+                            <Link to="/services" aria-current="page" class="nav-item__link w-inline-block ">
                                 <div class="nav-item-logo-wrapper">
                                     <div class="embed-icon w-embed">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 15.841 16.161">
@@ -149,7 +149,7 @@ function Section() {
                                     </div>
                                 </div>
                                 <div class="nav-link-text">Services</div>
-                            </a>
+                            </Link>
                         </div>
                         <div class={userInfo ? "click" : "hero-content__logo-wrapper is-navbar"}>
 
