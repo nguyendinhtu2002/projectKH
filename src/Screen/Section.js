@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import logo from "../assets/images/logo.png"
+import logo from "../assets/images/logo.svg"
 import "../Components/homePage/Header.css"
 import "../assets/css/main.css"
 import "../assets/css/responsive.css"
@@ -194,7 +194,7 @@ function Section
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
                         <div className='aside-logo flex-none px-9 mb-9'>
                             <Link to="/">
-                                <img alt="Logo" src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" class="h-[3.5rem] logo theme-light-show" />
+                                <img alt="Logo" src={logo} class="h-[3.5rem] logo theme-light-show" />
                             </Link>
                         </div>
                         <div className='aside-menu flex-column-fluid pl-5 pr-3 mb-9 '>

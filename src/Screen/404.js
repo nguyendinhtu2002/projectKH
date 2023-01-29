@@ -1,16 +1,16 @@
 import React from 'react'
 import Logo from '../assets/images/404-client.png'
-// import { Helmet } from "react-helmet";
+ import { Helmet } from "react-helmet";
 
 export default function Error404() {
     return (
 
         <div className="h-screen w-screen bg-gray-50 flex items-center">
-            {/* <Helmet>
+             <Helmet>
                 <meta charSet="utf-8" />
-                <title>404 | 1DG SMM Panel - Social Services</title>
-                <meta name="description" content="1DG SMM Panel - Social Services. Generating leads with social media marketing" />
-            </Helmet> */}
+                <title>404 | AZVIEW SMM Panel - Social Services</title>
+                <meta name="description" content="AZVIEW SMM Panel - Social Services. Generating leads with social media marketing" />
+            </Helmet>
             <div className="container flex flex-col md:flex-row items-center justify-between px-5 text-gray-700">
                 <div className="w-full lg:w-1/2 mx-8">
                     <div className="text-7xl text-green-500 font-dark font-extrabold mb-8"> 404</div>

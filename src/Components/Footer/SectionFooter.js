@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import logo from "../../assets/images/logo.svg"
 function SectionFooter() {
     return (
         <div className='section is-footer'>
@@ -9,7 +9,7 @@ function SectionFooter() {
                     <div className='footer-content'>
                         <div className='footer-left'>
                             <div>
-                                <img src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" loading="lazy" alt="AdCreative AI Logo" class="footer-lofo inline" />
+                                <img src={logo} loading="lazy" alt="AdCreative AI Logo" class="footer-lofo inline" />
                                 <p class="is-soft-purple bottom-margin-20">Made with ♥ in AZO!</p>
                                 <p class="is-soft-purple bottom-margin-20">2022 AzoView.us | All rights reserved.</p>
                                 <p class="is-soft-purple bottom-margin-20">

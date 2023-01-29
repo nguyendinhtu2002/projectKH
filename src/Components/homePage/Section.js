@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import $ from "jquery";
-import logo from "../../assets/images/logo.png"
+import logo from "../../assets/images/logo.svg"
 import './Header.css'
 import './test.css'
 import { useSelector } from 'react-redux';
@@ -167,7 +167,7 @@ function Section() {
 
                     <div className='hero-content__right'>
                         <div class="content-wrapper-hero">
-                            <img src="https://lh3.googleusercontent.com/pw/AL9nZEVrckDMTisn5ajw5Al7lamh-eYQgFy8L9BwN-sczLErlyBGyuZmdfKK7mJ2Ow78EbIUP7xwAPGlWZ1HPQ_l4Iqfum2t7U_SrI9F-I9O6bLX_8TsOO0iM_YJDtZEFyfQMsUXDKti-OQn6ISqWkCkpuc=w703-h434-no?authuser=0" loading="lazy" alt="ad-creative-logo" class="hero-logo" />
+                            <img src={logo} loading="lazy" alt="ad-creative-logo" class="hero-logo" />
                             <div class="before-heading-text">Cheapest SMM Panel Over 10 Years!</div>
                             <h1 class="heading-hero">with 1DG SMM Panel - Social Services</h1>
                             <div class="mb-[1.25rem]">

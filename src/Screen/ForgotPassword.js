@@ -5,6 +5,9 @@ import Loading from "../Components/LoadingError/Loading";
 import { toast } from "react-toastify";
 import Toast from "../Components/LoadingError/Toast";
 import axios from 'axios';
+import { Helmet } from "react-helmet";
+import logo from "../assets/images/logo.svg"
+
 function ForgotPassword() {
     const [email, setEmail] = useState("");
     const [loading, SetLoading] = useState(false)
@@ -45,13 +48,18 @@ function ForgotPassword() {
     };
     return (
         <div>
+		<Helmet>
+                <meta charSet="utf-8" />
+                <title>AZVIEW ForgotPassword</title>
+                <meta name="description" content="AZVIEW SMM Panel - Social Services. Generating leads with social media marketing" />
+            </Helmet>
             <Toast />
             <section className='pl-0 pr-0 max-w-[2100px] '>
                 <div className='login-layout'>
 
                     <section className='left-section'>
                         <Link to='/'>
-                            <img src="https://app.adcreative.ai/assets/svg/auth-logo.svg" class="left-section--logo" />
+                            <img src={logo} class="left-section--logo" />
                         </Link>
                         <section className='left-section--texts'>
                             <h2 className='text-white'>Converting Ad Creatives by</h2>
