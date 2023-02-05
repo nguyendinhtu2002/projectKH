@@ -13,16 +13,16 @@ import { addToCart } from '../../redux/Actions/cartActions';
 import { createOrderAPIMe, listMyOrders } from '../../redux/Actions/ordersAction';
 import { updateWallet } from '../../redux/Actions/WalletAction';
 import { createCashFlow } from '../../redux/Actions/cashAction';
-const Social = [
-    { name: 'Youtube' }
-    // { name: 'Pending' },
-    // { name: 'Processing' },
-    // { name: 'In progress' },
-    // { name: 'Completed' },
-    // { name: 'Partial' },
-    // { name: 'Canceled' },
+// const Social = [
+//     { name: 'Youtube' }
+//     // { name: 'Pending' },
+//     // { name: 'Processing' },
+//     // { name: 'In progress' },
+//     // { name: 'Completed' },
+//     // { name: 'Partial' },
+//     // { name: 'Canceled' },
 
-]
+// ]
 function Neworder() {
     const location = useLocation();
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function Neworder() {
     const [socialMedida, setSocialMedida] = useState("Youtube")
     // const [id, setId] = useState('')
     const [service, setService] = useState(redirect)
-    const [category, setCategory] = useState('Increase video views')
+    const [category, setCategory] = useState('')
     const [link, setLink] = useState("")
     const [quanlity, setQuanlity] = useState(0)
     const [keyword, setKeyWord] = useState("")
@@ -46,19 +46,24 @@ function Neworder() {
     const temp1 = []
     const temp2 = [];
     const temp3 = [];
-
     const findBySercive = products.find((items) => items.service === redirect)
+    const [min, setMin] = useState(findBySercive?.min)
+    const [max, setMax] = useState(findBySercive?.max)
 
     if (redirect !== "" && findBySercive != undefined) {
-
         const getScial = findBySercive?.name.split("|")[0]
-        const getCategory = findBySercive?.category.split(`${getScial}|`)[1]
-
+        const getCategory = findBySercive?.category.split(`${getScial}| `)[1]
         temp1.push(findBySercive?.platform)
         temp2.push(getCategory)
-        temp3.push(findBySercive?.name.split(`${socialMedida} |${getCategory} |`)[1])
+        // console.log(`${getScial} | ${getCategory} | `)
+        // console.log(findBySercive?.name.split(`${getScial}| ${getCategory} | `)[1])
+        temp3.push(findBySercive?.name.split(`${getScial}| ${getCategory} | `)[1])
     }
     else {
+        products.map((items) => {
+            temp1.push(items.platform)
+        })
+
         products.map((items) => {
             if (socialMedida === items.name.split(" | ")[0]) temp2.push(items.category.split(`${socialMedida} | `)[1])
         })
@@ -67,6 +72,9 @@ function Neworder() {
         })
 
     }
+
+    const uniqueSet1 = new Set(temp1);
+    const Social = [...uniqueSet1];
 
     const uniqueSet2 = new Set(temp2);
     const Category = [...uniqueSet2];
@@ -87,8 +95,9 @@ function Neworder() {
     const getId1 = products.find((items) => items.name.split(`${socialMedida} | ${category} |`)[1] === service)
 
     if (redirect === "" && getId1 !== undefined) {
-        console.log(getId1.service)
         setService(getId1.service)
+        setMin(getId1.min)
+        setMax(getId1.max)
     }
     const onSubmit = async () => {
         if (link === "" || quanlity === "") {
@@ -99,11 +108,12 @@ function Neworder() {
         else {
 
             await dispatch(addToCart(service, Number(quanlity), link))
+
             const items = (JSON.parse(localStorage.getItem('cartItems')))
             if (wallet.balance > Number(quanlity) * (items[0].rate) / 1000) {
                 //khách order -> lưu vào databasse -> xử lý gửi cho đối tác -> check trạng thái vsoos view bên đối tác -> update lên database 
 
-                if (quanlity >= 200 && quanlity <= 20000) {
+                if (quanlity >= min && quanlity <= max) {
                     await dispatch(createOrderAPIMe({
                         service,
                         link,
@@ -132,6 +142,7 @@ function Neworder() {
                             toastId.current = toast.error("Order không thành công", Toastobjects);
                         }
                     }
+                    // alert("test")
                 }
                 else {
                     if (!toast.isActive(toastId.current)) {
@@ -170,13 +181,13 @@ function Neworder() {
                             <label className=' mb-[0.5rem] text-[1.05rem] font-medium color-[#3f4254] inline-block '>
                                 Social media
                             </label>
-                            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select onChange={(e) => setSocialMedida(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 {
                                     redirect === "" ? <option></option> : ""
                                 }
                                 {
                                     Social.map((items, index) =>
-                                        <option key={index} value={items.name}>{items.name}</option>
+                                        <option key={index} value={items}>{items}</option>
                                     )
                                 }
                             </select>
@@ -240,7 +251,7 @@ function Neworder() {
                                 Quantity
                             </label>
                             <div className='input-group input-group-solid mb-2'>
-                                <input onChange={(e) => setQuanlity(e.target.value)} type="text" id="default-input" placeholder="From 500 to 2000" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                <input onChange={(e) => setQuanlity(e.target.value)} type="text" id="default-input" placeholder={`From ${min} to ${max}`} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                             </div>
 

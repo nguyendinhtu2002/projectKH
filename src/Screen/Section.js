@@ -36,7 +36,7 @@ function Section
     const history = useNavigate();
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
-   
+
     const dispatch = useDispatch();
     const toastId = React.useRef(null);
     const voucher = useSelector((state) => state.voucher);
@@ -354,7 +354,7 @@ function Section
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <div className='flex items-center ml-1 lg:ml-3'>
+                                            <div className={userInfo ? 'flex items-center ml-1 lg:ml-3' : 'hidden'}>
                                                 <div className='btn btn-icon w-[30px] h-[30px] pulse pulse-primary'>
                                                     <button data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
 
@@ -370,7 +370,7 @@ function Section
                                                 </div>
 
                                             </div>
-                                            <div className='flex items-center ml-1 lg:ml-3 '>
+                                            <div className={userInfo ? 'flex items-center ml-1 lg:ml-3 ' : "hidden"}>
                                                 <div className='cursor-pointer text-[1.35rem] text-primary'>
                                                     ₫{(wallet?.balance)?.toFixed(2)}
                                                 </div>
