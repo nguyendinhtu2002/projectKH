@@ -19,6 +19,7 @@ import { createAddFunds, listMyAdsFunds } from '../redux/Actions/AddFunds'
 import axios from 'axios'
 import { updateVoucher } from '../redux/Actions/Voucher'
 import { URL } from "../redux/Url";
+import { findProduct } from '../redux/Actions/productAction'
 
 const { RangePicker } = DatePicker
 const usePathName = () => {
@@ -33,6 +34,8 @@ function Section
     const [message, setMessage] = useState('')
     const [choose, SetChoose] = useState('Order')
     const [code, setCode] = useState('')
+    const [type, setType] = useState('')
+    const [text, setText] = useState('')
     const history = useNavigate();
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
@@ -43,6 +46,7 @@ function Section
     const { success } = voucher
     const productList = useSelector((state) => state.productList);
     const { products } = productList;
+
     const logoutHandler = () => {
         dispatch(logout());
     };
@@ -158,11 +162,17 @@ function Section
 
         }
     }
+    const handleFindProduct = () => {
+        // const name = text;
+        // const service = text
+        // dispatch(findProduct(type, name, service))
+
+    }
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(CreateWallet())
         dispatch(listMyAdsFunds())
-
+       
     }, [dispatch])
     const location = usePathName();
     const id = location.split("/")[2]
@@ -194,7 +204,7 @@ function Section
             <div className={location === "/new" ? ' flex-test flex-col flex-1 page-wrapper is-home bg  ' : ' flex-test flex-col flex-1 page-wrapper is-home bg  '} ref={refOne}>
                 <div className={click ? 'page flex flex-row flex-column-fluid' : 'page flex flex-row '}>
                     <div className={click ? 'aside py-9 drawer drawer-start drawer-on w-[250px] ' : 'aside py-9'}>
-                        <div className='aside-logo flex-none px-9 mb-9'>
+                        <div className='aside-logo flex-none px-9 mb-9' style={{ justifyContent: 'center' }}>
                             <Link to="/">
                                 <img alt="Logo" src={logo} class="h-[3.5rem] logo theme-light-show" />
                             </Link>
@@ -513,7 +523,7 @@ function Section
                                                                 <p className='text-inherit text-sm mb-[1em]'>Địa chỉ  <strong>PAYPAL</strong>: <strong>sontungle2013@gmail.com</strong></p>
                                                                 <p className='text-inherit text-sm mb-[1em]'>Sau khi chuyển tiền vui lòng liên hệ với tôi để được cập nhật tiền.</p>
                                                             </div>
-                                                            
+
 
                                                         </div>
                                                         <div class="tab-pane fade" id="tabs-profile3" role="tabpanel" aria-labelledby="tabs-profile-tab3">
@@ -845,45 +855,7 @@ function Section
 
 
 
-            {/* <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-xl relative w-auto pointer-events-none">
-                    <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                        <div class="modal-header flex flex-shrink-0 items-center justify-between pt-2 px-2 border-b border-gray-200 rounded-t-md">
-                            <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalXlLabel">
-                                <form className='flex items-center w-full relative'>
-                                    <i class="las la-search fs-1"></i>
-                                    <input type="text" class="text-[#5E6278] bg-[#ffffff] shadow-none border-0" placeholder="Quick service search"></input>
-                                </form>
-                            </h5>
-                            <button type="button"
-                                class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body relative p-4">
-                            <div className='flex items-center cursor-pointer border-gray-400 '>
-                                <div className='flex flex-col'>
-                                    <div class="d-flex align-items-center">
-                                        <div class="info text-[14px]">
-                                            <span class="fw-bolder">
-                                                <i class="fa-brands fa-youtube fs-5"></i>
-                                                1131
-                                            </span> - Youtube Views | Revenue | Speed 30-50k/day | Best for SEO -
-                                            <span class="text-primary fw-bolder ms-1">$1.725</span>
-                                        </div>
-                                    </div>
-                                    <span class="my-1 text-muted text-[12.35px]">Min: <span class="text-gray-700">1000</span> - Max: <span class="text-gray-700">50000</span></span>
-                                    <span>
-                                        <span class="badge badge-danger rounded-pill fs-9 me-1" data-lang="label::Best seller">Best seller</span>
-                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::Recommend">Recommendation</span>
-                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::Instant">Instant</span>
-                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::Real">Real</span>
-                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::30 days Refill">30 days Refill</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+
             <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
                 id="exampleModalLong" tabindex="-1" aria-labelledby="exampleModalLongLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg relative w-auto pointer-events-none">
@@ -891,9 +863,32 @@ function Section
                         class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                         <div
                             class="modal-header flex flex-shrink-0 items-center justify-between px-2 pt-2 border-b border-gray-200 rounded-t-md">
-                            <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">
-                                <form className='flex items-center w-full relative'>
+                            <h5 class="text-xl font-medium leading-normal text-gray-800 " id="exampleModalLabel">
+
+                                <form className='flex items-center w-full relative' onChange={handleFindProduct}>
+
                                     <i class="las la-search fs-1"></i>
+
+                                    <select class="form-select form-select-sm
+    appearance-none
+    block
+    w-full
+    px-2
+    py-1
+    text-sm
+    font-normal
+    text-gray-700
+    bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300
+    rounded
+    transition
+    ease-in-out
+    m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" onChange={(e) => setType(e.target.value)} aria-label=".form-select-sm example">
+                                        <option selected>Choose type</option>
+                                        <option value="name">Name</option>
+                                        <option value="service">Service</option>
+                                    </select>
                                     <input type="text" class="text-[#5E6278] bg-[#ffffff] shadow-none border-0" placeholder="Quick service search"></input>
                                 </form>
                             </h5>
