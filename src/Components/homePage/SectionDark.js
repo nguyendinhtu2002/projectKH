@@ -27,7 +27,7 @@ function SectionDark() {
                         Increase view increase like increase sub quickly
                     </div>
                     <h2 className="text-gradient-purple-yellow">Using 100% Real Interactions.﻿</h2>
-                    <p class="is-soft-purple">In 2022, every single thing in Digital Marketing is optimized by Artificial Intelligence, except Creatives. ﻿Azview.az is here to change that, to make data-backed, result-bringing ad creatives accessible.</p>
+                    <p class="is-soft-purple">In 2022, every single thing in Digital Marketing is optimized by Artificial Intelligence, except Creatives. ﻿Azview.us is here to change that, to make data-backed, result-bringing ad creatives accessible.</p>
                     <div className='w-layout-grid _2-grid'>
                         <div id="w-node-aa5a5ec0-a6ad-61e0-a810-941f58d207f8-f148ae1e" class="content-with-gradient">
                             <div class="grid-icon w-embed">

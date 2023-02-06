@@ -41,6 +41,8 @@ function Section
     const toastId = React.useRef(null);
     const voucher = useSelector((state) => state.voucher);
     const { success } = voucher
+    const productList = useSelector((state) => state.productList);
+    const { products } = productList;
     const logoutHandler = () => {
         dispatch(logout());
     };
@@ -347,20 +349,19 @@ function Section
                                     <div className='flex items-center'>
                                         <div className='flex items-center'>
                                             <div className='btn btn-icon w-[35px] h-[35px] md:w-[40px] md:h-[40px]'>
-                                                <span class="svg-icon svg-icon-1 text-primary">
+                                                <span class="svg-icon svg-icon-1 text-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
                                                         <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
                                                     </svg>
                                                 </span>
                                             </div>
-                                            <div className={userInfo ? 'flex items-center ml-1 lg:ml-3' : 'hidden'}>
+                                            {/* <div className={userInfo ? 'flex items-center ml-1 lg:ml-3' : 'hidden'}>
                                                 <div className='btn btn-icon w-[30px] h-[30px] pulse pulse-primary'>
                                                     <button data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
 
                                                         <i class="fas fa-bell fs-1 text-primary"></i>
                                                     </button>
-                                                    {/* <button class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg  focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mr-1.5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button> */}
 
                                                     <span type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ></span>
                                                     <span type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ></span>
@@ -369,7 +370,7 @@ function Section
 
                                                 </div>
 
-                                            </div>
+                                            </div> */}
                                             <div className={userInfo ? 'flex items-center ml-1 lg:ml-3 ' : "hidden"}>
                                                 <div className='cursor-pointer text-[1.35rem] text-primary'>
                                                     ₫{(wallet?.balance)?.toFixed(2)}
@@ -404,8 +405,8 @@ function Section
                                 </div> : null}
                                 {location === "/childpanel" ? <div className='alert alert-primary  '>
                                     <p class="m-0 text-[#009ef7] text-[13px]">Please change domain nameservers to:</p>
-                                    <p class="m-0 font-bold text-[#009ef7] text-[13px]">ns1.1dgdns.com</p>
-                                    <p class="m-0 font-bold text-[#009ef7] text-[13px]">ns2.1dgdns.com</p>
+                                    <p class="m-0 font-bold text-[#009ef7] text-[13px]">ns1.azview.us</p>
+                                    <p class="m-0 font-bold text-[#009ef7] text-[13px]">ns1.azview.us</p>
 
                                 </div> : null}
                                 {location === "/childpanel" ? <div className='alert alert-primary text-[13px] '>
@@ -425,7 +426,7 @@ function Section
                                                     All services 4000h watch time dropped. Orders from December 6 will have views deducted. We will partial order all orders for you in 5 days. The reason is that all of today's views are deducted so we can refund the  exact amount.
                                                 </strong>
                                             </li>
-                                            <li>Các bạn muốn mở website riêng dành cho đại lý liên hệ với mình qua FB <Link to="https://www.facebook.com/motdanga" rel="noopener noreferrer" target="_blank">Nguyễn Mạnh Hùng</Link></li>
+                                            <li>Các bạn muốn mở website riêng dành cho đại lý liên hệ với mình qua FB <Link to="https://www.facebook.com/azview.us/" rel="noopener noreferrer" target="_blank">Azo Team</Link></li>
                                         </ul>
                                     </div>
 
@@ -462,6 +463,7 @@ function Section
                                                                 <select id="countries" onChange={(e) => SetChooseSelect(e.target.value)} class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                                     <option value="MoMo" defaultValue>AUTO - Momo | Nạp tối thiểu 10.000 VND</option>
                                                                     <option value="USDT">USDT - TRC20 (5% Bonus on $1000+)</option>
+                                                                    <option value="Paypal">Paypal (5% Bonus on $1000+)</option>
 
                                                                 </select>
                                                             </div>
@@ -470,7 +472,7 @@ function Section
                                                                 <p className='text-inherit text-sm mb-[1em]'>Binance Pay ID : 11713152</p>
                                                                 <p className='text-inherit text-sm mb-[1em]'>Sau khi chuyển tiền vui lòng liên hệ với tôi để được cập nhật tiền.</p>
                                                             </div>
-                                                            <div className={chooseSelect != "USDT" ? "div-options div-8 text-center " : "hidden"} >
+                                                            <div className={chooseSelect === "MoMo" ? "div-options div-8 text-center " : "hidden"} >
                                                                 <img src={`https://momosv3.apimienphi.com/api/QRCode?phone=0985822626&amount=0&note=${content}`} class="w-250px  mb-5 inline-block" />
                                                                 {/* <div className="mb-5">
                                                                     <span className="" id="momo_phone">Số điện thoại: <span className="fw-boldest text-primary ">{phone}</span></span>
@@ -507,6 +509,12 @@ function Section
                                                                 <button type="button" onClick={handleSubbmit} class={chooseSelect === "MoMo" ? "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" : "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 hidden"}>Xác nhận thành công</button>
 
                                                             </div>
+                                                            <div className={chooseSelect === "Paypal" ? 'mb-5 text-sm ' : 'hidden'}>
+                                                                <p className='text-inherit text-sm mb-[1em]'>Địa chỉ  <strong>PAYPAL</strong>: <strong>sontungle2013@gmail.com</strong></p>
+                                                                <p className='text-inherit text-sm mb-[1em]'>Sau khi chuyển tiền vui lòng liên hệ với tôi để được cập nhật tiền.</p>
+                                                            </div>
+                                                            
+
                                                         </div>
                                                         <div class="tab-pane fade" id="tabs-profile3" role="tabpanel" aria-labelledby="tabs-profile-tab3">
                                                             <div class="mb-1">
@@ -834,11 +842,109 @@ function Section
                 </div>
             </div>
 
-            {/* <div class="text-center">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
-                    Show right drawer
-                </button>
+
+
+
+            {/* <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-xl relative w-auto pointer-events-none">
+                    <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                        <div class="modal-header flex flex-shrink-0 items-center justify-between pt-2 px-2 border-b border-gray-200 rounded-t-md">
+                            <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalXlLabel">
+                                <form className='flex items-center w-full relative'>
+                                    <i class="las la-search fs-1"></i>
+                                    <input type="text" class="text-[#5E6278] bg-[#ffffff] shadow-none border-0" placeholder="Quick service search"></input>
+                                </form>
+                            </h5>
+                            <button type="button"
+                                class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body relative p-4">
+                            <div className='flex items-center cursor-pointer border-gray-400 '>
+                                <div className='flex flex-col'>
+                                    <div class="d-flex align-items-center">
+                                        <div class="info text-[14px]">
+                                            <span class="fw-bolder">
+                                                <i class="fa-brands fa-youtube fs-5"></i>
+                                                1131
+                                            </span> - Youtube Views | Revenue | Speed 30-50k/day | Best for SEO -
+                                            <span class="text-primary fw-bolder ms-1">$1.725</span>
+                                        </div>
+                                    </div>
+                                    <span class="my-1 text-muted text-[12.35px]">Min: <span class="text-gray-700">1000</span> - Max: <span class="text-gray-700">50000</span></span>
+                                    <span>
+                                        <span class="badge badge-danger rounded-pill fs-9 me-1" data-lang="label::Best seller">Best seller</span>
+                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::Recommend">Recommendation</span>
+                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::Instant">Instant</span>
+                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::Real">Real</span>
+                                        <span class="badge badge-success rounded-pill fs-9 me-1" data-lang="label::30 days Refill">30 days Refill</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div> */}
+            <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+                id="exampleModalLong" tabindex="-1" aria-labelledby="exampleModalLongLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg relative w-auto pointer-events-none">
+                    <div
+                        class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                        <div
+                            class="modal-header flex flex-shrink-0 items-center justify-between px-2 pt-2 border-b border-gray-200 rounded-t-md">
+                            <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">
+                                <form className='flex items-center w-full relative'>
+                                    <i class="las la-search fs-1"></i>
+                                    <input type="text" class="text-[#5E6278] bg-[#ffffff] shadow-none border-0" placeholder="Quick service search"></input>
+                                </form>
+                            </h5>
+                            <button type="button"
+                                class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body relative p-0" >
+                            {
+                                products.map((items, index) =>
+                                    <a href={`/new?service=${items.service}`} >
+
+                                        <div className='flex items-center cursor-pointer border-t border-gray-400 p-3' >
+                                            <div className='flex flex-col'>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="info text-[13px]">
+                                                        <span class="fw-bolder">
+                                                            <i class="fa-brands fa-youtube fs-5"></i>
+                                                            {items.service}
+                                                        </span> - {items.name} -
+                                                        <span class="text-primary fw-bolder ms-1">${items.rate}</span>
+
+                                                    </div>
+                                                </div>
+                                                <span class="my-1 text-muted text-[12.35px]">Min: <span class="text-gray-700">{items.min}</span> - Max: <span class="text-gray-700">{items.max}</span></span>
+                                                <span>
+                                                    <span class="badge badge-danger rounded-pill fs-9 mr-1 text-[9.75px] " data-lang="label::Best seller">Best seller</span>
+                                                    <span class="badge badge-success rounded-pill fs-9 mr-1  text-[9.75px] " data-lang="label::Recommend">Recommendation</span>
+                                                    <span class="badge badge-success rounded-pill fs-9 mr-1  text-[9.75px]" data-lang="label::Instant">Instant</span>
+                                                    <span class="badge badge-success rounded-pill fs-9 mr-1  text-[9.75px]" data-lang="label::Real">Real</span>
+                                                    <span class="badge badge-success rounded-pill fs-9 mr-1  text-[9.75px]" data-lang="label::30 days Refill">30 days Refill</span></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                )
+                            }
+
+                        </div>
+                        <div
+                            class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                            <button type="button"
+                                class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                                data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="offcanvas offcanvas-end fixed bottom-0 flex flex-col max-w-full bg-white invisible bg-clip-padding shadow-sm outline-none transition duration-300 ease-in-out text-gray-700 top-0 right-0 border-none lg:w-[600px] w-[300px]" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                 <div className="offcanvas-header flex items-center justify-between p-4 border-b-[1px] border-solid boder-[#dadaeb]">

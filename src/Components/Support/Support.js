@@ -50,7 +50,7 @@ function Support() {
                             <span className='font-semibold text-gray-600 block text'>
                                 Facebook
                             </span>
-                            <span class="font-bold text-gray-800 text-[0.85rem]">https://www.facebook.com/azview/</span>
+                            <span class="font-bold text-gray-800 text-[0.85rem]">https://www.facebook.com/azview.us/</span>
                         </div>
                     </div>
                     <div className='lg:grid-cols-1 grid-cols-2 flex'>
@@ -64,7 +64,7 @@ function Support() {
                                 <span className='font-semibold text-gray-600 block text'>
                                     Telegram
                                 </span>
-                                <span class="font-bold text-gray-800 text-[1.075rem]">@azview</span>
+                                <span class="font-bold text-gray-800 text-[1.075rem]">https://t.me/azviewus</span>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@ function Support() {
                                 <span className='font-semibold text-gray-600 block text'>
                                     Phone
                                 </span>
-                                <span class="font-bold text-gray-800 text-[1.075rem]">099.73.66666</span>
+                                <span class="font-bold text-gray-800 text-[1.075rem]">098.582.2626</span>
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@ function Support() {
                 <div className='flex items-center flex-wrap gap-2 border-t border-solid border-[#eff2f5]  mt-5 pt-5 '>
                     <p>Support payment : </p>
                     <ul className='list-disc ml-5'>
-                        <li> WhatsApp : +84917557227</li>
+                        <li> WhatsApp : +84985822626</li>
                     </ul>
                 </div>
             </div>

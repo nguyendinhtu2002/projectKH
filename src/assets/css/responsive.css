@@ -15,11 +15,11 @@
         box-shadow: var(--kt-modal-box-shadow-sm-up);
     }
 
-    .modal-dialog {
+    /* .modal-dialog {
         max-width: 500px;
         margin-right: auto;
         margin-left: auto;
-    }
+    } */
 }
 
 @media (max-width: 640px) {

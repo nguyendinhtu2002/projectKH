@@ -7,6 +7,9 @@ import { getUserById, changeEmail, apiKey, updateApiKey } from '../../redux/Acti
 import { toast } from "react-toastify";
 import Toast from "../LoadingError/Toast";
 import axios from 'axios'
+import { ListSignIn } from '../../redux/Actions/SignIn'
+import moment from 'moment'
+
 const Status = [
     { name: 'ALL' },
     { name: 'Pending' },
@@ -18,6 +21,8 @@ const Status = [
 
 ]
 function Setting() {
+    const format1 = "YYYY-MM-DD HH:mm:ss"
+
     const [selected, setSelected] = useState(Status[0])
     const [passwordOld, setPasswordOld] = useState("");
     const [id, setId] = useState("");
@@ -29,6 +34,8 @@ function Setting() {
     const { getUserId } = getUser;
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
+    const signIn = useSelector((state) => state.signIn)
+    const { Signin } = signIn;
     const [email, setEmail] = useState(userInfo?.email)
     const changeEmailUser = useSelector((state) => state.changeEmailUser)
     const getApiKey = useSelector((state) => state.getApiKey)
@@ -36,7 +43,7 @@ function Setting() {
     const [api, setApi] = useState(ApiKey?.apiKey)
     const changeApiKey = useSelector((state) => state.changeApi)
     const [isLoading, setIsLoading] = useState(false);
-   
+
 
     const toastId = React.useRef(null);
 
@@ -99,11 +106,11 @@ function Setting() {
             if (!toast.isActive(toastId.current)) {
                 toastId.current = toast.error("Password does not match", Toastobjects)
             }
-        }if(password.length<6){
+        } if (password.length < 6) {
             if (!toast.isActive(toastId.current)) {
                 toastId.current = toast.error("Password must not be less than 6 characters!", Toastobjects)
             }
-        } 
+        }
         else {
             axios.put(`https://api.azview.us/api/users/${userInfo?._id}/updateProfile`, { id: id, paswordold: passwordOld, paswordNew: password }, config)
                 .then(() => {
@@ -123,6 +130,7 @@ function Setting() {
         if (getUserId) {
             setId(getUserId._id)
         }
+        dispatch(ListSignIn())
         dispatch(apiKey())
         dispatch(getUserById());
     }, [dispatch]);
@@ -186,10 +194,10 @@ function Setting() {
             </div>
             <div className='card mb-5'>
                 <div class="card-header">
-                    <div class="card-title"><h3>Settings</h3></div>
+                    <div class="card-title"><h3>Sign-in history</h3></div>
                 </div>
-                <div className='card-body'>
-                    <form className=''>
+                <div className='card-body ' style={{ padding: 0 }}>
+                    {/* <form className=''>
                         <div class="mb-5">
                             <label class="form-label" >Appearance</label>
                             <Listbox value={selected} onChange={setSelected} className="mb-5">
@@ -343,7 +351,30 @@ function Setting() {
                                 </div>
                             </Listbox>
                         </div>
-                    </form>
+                    </form> */}
+                    <div className='table-responsive'>
+                        <div className='table align-middle gs-4 gy-4'>
+                            <thead class="font-semibold text-muted bg-light">
+                                <tr>
+                                    <th >IP</th>
+                                    <th data-lang="Device">Device</th>
+                                    <th data-lang="Time">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    Signin?.map((items, index) =>
+                                        <tr>
+                                            <td className='text-center'> | {items.ipAddress}</td>
+                                            <td class="break-words whitespace-pre-wrap text-center	">{items.device}</td>
+                                            <td className='text-center'>{moment(items.signInTime).format(format1)}</td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>

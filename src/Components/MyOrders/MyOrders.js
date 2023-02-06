@@ -96,7 +96,7 @@ function MyOrders() {
             },
         };
         dispatch(listMyOrders())
-        axios.get(`${URL}/api/orders/${userInfo._id}/getByUser`, config)
+        axios.get(`https://1dg.me/api/v2/api/orders/${userInfo._id}/getByUser`, config)
             .then(data => {
                 setData(data.data); // update state with response
                 // console.log( data.data[0].orderStatus)

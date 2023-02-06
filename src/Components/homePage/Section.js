@@ -169,7 +169,7 @@ function Section() {
                         <div class="content-wrapper-hero">
                             <img src={logo} loading="lazy" alt="ad-creative-logo" class="hero-logo" />
                             <div class="before-heading-text">Cheapest SMM Panel Over 10 Years!</div>
-                            <h1 class="heading-hero">with 1DG SMM Panel - Social Services</h1>
+                            <h1 class="heading-hero">with AZVIEW SMM Panel - Social Services</h1>
                             <div class="mb-[1.25rem]">
                                 <p class="hero-p">Generate conversion focused ad creatives and social media post creatives in a matter of seconds using
                                     <br />

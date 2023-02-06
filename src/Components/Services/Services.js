@@ -71,7 +71,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` ${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? `$ ${items.rate}` : `≈  ${items.rate} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -116,7 +116,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` ${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? `$ ${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -162,7 +162,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` ${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? `$ ${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -207,7 +207,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -263,7 +263,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -313,7 +313,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -363,7 +363,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -416,7 +416,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -466,7 +466,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -516,7 +516,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -562,7 +562,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -608,7 +608,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -654,7 +654,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -699,7 +699,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -743,7 +743,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -792,7 +792,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -841,7 +841,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -890,7 +890,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -941,7 +941,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -995,7 +995,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1049,7 +1049,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1105,7 +1105,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1161,7 +1161,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1217,7 +1217,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1273,7 +1273,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1329,7 +1329,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1385,7 +1385,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1441,7 +1441,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1497,7 +1497,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1553,7 +1553,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1609,7 +1609,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1665,7 +1665,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1721,7 +1721,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1777,7 +1777,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1833,7 +1833,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1889,7 +1889,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -1945,7 +1945,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -2001,7 +2001,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -2057,7 +2057,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -2113,7 +2113,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -2169,7 +2169,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -2225,7 +2225,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order
@@ -2281,7 +2281,7 @@ function Services() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate * items.min).toFixed(2)} VND`}</td>
+                            <td class="font-semibold">{!userInfo ? ` $${items.rate}` : `≈  ${(items.rate)} USD`}</td>
                             <td className={userInfo ? 'px-1 m-0 text-center font-semibold' : 'hidden'}>
                                 <Link to={`/new?service=${items.service}`} className="btn btn-bg-primary btn-color-white btn-active-color-primary btn-sm px-4">
                                     Order

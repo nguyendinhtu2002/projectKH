@@ -12,7 +12,7 @@ function Api() {
                                 API URL
                             </td>
                             <td className="py-2 px-6 w-[70%] font-semibold">
-                                https://up-views.herokuapp.com/api/v2
+                                https://api.azview.us/api/v2
                             </td>
 
                         </tr>
