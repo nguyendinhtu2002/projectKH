@@ -436,7 +436,7 @@ function Section
                                                     All services 4000h watch time dropped. Orders from December 6 will have views deducted. We will partial order all orders for you in 5 days. The reason is that all of today's views are deducted so we can refund the  exact amount.
                                                 </strong>
                                             </li>
-                                            <li>Các bạn muốn mở website riêng dành cho đại lý liên hệ với mình qua FB <Link to="https://www.facebook.com/azview.us/" rel="noopener noreferrer" target="_blank">Azo Team</Link></li>
+                                            <li>Các bạn muốn mở website riêng dành cho đại lý liên hệ với mình qua FB <a href="https://www.facebook.com/azview.us">Azo Team</a></li>
                                         </ul>
                                     </div>
 
