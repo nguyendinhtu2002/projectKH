@@ -51,15 +51,15 @@ function LoginScreen() {
     }, [userInfo, history, redirect]);
     const submitHandler = async (e) => {
         e.preventDefault();
-
+        await axios.get("https://api.ipify.org/?format=json")
+            .then((data) => setIp(data.data.ip))
         if (key === "") {
             if (!toast.isActive(toastId.current)) {
                 toastId.current = toast.error("Please solve Captcha correctly!", Toastobjects);
             }
         }
         else {
-            await axios.get("https://api.ipify.org/?format=json")
-                .then((data) => setIp(data.data.ip))
+
             await dispatch(login(email, password, ip));
         }
     };
