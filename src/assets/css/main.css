@@ -1239,10 +1239,9 @@ h6 {
     border: 0;
     border-radius: 15px;
     width: 100%;
-    font-family: gilroy-bold;
+    font-family: gilroy-medium,sans-serif;
     color: #3b2a82;
     font-size: 16px;
-    font-family: gilroy-bold;
     padding: 19.5px;
 }
 
@@ -1341,19 +1340,6 @@ h6 {
     border-radius: 5px;
 }
 
-.login-layout .right-section .component .component-content input {
-    margin: 0.5rem 0;
-    background-color: #f7f6fb;
-    padding: 14px 25px;
-    border: 0;
-    border-radius: 15px;
-    width: 100%;
-    font-family: gilroy-bold;
-    color: #3b2a82;
-    font-size: 16px;
-    font-family: gilroy-bold;
-    padding: 19.5px;
-}
 
 .ad-checkbox input[type=checkbox] {
     display: none;
