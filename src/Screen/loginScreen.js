@@ -11,6 +11,7 @@ import Toast from "../Components/LoadingError/Toast";
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import logo from "../assets/images/logo.svg"
+import axios from 'axios';
 function LoginScreen() {
     const location = useLocation();
     const history = useNavigate();
@@ -20,6 +21,7 @@ function LoginScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [key, setKey] = useState("");
+    const [ip, setIp] = useState("");
     const Toastobjects = {
         position: "top-right",
         autoClose: 5000,
@@ -43,7 +45,9 @@ function LoginScreen() {
     }, [userInfo, history, redirect]);
     const submitHandler = async (e) => {
         e.preventDefault();
-        await dispatch(login(email, password));
+        await axios.get("https://api.ipify.org/?format=json")
+            .then((data) => setIp(data.data.ip))
+        await dispatch(login(email, password, ip));
         // if (key === "") {
         //     if (!toast.isActive(toastId.current)) {
         //         toastId.current = toast.error("Please solve Captcha correctly!", Toastobjects);
@@ -57,7 +61,7 @@ function LoginScreen() {
 
     return (
         <div>
-		<Helmet>
+            <Helmet>
                 <meta charSet="utf-8" />
                 <title>AZVIEW LOGIN</title>
                 <meta name="description" content="AZVIEW SMM Panel - Social Services. Generating leads with social media marketing" />

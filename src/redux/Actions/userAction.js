@@ -31,7 +31,7 @@ export const register = (name, email, password, apiKey) => async (dispatch) => {
   }
 }
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, password, ip) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
 
@@ -43,7 +43,7 @@ export const login = (email, password) => async (dispatch) => {
 
     const { data } = await axios.post(
       `${URL}/api/users/login`,
-      { email, password },
+      { email, password, ip },
       config)
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
@@ -223,7 +223,7 @@ export const changeEmail = (email) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`${URL}/api/users/${userInfo._id}/updateEmail`, {email}, config);
+    const { data } = await axios.put(`${URL}/api/users/${userInfo._id}/updateEmail`, { email }, config);
     dispatch({ type: USER_CHANGEEMAIL_SUCCESS, payload: data });
 
   } catch (error) {
