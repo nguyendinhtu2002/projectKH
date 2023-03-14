@@ -7,6 +7,7 @@ import './test.css'
 import { useSelector } from 'react-redux';
 function Section() {
     const [click, SetClick] = useState(true);
+    
     const [clickClaim, setClickClaim] = useState(false);
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;

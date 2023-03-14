@@ -2076,7 +2076,12 @@ html.w-mod-touch * {
 
 
 }
-
+@media screen and (max-width: 991px)
+{
+    .content-wrapper-hero {
+        width: 55em;
+}
+}
 @media screen and (max-width: 767px) {
     .hero-content {
         padding: 0.2rem;
@@ -2187,6 +2192,28 @@ html.w-mod-touch * {
 @media screen and (max-width: 991px) {
     .nav-link-text {
         font-size: 1.1rem;
+    }
+    .screen-image {
+        height: 530px;
+    }
+   
+    .trusted-award.is-1{
+        left: 2.4375em;
+    }
+    .trusted-award.is-2{
+        left: 8.625em;
+    }
+    .trusted-award.is-3{
+        right: 7.625em;
+    }
+    .trusted-award.is-4{
+        right: 1.4375em;
+    }
+    .trusted-channels{
+        padding: 1em 5.1375em;
+    }
+    .content-narrow{
+        width: 53.5em;
     }
 
     .claim-pop-up-inside {
@@ -3325,6 +3352,12 @@ html.w-mod-touch * {
 
 ._30-text.is-soft-purple {
     font-weight: 600;
+}
+@media screen and (min-width: 2100px){
+    .auth-container{
+        max-width: 100%;
+    }
+    
 }
 
 @media screen and (min-width: 1920px) {

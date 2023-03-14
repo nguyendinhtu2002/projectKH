@@ -74,7 +74,7 @@ function LoginScreen() {
                 <meta name="description" content="AZVIEW SMM Panel - Social Services. Generating leads with social media marketing" />
             </Helmet>
             <Toast />
-            <section className='pl-0 pr-0 max-w-[2100px]'>
+            <section className='pl-0 pr-0 max-w-[2100px] auth-container'>
                 <div className='login-layout'>
 
                     <section className='left-section'>

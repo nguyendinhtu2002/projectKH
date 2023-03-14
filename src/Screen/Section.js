@@ -260,12 +260,12 @@ function Section
                                         </Link>
                                     </div>
 
-                                    <div class={userInfo ? "menu-item" : "menu-item d-none"}>
+                                    {/* <div class={userInfo ? "menu-item" : "menu-item d-none"}>
                                         <Link to="/affiliate" class="menu-link">
                                             <span class="menu-icon"><i class="las la-podcast fs-1"></i></span>
                                             <span class="menu-title" data-lang="menu::Affiliate">Affiliate</span>
                                         </Link>
-                                    </div>
+                                    </div> */}
                                     <div class={userInfo ? "menu-item" : "menu-item d-none"}>
                                         <Link to="/childpanel" class="menu-link">
                                             <span class="menu-icon"><i class="las la-child fs-1"></i></span>

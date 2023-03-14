@@ -380,7 +380,8 @@
 
 @media (min-width: 1024px) {
     .menu-item .menu-link {
-        padding: 0.65rem 1rem;
+        padding: 0.1rem 1rem;
 
     }
+   
 }
